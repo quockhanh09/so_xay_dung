@@ -75,20 +75,250 @@ const eventImages = [event1, event2, event3, event4];
 
 function App({ characters }) {
   const charactersList = [
-    { name: "Nguyễn Văn A", image: "https://yourlink.com/a.jpg" },
-    { name: "Trần Thị B", image: "https://yourlink.com/b.jpg" },
-    { name: "Lê Văn C", image: "https://yourlink.com/c.jpg" },
-    { name: "Phạm Thị D", image: "https://yourlink.com/d.jpg" },
-    { name: "Vũ Văn E", image: "https://yourlink.com/e.jpg" },
-    { name: "Đỗ Thị F", image: "https://yourlink.com/f.jpg" },
-    { name: "Hồ Văn G", image: "https://yourlink.com/g.jpg" },
-    { name: "Ngô Thị H", image: "https://yourlink.com/h.jpg" },
-    { name: "Phan Văn I", image: "https://yourlink.com/i.jpg" },
-    { name: "Trịnh Thị K", image: "https://yourlink.com/k.jpg" },
+    { 
+      id: 1,
+      name: "Anna Cawrse", 
+      image: "https://www.sasaki.com/wp-content/uploads/2019/10/zAlt_ZChrisco-720x720.jpg",
+      title: "Chair of Landscape Architecture, Civil Engineering, & Ecology",
+      subtitle: "Board of Directors, Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 2,
+      name: "Zachary Chrisco", 
+      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Board of Directors, Principal",
+      role: "Civil Engineer"
+    },
+    { 
+      id: 3,
+      name: "Caitlyn Clauson", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      title: "President",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 4,
+      name: "Meredith McCarthy", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Associate Principal, Board of Directors",
+      role: "Architect"
+    },
+    { 
+      id: 5,
+      name: "Tyler Patrick", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      title: "Chair of Planning & Urban Design",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 6,
+      name: "Pablo Savid-Buteler", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      title: "Chair of Design Integration",
+      subtitle: "Board of Directors, Principal",
+      role: "Designer"
+    },
+    { 
+      id: 7,
+      name: "Victor Vizgaitis", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Victor-Vizgaitis_450x450.jpg",
+      title: "Managing Principal",
+      subtitle: "Board of Directors, Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 8,
+      name: "Joshua Brooks", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Joshua-Brooks_450x450.jpg",
+      title: "Denver Office Director",
+      subtitle: "Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 9,
+      name: "Carla Ceruzzi", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Carla-Ceruzzi_450x450.jpg",
+      title: "Associate Principal",
+      subtitle: "Landscape Architect",
+      role: ""
+    },
+    { 
+      id: 10,
+      name: "Fiske Crowell", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Fiske-Crowell_450x450.jpg",
+      title: "Principal",
+      subtitle: "Landscape Architect",
+      role: ""
+    },
+    { 
+      id: 11,
+      name: "Ian Dickenson", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Ian-Dickenson_450x450.jpg",
+      title: "Associate Principal",
+      subtitle: "Architect",
+      role: ""
+    },
+    { 
+      id: 12,
+      name: "Philip Dugdale", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Philip-Dugdale_450x450.jpg",
+      title: "New York Office Director",
+      subtitle: "Principal",
+      role: "Architect"
+    },
+    { 
+      id: 13,
+      name: "Anna Cawrse", 
+      image: "https://www.sasaki.com/wp-content/uploads/2022/12/Anna-Cawrse_450x450.jpg",
+      title: "Chair of Landscape Architecture",
+      subtitle: "Board of Directors, Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 14,
+      name: "Zachary Chrisco", 
+      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Board of Directors, Principal",
+      role: "Civil Engineer"
+    },
+    { 
+      id: 15,
+      name: "Caitlyn Clauson", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      title: "President",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 16,
+      name: "Meredith McCarthy", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Associate Principal",
+      role: "Architect"
+    },
+    { 
+      id: 17,
+      name: "Tyler Patrick", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      title: "Chair of Planning & Urban Design",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 18,
+      name: "Pablo Savid-Buteler", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      title: "Chair of Design Integration",
+      subtitle: "Board of Directors, Principal",
+      role: "Designer"
+    },
+    { 
+      id: 19,
+      name: "Victor Vizgaitis", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Victor-Vizgaitis_450x450.jpg",
+      title: "Managing Principal",
+      subtitle: "Board of Directors",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 20,
+      name: "Joshua Brooks", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Joshua-Brooks_450x450.jpg",
+      title: "Denver Office Director",
+      subtitle: "Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 21,
+      name: "Carla Ceruzzi", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Carla-Ceruzzi_450x450.jpg",
+      title: "Associate Principal",
+      subtitle: "Landscape Architect",
+      role: ""
+    },
+    { 
+      id: 22,
+      name: "Fiske Crowell", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Fiske-Crowell_450x450.jpg",
+      title: "Principal",
+      subtitle: "Landscape Architect",
+      role: ""
+    },
+    { 
+      id: 23,
+      name: "Ian Dickenson", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Ian-Dickenson_450x450.jpg",
+      title: "Associate Principal",
+      subtitle: "Architect",
+      role: ""
+    },
+    { 
+      id: 24,
+      name: "Philip Dugdale", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Philip-Dugdale_450x450.jpg",
+      title: "New York Office Director",
+      subtitle: "Principal",
+      role: "Architect"
+    },
+    { 
+      id: 25,
+      name: "Anna Cawrse", 
+      image: "https://www.sasaki.com/wp-content/uploads/2022/12/Anna-Cawrse_450x450.jpg",
+      title: "Chair of Landscape Architecture",
+      subtitle: "Board of Directors, Principal",
+      role: "Landscape Architect"
+    },
+    { 
+      id: 26,
+      name: "Zachary Chrisco", 
+      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Board of Directors, Principal",
+      role: "Civil Engineer"
+    },
+    { 
+      id: 27,
+      name: "Caitlyn Clauson", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      title: "President",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 28,
+      name: "Meredith McCarthy", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      title: "Chair At-Large",
+      subtitle: "Associate Principal",
+      role: "Architect"
+    },
+    { 
+      id: 29,
+      name: "Tyler Patrick", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      title: "Chair of Planning & Urban Design",
+      subtitle: "Board of Directors, Principal",
+      role: "Planner"
+    },
+    { 
+      id: 30,
+      name: "Pablo Savid-Buteler", 
+      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      title: "Chair of Design Integration",
+      subtitle: "Board of Directors, Principal",
+      role: "Designer"
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 30;
   const totalPages = Math.ceil(charactersList.length / itemsPerPage);
 
   const currentItems = charactersList.slice(
@@ -675,6 +905,7 @@ function App({ characters }) {
                         fontSize: "34px",
                         fontWeight: "bold",
                         marginBottom: "10px",
+                        textAlign: "center",
                       }}
                     >
                       BAN LÃNH ĐẠO (VIUP)
@@ -685,6 +916,7 @@ function App({ characters }) {
                         fontFamily: "'Times New Roman', serif",
                         fontSize: "16px",
                         marginBottom: "25px",
+                        textAlign: "center",
                       }}
                     >
                       BAN LÃNH ĐẠO VÀ GIÁM ĐỐC TRUNG TÂM
@@ -692,26 +924,21 @@ function App({ characters }) {
                   </div>
 
                   {/* LIST CARD */}
-                  <div className="container">
+                  <div className="container" style={{ maxWidth: "1600px" }}>
                     <div
                       className="row"
                       style={{
-                        rowGap: "30px",
+                        rowGap: "80px",
+                        columnGap: "40px",
+                        justifyContent: "center",
                       }}
                     >
                       {currentItems.map((char, i) => (
-                        <div className="col-lg-3 col-md-4 col-sm-6" key={i}>
+                        <div className="col-lg-2 col-md-4 col-sm-6" key={i}>
                           <div
                             style={{
                               width: "100%",
-                              height: "350px",
-                              border: "1px solid #ddd",
-                              borderRadius: "10px",
-                              overflow: "hidden",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              background: "#fafafa",
+                              marginBottom: "20px",
                             }}
                           >
                             <img
@@ -719,26 +946,75 @@ function App({ characters }) {
                               alt={char.name}
                               style={{
                                 width: "100%",
-                                height: "100%",
+                                height: "auto",
                                 objectFit: "cover",
+                                display: "block",
                               }}
                             />
                           </div>
 
                           {/* NAME */}
-                          <p
+                          <h3
                             style={{
-                              textAlign: "center",
-                              marginTop: "12px",
-                              fontFamily: "'Times New Roman', serif",
-                              fontSize: "16px",
-                              fontWeight: "bold",
+                              textAlign: "left",
+                              marginTop: "15px",
+                              marginBottom: "10px",
+                              fontFamily: "'Arial', sans-serif",
+                              fontSize: "22px",
+                              fontWeight: "600",
                               color: "#000",
-                              textTransform: "uppercase",
+                              lineHeight: "1.3",
                             }}
                           >
                             {char.name}
+                          </h3>
+
+                          {/* TITLE */}
+                          <p
+                            style={{
+                              textAlign: "left",
+                              margin: "0 0 6px 0",
+                              fontFamily: "'Arial', sans-serif",
+                              fontSize: "16px",
+                              fontWeight: "400",
+                              color: "#999",
+                              lineHeight: "1.5",
+                            }}
+                          >
+                            {char.title}
                           </p>
+
+                          {/* SUBTITLE */}
+                          <p
+                            style={{
+                              textAlign: "left",
+                              margin: "0 0 6px 0",
+                              fontFamily: "'Arial', sans-serif",
+                              fontSize: "16px",
+                              fontWeight: "400",
+                              color: "#999",
+                              lineHeight: "1.5",
+                            }}
+                          >
+                            {char.subtitle}
+                          </p>
+
+                          {/* ROLE */}
+                          {char.role && (
+                            <p
+                              style={{
+                                textAlign: "left",
+                                margin: "0",
+                                fontFamily: "'Arial', sans-serif",
+                                fontSize: "16px",
+                                fontWeight: "400",
+                                color: "#999",
+                                lineHeight: "1.5",
+                              }}
+                            >
+                              {char.role}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
