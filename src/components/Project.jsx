@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Import hình ảnh
 import bgImage from "../assets/img/sxd-ab6.png";
@@ -9,7 +9,47 @@ import sxdbg12 from "../assets/img/sxd-ab12.png";
 import sxdbg13 from "../assets/img/sxd-ab13.png";
 import sxdbg14 from "../assets/img/sxd-ab14.png";
 import sxdbg15 from "../assets/img/sxd-ab15.png";
+
 function Project() {
+  const [page, setPage] = useState(1);
+  const projectCards = [
+    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
+    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
+    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
+    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
+    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
+    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
+    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
+    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
+    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
+    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
+    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
+    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
+    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
+    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
+    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
+    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
+    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
+    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
+    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
+    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
+    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
+    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
+    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
+    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
+    
+  ];
+
+  const rowsPerPage = 6; // 6 hàng, mỗi hàng 4 thẻ
+  const itemsPerPage = rowsPerPage * 4;
+  const totalPages = Math.max(1, Math.ceil(projectCards.length / itemsPerPage));
+  const paginatedCards = projectCards.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+  const goPage = (p) => {
+    const next = Math.min(Math.max(p, 1), totalPages);
+    setPage(next);
+  };
+
   return (
     <>
       {/* Portfolio Details Section */}
@@ -162,54 +202,91 @@ function Project() {
           </div>
         </div>
 
-        {/* Grid 6 images with overlay text */}
+        {/* Grid cards */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '48px',
-            maxWidth: 1700,
-            margin: '60px auto 0 auto',
-            padding: '0 24px',
+            gridTemplateColumns: 'repeat(4, minmax(320px, 1fr))',
+            gap: '80px 64px',
+            maxWidth: 1800,
+            margin: '90px auto 0 auto',
+            padding: '0 28px',
           }}
         >
-          {/* 1 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg10} alt="CHEF APARTMENTS" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>CHEF APARTMENTS</div>
-          </div>
-          {/* 2 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg11} alt="STUDIO APARTMENTS" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>STUDIO APARTMENTS</div>
-          </div>
-          {/* 3 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg12} alt="LUXURY APARTMENTS" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>LUXURY APARTMENTS</div>
-          </div>
-          {/* 4 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg13} alt="PREMIUM OFFICE SUITE" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>PREMIUM OFFICE SUITE</div>
-          </div>
-          {/* 5 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg14} alt="SENIOR APARTMENTS" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>SENIOR APARTMENTS</div>
-          </div>
-          {/* 6 */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)' }}>
-            <img src={sxdbg15} alt="MODERN OFFICE" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.18)' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', color: '#fff', fontFamily: 'serif', fontSize: '2.1rem', fontWeight: 400, textAlign: 'center', letterSpacing: 1, zIndex: 2, textShadow: '0 2px 8px rgba(0,0,0,0.18)', whiteSpace: 'nowrap' }}>MODERN OFFICE</div>
-          </div>
+          {paginatedCards.map((item, index) => (
+            <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)' }}>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+              <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
+                {item.title}
+              </div>
+              <div style={{ fontFamily: 'serif', fontSize: '1.2rem', color: '#8a8a8a', letterSpacing: '0.3px' }}>
+                {item.location}
+              </div>
+            </div>
+          ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, marginTop: 40 }}>
+            <button
+              onClick={() => goPage(page - 1)}
+              disabled={page === 1}
+              style={{
+                padding: '10px 16px',
+                border: '1px solid #ccc',
+                background: page === 1 ? '#f5f5f5' : '#fff',
+                cursor: page === 1 ? 'not-allowed' : 'pointer',
+                borderRadius: 4,
+                fontFamily: 'serif',
+              }}
+            >
+              Prev
+            </button>
+            {[...Array(totalPages)].map((_, i) => {
+              const p = i + 1;
+              const active = p === page;
+              return (
+                <button
+                  key={p}
+                  onClick={() => goPage(p)}
+                  style={{
+                    width: 38,
+                    height: 38,
+                    borderRadius: '50%',
+                    border: active ? '1px solid #222' : '1px solid #ccc',
+                    background: active ? '#222' : '#fff',
+                    color: active ? '#fff' : '#333',
+                    cursor: 'pointer',
+                    fontFamily: 'serif',
+                  }}
+                >
+                  {p}
+                </button>
+              );
+            })}
+            <button
+              onClick={() => goPage(page + 1)}
+              disabled={page === totalPages}
+              style={{
+                padding: '10px 16px',
+                border: '1px solid #ccc',
+                background: page === totalPages ? '#f5f5f5' : '#fff',
+                cursor: page === totalPages ? 'not-allowed' : 'pointer',
+                borderRadius: 4,
+                fontFamily: 'serif',
+              }}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </section>
 
         <section style={{ background: '#fff', padding: '60px 0 80px 0', width: '100%' }}>
