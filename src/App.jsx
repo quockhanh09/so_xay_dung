@@ -22,53 +22,49 @@ import 'swiper/swiper-bundle.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'flag-icons/css/flag-icons.min.css'
 
-//
-import logo from "./assets/img/Logo-name.png";
-// import iconGlobal from "./assets/img/Icon.svg";
 import heroBg from "./assets/img/sxd-bg.png";
-import iconYoutube from "./assets/img/Icon-youtube.svg";
-import iconInsta from "./assets/img/Icon-insta.svg";
-import iconFace from "./assets/img/Facebook.svg";
-import iconQr from "./assets/img/qr1-1.svg";
-import appStore from "./assets/img/testimonials/appstore.svg";
-import ggplay from "./assets/img/testimonials/gg play.svg";
-import logoFull from "./assets/img/Logo-full.png";
-import tabDot from "./assets/img/tab-dot.png";
-import ttImg from "./assets/img/fortress-1.png"
-import no1 from "./assets/img/no1.png";
-import no2 from "./assets/img/no2.png";
-import no3 from "./assets/img/no3.png";
-import statusBg from "./assets/img/elrodika-05.png";
-import nv12 from "./assets/img/nv-12.png";
-import bgTime from "./assets/img/br-season.jpeg";
-import seasonImg from "./assets/img/season 2025.png";
-import logosword from "./assets/img/TheGuardian_Logo_VIE 3.png"
-import chinhSach from "./assets/img/Chính sách bảo mật.pdf"
-import dieuKhoan from "./assets/img/The Guardians_Điều khoản sử dụng.pdf"
 
 import sxdbg1 from "./assets/img/sxd-ab1.png"
 import sxdbg2 from "./assets/img/sxd-ab2.png"
 import sxdbg3 from "./assets/img/sxd-ab3.png"
 import sxdbg4 from "./assets/img/sxd-ab4.png"
-import canonDefault from "./assets/img/character=canon, state=default.png";
-import canonZoom from "./assets/img/character=canon, state=zoom.png";
-import holyDefault from "./assets/img/character=holy, state=default.png";
-import holyZoom from "./assets/img/character=holy, state=zoom.png";
-import assasinDefault from "./assets/img/character=assasin, state=default.png";
-import assasinZoom from "./assets/img/character=assasin, state=zoom.png";
-import warriorDefault from "./assets/img/character=warrior, state=default.png";
-import warriorZoom from "./assets/img/character=warrior, state=zoom.png";
-import mageDefault from "./assets/img/character=mage, state=default.png";
-import mageZoom from "./assets/img/character=mage, state=zoom.png";
-import archerDefault from "./assets/img/character=archer, state=default.png";
-import archerZoom from "./assets/img/character=archer, state=zoom.png";
-// danh sách nhân vật
-
 
 import event1 from "./assets/img/lucarly-08.png";
 import event2 from "./assets/img/lucarly-02.png";
 import event3 from "./assets/img/lucarly-01.png";
 import event4 from "./assets/img/kram-11.png";
+
+// ===== Ảnh bản thân =====
+import banThan2 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/2.jpg";
+import banThan3 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/3.jpg";
+import banThan4 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/4.jpg";
+import banThan5 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/5.jpg";
+import banThan6 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/6.jpg";
+import banThan7 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/7.jpg";
+import banThan8 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/8.jpg";
+import banThan9 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/9.jpg";
+import banThan10 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/10.jpg";
+import banThan11 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/11.jpg";
+import banThan12 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/12.jpg";
+import banThan13 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/13.jpg";
+import banThan14 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/14.jpg";
+import banThan15 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/15.jpg";
+import banThan16 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/16.jpg";
+import banThan17 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/17.jpg";
+import banThan18 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/18.jpg";
+import banThan19 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/19.jpg";
+import banThan20 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/20.jpg";
+import banThan21 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/21.jpg";
+import banThan22 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/22.jpg";
+import banThan23 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/23.jpg";
+import banThan24 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/24.jpg";
+import banThan25 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/25 (2).jpg";
+import banThan26 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/26.jpg";
+import banThan27 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/27.jpg";
+import banThan28 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/28.jpg";
+import banThan29 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/29.jpg";
+import banThan30 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/30.jpg";
+import banThan31 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/31.jpg";
 
 
 const eventImages = [event1, event2, event3, event4];
@@ -78,7 +74,7 @@ function App({ characters }) {
     { 
       id: 1,
       name: "Anna Cawrse", 
-      image: "https://www.sasaki.com/wp-content/uploads/2019/10/zAlt_ZChrisco-720x720.jpg",
+      image: banThan2,
       title: "Chair of Landscape Architecture, Civil Engineering, & Ecology",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
@@ -86,7 +82,7 @@ function App({ characters }) {
     { 
       id: 2,
       name: "Zachary Chrisco", 
-      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      image: banThan3,
       title: "Chair At-Large",
       subtitle: "Board of Directors, Principal",
       role: "Civil Engineer"
@@ -94,7 +90,7 @@ function App({ characters }) {
     { 
       id: 3,
       name: "Caitlyn Clauson", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      image: banThan4,
       title: "President",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -102,7 +98,7 @@ function App({ characters }) {
     { 
       id: 4,
       name: "Meredith McCarthy", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      image: banThan5,
       title: "Chair At-Large",
       subtitle: "Associate Principal, Board of Directors",
       role: "Architect"
@@ -110,7 +106,7 @@ function App({ characters }) {
     { 
       id: 5,
       name: "Tyler Patrick", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      image: banThan6,
       title: "Chair of Planning & Urban Design",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -118,7 +114,7 @@ function App({ characters }) {
     { 
       id: 6,
       name: "Pablo Savid-Buteler", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      image: banThan7,
       title: "Chair of Design Integration",
       subtitle: "Board of Directors, Principal",
       role: "Designer"
@@ -126,7 +122,7 @@ function App({ characters }) {
     { 
       id: 7,
       name: "Victor Vizgaitis", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Victor-Vizgaitis_450x450.jpg",
+      image: banThan8,
       title: "Managing Principal",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
@@ -134,7 +130,7 @@ function App({ characters }) {
     { 
       id: 8,
       name: "Joshua Brooks", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Joshua-Brooks_450x450.jpg",
+      image: banThan9,
       title: "Denver Office Director",
       subtitle: "Principal",
       role: "Landscape Architect"
@@ -142,7 +138,7 @@ function App({ characters }) {
     { 
       id: 9,
       name: "Carla Ceruzzi", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Carla-Ceruzzi_450x450.jpg",
+      image: banThan10,
       title: "Associate Principal",
       subtitle: "Landscape Architect",
       role: ""
@@ -150,7 +146,7 @@ function App({ characters }) {
     { 
       id: 10,
       name: "Fiske Crowell", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Fiske-Crowell_450x450.jpg",
+      image: banThan11,
       title: "Principal",
       subtitle: "Landscape Architect",
       role: ""
@@ -158,7 +154,7 @@ function App({ characters }) {
     { 
       id: 11,
       name: "Ian Dickenson", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Ian-Dickenson_450x450.jpg",
+      image: banThan12,
       title: "Associate Principal",
       subtitle: "Architect",
       role: ""
@@ -166,7 +162,7 @@ function App({ characters }) {
     { 
       id: 12,
       name: "Philip Dugdale", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Philip-Dugdale_450x450.jpg",
+      image: banThan13,
       title: "New York Office Director",
       subtitle: "Principal",
       role: "Architect"
@@ -174,7 +170,7 @@ function App({ characters }) {
     { 
       id: 13,
       name: "Anna Cawrse", 
-      image: "https://www.sasaki.com/wp-content/uploads/2022/12/Anna-Cawrse_450x450.jpg",
+      image: banThan14,
       title: "Chair of Landscape Architecture",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
@@ -182,7 +178,7 @@ function App({ characters }) {
     { 
       id: 14,
       name: "Zachary Chrisco", 
-      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      image: banThan15,
       title: "Chair At-Large",
       subtitle: "Board of Directors, Principal",
       role: "Civil Engineer"
@@ -190,7 +186,7 @@ function App({ characters }) {
     { 
       id: 15,
       name: "Caitlyn Clauson", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      image: banThan16,
       title: "President",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -198,7 +194,7 @@ function App({ characters }) {
     { 
       id: 16,
       name: "Meredith McCarthy", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      image: banThan17,
       title: "Chair At-Large",
       subtitle: "Associate Principal",
       role: "Architect"
@@ -206,7 +202,7 @@ function App({ characters }) {
     { 
       id: 17,
       name: "Tyler Patrick", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      image: banThan18,
       title: "Chair of Planning & Urban Design",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -214,7 +210,7 @@ function App({ characters }) {
     { 
       id: 18,
       name: "Pablo Savid-Buteler", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      image: banThan19,
       title: "Chair of Design Integration",
       subtitle: "Board of Directors, Principal",
       role: "Designer"
@@ -222,7 +218,7 @@ function App({ characters }) {
     { 
       id: 19,
       name: "Victor Vizgaitis", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Victor-Vizgaitis_450x450.jpg",
+      image: banThan20,
       title: "Managing Principal",
       subtitle: "Board of Directors",
       role: "Landscape Architect"
@@ -230,7 +226,7 @@ function App({ characters }) {
     { 
       id: 20,
       name: "Joshua Brooks", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Joshua-Brooks_450x450.jpg",
+      image: banThan21,
       title: "Denver Office Director",
       subtitle: "Principal",
       role: "Landscape Architect"
@@ -238,7 +234,7 @@ function App({ characters }) {
     { 
       id: 21,
       name: "Carla Ceruzzi", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Carla-Ceruzzi_450x450.jpg",
+      image: banThan22,
       title: "Associate Principal",
       subtitle: "Landscape Architect",
       role: ""
@@ -246,7 +242,7 @@ function App({ characters }) {
     { 
       id: 22,
       name: "Fiske Crowell", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Fiske-Crowell_450x450.jpg",
+      image: banThan23,
       title: "Principal",
       subtitle: "Landscape Architect",
       role: ""
@@ -254,7 +250,7 @@ function App({ characters }) {
     { 
       id: 23,
       name: "Ian Dickenson", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Ian-Dickenson_450x450.jpg",
+      image: banThan24,
       title: "Associate Principal",
       subtitle: "Architect",
       role: ""
@@ -262,7 +258,7 @@ function App({ characters }) {
     { 
       id: 24,
       name: "Philip Dugdale", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Philip-Dugdale_450x450.jpg",
+      image: banThan25,
       title: "New York Office Director",
       subtitle: "Principal",
       role: "Architect"
@@ -270,7 +266,7 @@ function App({ characters }) {
     { 
       id: 25,
       name: "Anna Cawrse", 
-      image: "https://www.sasaki.com/wp-content/uploads/2022/12/Anna-Cawrse_450x450.jpg",
+      image: banThan26,
       title: "Chair of Landscape Architecture",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
@@ -278,7 +274,7 @@ function App({ characters }) {
     { 
       id: 26,
       name: "Zachary Chrisco", 
-      image: "https://www.sasaki.com/wp-content/uploads/2024/02/Zachary-Chrisco_450x450.jpg",
+      image: banThan27,
       title: "Chair At-Large",
       subtitle: "Board of Directors, Principal",
       role: "Civil Engineer"
@@ -286,7 +282,7 @@ function App({ characters }) {
     { 
       id: 27,
       name: "Caitlyn Clauson", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Caitlyn-Clauson_450x450.jpg",
+      image: banThan28,
       title: "President",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -294,7 +290,7 @@ function App({ characters }) {
     { 
       id: 28,
       name: "Meredith McCarthy", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Meredith-McCarthy_450x450.jpg",
+      image: banThan29,
       title: "Chair At-Large",
       subtitle: "Associate Principal",
       role: "Architect"
@@ -302,7 +298,7 @@ function App({ characters }) {
     { 
       id: 29,
       name: "Tyler Patrick", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Tyler-Patrick_450x450.jpg",
+      image: banThan30,
       title: "Chair of Planning & Urban Design",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
@@ -310,7 +306,7 @@ function App({ characters }) {
     { 
       id: 30,
       name: "Pablo Savid-Buteler", 
-      image: "https://www.sasaki.com/wp-content/uploads/2023/02/Pablo-Savid-Buteler_450x450.jpg",
+      image: banThan31,
       title: "Chair of Design Integration",
       subtitle: "Board of Directors, Principal",
       role: "Designer"
