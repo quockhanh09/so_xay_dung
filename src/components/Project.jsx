@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Import hình ảnh
 import bgImage from "../assets/img/sxd-ab6.png";
@@ -216,15 +217,33 @@ function Project() {
           {paginatedCards.map((item, index) => (
             <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)' }}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
+                {index === 0 ? (
+                  <Link to="/projects/gatton-park" style={{ display: 'block' }}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </Link>
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                )}
               </div>
-              <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
-                {item.title}
-              </div>
+              {index === 0 ? (
+                <Link to="/projects/gatton-park" style={{ textDecoration: 'none' }}>
+                  <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
+                    {item.title}
+                  </div>
+                </Link>
+              ) : (
+                <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
+                  {item.title}
+                </div>
+              )}
               <div style={{ fontFamily: 'serif', fontSize: '1.2rem', color: '#8a8a8a', letterSpacing: '0.3px' }}>
                 {item.location}
               </div>

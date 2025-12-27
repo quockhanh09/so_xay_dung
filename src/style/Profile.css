@@ -1,0 +1,270 @@
+/* Profile Page Styles */
+
+.profile-page {
+  padding-top: 0;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.profile-hero {
+  padding: 80px 0;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.profile-left-section {
+  padding: 0 40px 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-right-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0 40px;
+}
+
+.profile-image-wrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.profile-main-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+.profile-header-info {
+  padding: 0;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-name {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 64px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  letter-spacing: -1px;
+}
+
+.profile-credentials {
+  font-size: 18px;
+  color: #999;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.profile-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.profile-subtitle {
+  font-size: 16px;
+  color: #999;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+.profile-role {
+  font-size: 16px;
+  color: #999;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.say-hello-link {
+  display: inline-block;
+  color: #999;
+  text-decoration: underline;
+  font-size: 16px;
+  margin-bottom: 40px;
+  transition: color 0.3s ease;
+}
+
+.say-hello-link:hover {
+  color: #1a1a1a;
+}
+
+.profile-bio-full {
+  margin-bottom: 50px;
+  line-height: 1.8;
+}
+
+.profile-bio-full p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Details Section */
+.profile-details-section {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.details-block {
+  margin-bottom: 50px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.details-block h4 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.details-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.details-block li {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  padding-left: 0;
+}
+
+.details-block li:before {
+  content: "";
+}
+
+.details-block a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.details-block a:hover {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
+
+/* Back Button */
+.profile-back {
+  padding: 60px 0;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 15px 40px;
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-back:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+  color: #fff;
+}
+
+.btn-back i {
+  margin-right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .profile-hero {
+    padding: 60px 0;
+  }
+
+  .profile-name {
+    font-size: 48px;
+  }
+
+  .profile-left-section {
+    padding-right: 20px;
+  }
+
+  .profile-right-section {
+    padding-left: 20px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .profile-hero {
+    min-height: auto;
+    padding: 40px 0;
+  }
+
+  .profile-left-section {
+    padding: 0;
+  }
+
+  .profile-right-section {
+    padding: 40px 0 0 0;
+    margin-top: 0;
+  }
+
+  .profile-name {
+    font-size: 40px;
+  }
+
+  .profile-main-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-hero {
+    padding: 30px 0;
+  }
+
+  .profile-name {
+    font-size: 32px;
+  }
+
+  .profile-title {
+    font-size: 20px;
+  }
+
+  .profile-credentials {
+    font-size: 16px;
+  }
+
+  .profile-bio-full p,
+  .details-block li {
+    font-size: 15px;
+  }
+
+  .details-block h4 {
+    font-size: 16px;
+  }
+}
+

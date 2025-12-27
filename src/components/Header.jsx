@@ -7,13 +7,267 @@ import "../style/App.css";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const [animationDone, setAnimationDone] = useState(false);
   const location = useLocation();
+  
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  
+  useEffect(() => {
+    // Tạm thời luôn chạy animation để test
+    setTimeout(() => {
+      setShowIntro(false);
+    }, 2500);
+    setTimeout(() => {
+      setAnimationDone(true);
+    }, 3000);
+  }, []);
   // const isLoginPage = location.pathname === "/Login";
 
   return (
     <>
       <style>{`
+        .logo-intro-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: #ffffff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+        }
+        
+        .udi-letters-container {
+          position: relative;
+          width: 700px;
+          height: 320px;
+        }
+        
+        .piece {
+          position: absolute;
+          border-radius: 4px;
+          opacity: 0;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        /* Chữ U - kiểu ảnh 2: hai thanh dọc + thanh ngang ngắn */
+        .u1 { 
+          width: 40px; 
+          height: 180px; 
+          background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+          left: -150px; 
+          top: -100px; 
+          border-radius: 12px;
+          animation: moveU1 0.9s ease-out 0.1s forwards;
+        }
+        .u2 { 
+          width: 40px; 
+          height: 180px; 
+          background: linear-gradient(135deg, #FF8E53, #FFB347);
+          left: 900px; 
+          top: -80px; 
+          border-radius: 12px;
+          animation: moveU2 0.9s ease-out 0.15s forwards;
+        }
+        .u3 { 
+          width: 110px; 
+          height: 40px; 
+          background: linear-gradient(135deg, #FFB347, #FFA500);
+          left: -120px; 
+          top: 450px; 
+          border-radius: 12px;
+          animation: moveU3 0.9s ease-out 0.2s forwards;
+        }
+        
+        /* Chữ D - kiểu ảnh 2: giống chữ C + hai khối nhỏ bên phải */
+        .d1 { 
+          width: 40px; 
+          height: 180px; 
+          background: linear-gradient(135deg, #4A90E2, #357ABD);
+          left: -200px; 
+          top: 100px; 
+          border-radius: 12px;
+          animation: moveD1 0.9s ease-out 0.3s forwards;
+        }
+        .d2 { 
+          width: 110px; 
+          height: 40px; 
+          background: linear-gradient(135deg, #357ABD, #2E5F8E);
+          left: 950px; 
+          top: -120px; 
+          border-radius: 12px;
+          animation: moveD2 0.9s ease-out 0.35s forwards;
+        }
+        .d3 { 
+          width: 110px; 
+          height: 40px; 
+          background: linear-gradient(135deg, #2E5F8E, #1E4D7B);
+          left: -150px; 
+          top: 480px; 
+          border-radius: 12px;
+          animation: moveD3 0.9s ease-out 0.4s forwards;
+        }
+        .d4 { 
+          width: 40px; 
+          height: 50px; 
+          background: linear-gradient(135deg, #5BA3F5, #4A90E2);
+          left: 980px; 
+          top: 180px; 
+          border-radius: 12px;
+          animation: moveD4 0.9s ease-out 0.45s forwards;
+        }
+        .d5 { 
+          width: 40px; 
+          height: 50px; 
+          background: linear-gradient(135deg, #6BB6FF, #5BA3F5);
+          left: -220px; 
+          top: -150px; 
+          border-radius: 12px;
+          animation: moveD5 0.9s ease-out 0.32s forwards;
+        }
+        
+        /* Chữ I - 3 mảnh tạo hình I đơn giản */
+        .i1 { 
+          width: 100px; 
+          height: 35px; 
+          background: linear-gradient(135deg, #4ECB71, #3BB75E);
+          left: 1000px; 
+          top: -100px; 
+          border-radius: 12px 12px 12px 12px;
+          animation: moveI1 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+        }
+        .i2 { 
+          width: 35px; 
+          height: 160px; 
+          background: linear-gradient(135deg, #3BB75E, #2EA44F);
+          left: -250px; 
+          top: -130px; 
+          border-radius: 12px;
+          animation: moveI2 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
+        }
+        .i3 { 
+          width: 100px; 
+          height: 35px; 
+          background: linear-gradient(135deg, #2EA44F, #248A3D);
+          left: 1020px; 
+          top: 500px; 
+          border-radius: 12px 12px 12px 12px;
+          animation: moveI3 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+        }
+        
+        /* Animations cho chữ U (single-phase theo bố cục ảnh 2) */
+        @keyframes moveU1 { 
+          to { 
+            left: 80px; 
+            top: 60px; 
+            opacity: 1; 
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveU2 { 
+          to { 
+            left: 235px; 
+            top: 60px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveU3 { 
+          to { 
+            left: 120px; 
+            top: 200px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        
+        /* Animations cho chữ D (single-phase theo bố cục ảnh 2) */
+        @keyframes moveD1 { 
+          to { 
+            left: 330px; 
+            top: 60px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveD2 { 
+          to { 
+            left: 370px; /* sát mép phải của d1 */
+            top: 60px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveD3 { 
+          to { 
+            left: 370px; /* thẳng hàng với d2 */
+            top: 200px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveD4 { 
+          to { 
+            left: 475px; 
+            top: 90px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        @keyframes moveD5 { 
+          to { 
+            left: 475px; 
+            top: 150px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        
+        /* Animations cho chữ I */
+        @keyframes moveI1 { 
+          to { 
+            left: 565px; 
+            top: 60px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+          from {
+            transform: scale(0.5) rotate(180deg);
+          }
+        }
+        @keyframes moveI2 { 
+          to { 
+            left: 600px; 
+            top: 60px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+          from {
+            transform: scale(0.5) rotate(-180deg);
+          }
+        }
+        @keyframes moveI3 { 
+          to { 
+            left: 565px; 
+            top: 185px; 
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+          from {
+            transform: scale(0.5) rotate(90deg);
+          }
+        }
+        
+        @keyframes fadeOut {
+          to {
+            opacity: 0;
+            visibility: hidden;
+          }
+        }
         .udi-header {
           width: 100%;
           background: #f5f5f5;
@@ -134,7 +388,29 @@ function Header() {
           }
         }
       `}</style>
-      <header className="udi-header">
+      {showIntro && (
+        <div className="logo-intro-overlay">
+          <div className="udi-letters-container">
+            {/* Chữ U - 3 mảnh chính */}
+            <div className="piece u1"></div>
+            <div className="piece u2"></div>
+            <div className="piece u3"></div>
+            
+            {/* Chữ D - 5 mảnh chính */}
+            <div className="piece d1"></div>
+            <div className="piece d2"></div>
+            <div className="piece d3"></div>
+            <div className="piece d4"></div>
+            <div className="piece d5"></div>
+            
+            {/* Chữ I - 3 mảnh chính */}
+            <div className="piece i1"></div>
+            <div className="piece i2"></div>
+            <div className="piece i3"></div>
+          </div>
+        </div>
+      )}
+      <header className="udi-header" style={{ opacity: animationDone ? 1 : 0, transition: 'opacity 0.5s' }}>
         {/* Hamburger button for mobile */}
         <button
           className="mobile-menu-btn"
@@ -147,8 +423,8 @@ function Header() {
             <span>&#9776;</span>
           )}
         </button>
-      {/* LOGO TRÊN */}
-      <div style={{ marginBottom: "20px" }}>
+      {/* LOGO TRÁI */}
+      <div style={{ marginBottom: "20px",marginRight:"800px" }}>
         <a href="/">
           <img
             src={logo}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // import Layout from "./Layout.jsx";
 import Header from "./components/Header";
@@ -8,10 +8,12 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Project from "./components/Project";
 import Details from "./components/Deatails";
+import ProjectDetails from "./components/ProjectDetails";
 import Login from "./signup-in/Login";
 import Newsletter from "./components/Newsletter";
 import Register from "./signup-in/Register";
 import About from "./components/About";
+import Profile from "./components/Profile";
 
 import "./style/App.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -884,16 +886,15 @@ function App({ characters }) {
                 </section>
 
 
-                {/* ===== CHARACTERS ===== */}
+                {/* SƠ ĐỒ CẤU TỔ CHỨC */}
                 <section
-                  id="services"
-                  className="services section"
+                  id="organization-chart"
+                  className="organization-chart section"
                   style={{
                     background: "#fff",
-                    padding: "40px 0",
+                    padding: "60px 0",
                   }}
                 >
-                  {/* TITLE */}
                   <div className="container">
                     <h2
                       style={{
@@ -904,167 +905,234 @@ function App({ characters }) {
                         textAlign: "center",
                       }}
                     >
-                      BAN LÃNH ĐẠO (VIUP)
+                      SƠ ĐỒ CẤU TỔ CHỨC VIỆN
                     </h2>
 
                     <h4
                       style={{
                         fontFamily: "'Times New Roman', serif",
                         fontSize: "16px",
-                        marginBottom: "25px",
+                        marginBottom: "40px",
                         textAlign: "center",
+                        color: "#666",
                       }}
                     >
-                      BAN LÃNH ĐẠO VÀ GIÁM ĐỐC TRUNG TÂM
+                      COMPANY'S ORGANIZATION STRUCTURE CHART
                     </h4>
-                  </div>
 
-                  {/* LIST CARD */}
-                  <div className="container" style={{ maxWidth: "1600px" }}>
-                    <div
-                      className="row"
-                      style={{
-                        rowGap: "80px",
-                        columnGap: "40px",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {currentItems.map((char, i) => (
-                        <div className="col-lg-2 col-md-4 col-sm-6" key={i}>
-                          <div
-                            style={{
-                              width: "100%",
-                              marginBottom: "20px",
-                            }}
-                          >
-                            <img
-                              src={char.image}
-                              alt={char.name}
-                              style={{
-                                width: "100%",
-                                height: "auto",
-                                objectFit: "cover",
-                                display: "block",
-                              }}
-                            />
-                          </div>
-
-                          {/* NAME */}
-                          <h3
-                            style={{
-                              textAlign: "left",
-                              marginTop: "15px",
-                              marginBottom: "10px",
-                              fontFamily: "'Arial', sans-serif",
-                              fontSize: "22px",
-                              fontWeight: "600",
-                              color: "#000",
-                              lineHeight: "1.3",
-                            }}
-                          >
-                            {char.name}
-                          </h3>
-
-                          {/* TITLE */}
-                          <p
-                            style={{
-                              textAlign: "left",
-                              margin: "0 0 6px 0",
-                              fontFamily: "'Arial', sans-serif",
-                              fontSize: "16px",
-                              fontWeight: "400",
-                              color: "#999",
-                              lineHeight: "1.5",
-                            }}
-                          >
-                            {char.title}
-                          </p>
-
-                          {/* SUBTITLE */}
-                          <p
-                            style={{
-                              textAlign: "left",
-                              margin: "0 0 6px 0",
-                              fontFamily: "'Arial', sans-serif",
-                              fontSize: "16px",
-                              fontWeight: "400",
-                              color: "#999",
-                              lineHeight: "1.5",
-                            }}
-                          >
-                            {char.subtitle}
-                          </p>
-
-                          {/* ROLE */}
-                          {char.role && (
-                            <p
-                              style={{
-                                textAlign: "left",
-                                margin: "0",
-                                fontFamily: "'Arial', sans-serif",
-                                fontSize: "16px",
-                                fontWeight: "400",
-                                color: "#999",
-                                lineHeight: "1.5",
-                              }}
-                            >
-                              {char.role}
-                            </p>
-                          )}
+                    {/* Sơ đồ tổ chức */}
+                    <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "50px 20px" }}>
+                      {/* BỘ XÂY DỰNG */}
+                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                        <div style={{
+                          display: "inline-block",
+                          padding: "12px 30px",
+                          border: "1px solid #333",
+                          background: "#fff",
+                        }}>
+                          <div style={{ fontSize: "13px", fontWeight: "600", letterSpacing: "0.5px" }}>BỘ XÂY DỰNG</div>
+                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>MINISTRY OF CONSTRUCTION</div>
                         </div>
-                      ))}
-                    </div>
+                        {/* Đường thẳng xuống */}
+                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
+                      </div>
 
-                    {/* PAGINATION */}
-                    <div
-                      style={{
-                        marginTop: "35px",
-                        display: "flex",
-                        justifyContent: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <button
-                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                        disabled={currentPage === 1}
-                        style={{
-                          padding: "6px 14px",
-                          border: "1px solid #ccc",
-                          background: currentPage === 1 ? "#eee" : "#fff",
-                          cursor: currentPage === 1 ? "not-allowed" : "pointer",
-                        }}
-                      >
-                        ←
-                      </button>
+                      {/* VIUP */}
+                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                        <div style={{
+                          display: "inline-block",
+                          padding: "20px 40px",
+                          border: "2px solid #333",
+                          background: "#fff",
+                        }}>
+                          <div style={{ fontSize: "38px", fontWeight: "700", letterSpacing: "2px", marginBottom: "8px" }}>VIUP</div>
+                          <div style={{ fontSize: "12px", fontWeight: "600", lineHeight: "1.4" }}>VIỆN QUY HOẠCH ĐÔ THỊ VÀ NÔNG THÔN QUỐC GIA</div>
+                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>VIETNAM INSTITUTE FOR URBAN AND RURAL PLANNING</div>
+                        </div>
+                        {/* Đường thẳng xuống */}
+                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
+                      </div>
 
-                      {Array.from({ length: totalPages }, (_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => setCurrentPage(i + 1)}
-                          style={{
-                            padding: "6px 14px",
-                            border: "1px solid #ccc",
-                            background: currentPage === i + 1 ? "#000" : "#fff",
-                            color: currentPage === i + 1 ? "#fff" : "#000",
-                            cursor: "pointer",
-                          }}
-                        >
-                          {i + 1}
-                        </button>
-                      ))}
+                      {/* UDI */}
+                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                        <div style={{
+                          display: "inline-block",
+                          padding: "25px 50px",
+                          border: "2px solid #333",
+                          background: "#333",
+                          color: "#fff",
+                        }}>
+                          <div style={{ fontSize: "42px", fontWeight: "700", letterSpacing: "3px", marginBottom: "8px" }}>UDI</div>
+                          <div style={{ fontSize: "12px", fontWeight: "600", lineHeight: "1.4" }}>VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ</div>
+                          <div style={{ fontSize: "10px", color: "#ddd", marginTop: "3px" }}>URBAN DESIGN INSTITUTE</div>
+                        </div>
+                        {/* Đường thẳng xuống */}
+                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
+                      </div>
 
-                      <button
-                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                        disabled={currentPage === totalPages}
-                        style={{
-                          padding: "6px 14px",
-                          border: "1px solid #ccc",
-                          background: currentPage === totalPages ? "#eee" : "#fff",
-                          cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-                        }}
-                      >
-                        →
-                      </button>
+                      {/* GIÁM ĐỐC VIỆN và HỘI ĐỒNG TƯ VẤN */}
+                      <div style={{ position: "relative", marginBottom: "40px", minHeight: "110px", maxWidth: "900px", margin: "0 auto 40px auto" }}>
+                        {/* Hội đồng tư vấn - bên trái */}
+                        <div style={{ position: "absolute", left: "80px", top: "0" }}>
+                          <div style={{
+                            padding: "14px 20px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            width: "220px",
+                          }}>
+                            <div style={{ fontSize: "12px", fontWeight: "600" }}>HỘI ĐỒNG TƯ VẤN</div>
+                            <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>ADVISORY COUNCIL</div>
+                          </div>
+                        </div>
+
+                        {/* Đường kẻ ngang từ Hội đồng tư vấn đến Giám đốc */}
+                        <div style={{
+                          position: "absolute",
+                          left: "300px",
+                          top: "27px",
+                          width: "calc(50% - 425px)",
+                          height: "1px",
+                          background: "#333",
+                        }}></div>
+
+                        {/* Giám đốc - ở giữa */}
+                        <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", top: "0" }}>
+                          <div style={{
+                            padding: "16px 25px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            width: "250px",
+                          }}>
+                            <div style={{ fontSize: "13px", fontWeight: "600" }}>GIÁM ĐỐC VIỆN</div>
+                            <div style={{ fontSize: "11px", color: "#666", marginTop: "3px" }}>DIRECTOR</div>
+                          </div>
+                          {/* Đường thẳng xuống */}
+                          <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
+                        </div>
+                      </div>
+
+                      {/* CÁC PHÓ GIÁM ĐỐC */}
+                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                        <div style={{
+                          display: "inline-block",
+                          padding: "14px 25px",
+                          border: "1px solid #333",
+                          background: "#fff",
+                        }}>
+                          <div style={{ fontSize: "12px", fontWeight: "600" }}>CÁC PHÓ GIÁM ĐỐC VIỆN</div>
+                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>VICE DIRECTORS</div>
+                        </div>
+                        {/* Đường thẳng xuống */}
+                        <div style={{ width: "1px", height: "25px", background: "#333", margin: "0 auto" }}></div>
+                        {/* Đường ngang */}
+                        <div style={{ width: "100%", height: "1px", background: "#333", margin: "0 auto", maxWidth: "900px" }}></div>
+                        {/* 4 đường thẳng xuống */}
+                        <div style={{ display: "flex", justifyContent: "space-between", padding: "0 50px", maxWidth: "900px", margin: "0 auto" }}>
+                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
+                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
+                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
+                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
+                        </div>
+                      </div>
+
+                      {/* CÁC TRUNG TÂM - HÀNG ĐẦU */}
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: "20px", marginBottom: "35px", position: "relative" }}>
+                        {/* Phòng tổng hợp */}
+                        <div style={{ flex: 1 }}>
+                          <div style={{
+                            padding: "16px 12px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            minHeight: "90px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>PHÒNG TỔNG HỢP</div>
+                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>GENERAL OFFICE</div>
+                          </div>
+                        </div>
+
+                        {/* Trung tâm quy hoạch */}
+                        <div style={{ flex: 1 }}>
+                          <div style={{
+                            padding: "16px 12px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            minHeight: "90px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM QUY HOẠCH XÂY DỰNG</div>
+                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>CONSTRUCTION PLANNING CENTER</div>
+                          </div>
+                          {/* Đường thẳng xuống từ box này */}
+                          <div style={{ width: "1px", height: "35px", background: "#333", margin: "0 auto" }}></div>
+                        </div>
+
+                        {/* Trung tâm thiết kế */}
+                        <div style={{ flex: 1 }}>
+                          <div style={{
+                            padding: "16px 12px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            minHeight: "90px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM THIẾT KẾ ĐÔ THỊ</div>
+                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>URBAN DESIGN CENTER</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* CÁC TRUNG TÂM - HÀNG DƯỚI */}
+                      <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+                        {/* Trung tâm kiến trúc cảnh quan */}
+                        <div style={{ width: "31%" }}>
+                          <div style={{
+                            padding: "16px 12px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            minHeight: "90px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM KIẾN TRÚC CẢNH</div>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>QUAN VÀ MÔI TRƯỜNG ĐÔ THỊ</div>
+                            <div style={{ fontSize: "9px", color: "#666", marginTop: "3px" }}>ARCHITECTURE DESIGN AND</div>
+                            <div style={{ fontSize: "9px", color: "#666" }}>URBAN ENVIRONMENT CENTER</div>
+                          </div>
+                        </div>
+
+                        {/* Trung tâm kỹ thuật hạ tầng */}
+                        <div style={{ width: "31%" }}>
+                          <div style={{
+                            padding: "16px 12px",
+                            border: "1px solid #333",
+                            background: "#fff",
+                            textAlign: "center",
+                            minHeight: "90px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM KỸ THUẬT HẠ TẦNG</div>
+                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>VÀ THUỶ LỢI ĐÔ THỊ</div>
+                            <div style={{ fontSize: "9px", color: "#666", marginTop: "3px" }}>URBAN INFRASTRUCTURE AND</div>
+                            <div style={{ fontSize: "9px", color: "#666" }}>ENGINEERING CENTER</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -1234,11 +1302,13 @@ function App({ characters }) {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Project" element={<Project />} />
           <Route path="/Deatails" element={<Details />} />
+          <Route path="/projects/gatton-park" element={<ProjectDetails />} />
           <Route path="/Newsletter" element={<Newsletter />} />
           <Route path="/About" element={<About />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Achievement" element={<Achievement />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
         
         {/* ===== FOOTER ===== */}
