@@ -8,24 +8,35 @@
 
 /* Hero Section */
 .profile-hero {
-  padding: 80px 0;
+  padding: 60px 0 80px;
   background: #fff;
   min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
+.profile-hero .row {
+  align-items: flex-start;
+}
+
+.profile-hero .container-fluid {
+  max-width: 1220px;
+  padding: 0 32px;
+}
+
 .profile-left-section {
   padding: 0 40px 0 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .profile-right-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-end;
   padding: 0 0 0 40px;
+  margin-top: -32px;
 }
 
 .profile-image-wrapper {
@@ -35,65 +46,70 @@
 
 .profile-main-image {
   width: 100%;
-  max-width: 600px;
+  max-width: 560px;
   height: auto;
-  border-radius: 4px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.08);
   display: block;
 }
 
 .profile-header-info {
   padding: 0;
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .profile-name {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 64px;
-  font-weight: 300;
+  font-size: 68px;
+  font-weight: 400;
   margin-bottom: 10px;
   color: #1a1a1a;
   letter-spacing: -1px;
+  line-height: 1.05;
 }
 
 .profile-credentials {
-  font-size: 18px;
-  color: #999;
-  margin-bottom: 20px;
+  font-size: 30px;
+  color: #8a8a8a;
+  margin-bottom: 28px;
   font-weight: 400;
   letter-spacing: 0.5px;
+  line-height: 1.15;
 }
 
 .profile-title {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 24px;
+  font-size: 38px;
   font-weight: 400;
-  color: #666;
-  margin-bottom: 8px;
+  color: #6a6a6a;
+  margin-bottom: 10px;
+  line-height: 1.15;
 }
 
 .profile-subtitle {
-  font-size: 16px;
-  color: #999;
-  margin-bottom: 5px;
+  font-size: 34px;
+  color: #6a6a6a;
+  margin-bottom: 6px;
   font-weight: 400;
+  line-height: 1.15;
 }
 
 .profile-role {
-  font-size: 16px;
-  color: #999;
+  font-size: 30px;
+  color: #6a6a6a;
   font-weight: 400;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
+  line-height: 1.15;
 }
 
 .say-hello-link {
   display: inline-block;
-  color: #999;
+  color: #6a6a6a;
   text-decoration: underline;
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   transition: color 0.3s ease;
 }
 
@@ -102,21 +118,22 @@
 }
 
 .profile-bio-full {
-  margin-bottom: 50px;
+  margin-top: 8px;
+  margin-bottom: 48px;
   line-height: 1.8;
 }
 
 .profile-bio-full p {
-  font-size: 16px;
-  color: #666;
+  font-size: 17px;
+  color: #505050;
   line-height: 1.8;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 /* Details Section */
 .profile-details-section {
-  margin-top: 50px;
-  text-align: center;
+  margin-top: 60px;
+  text-align: left;
 }
 
 .details-block {
@@ -145,7 +162,7 @@
 
 .details-block li {
   font-size: 16px;
-  color: #666;
+  color: #505050;
   line-height: 1.8;
   margin-bottom: 12px;
   padding-left: 0;
@@ -200,11 +217,11 @@
 /* Responsive */
 @media (max-width: 1200px) {
   .profile-hero {
-    padding: 60px 0;
+    padding: 70px 0;
   }
 
   .profile-name {
-    font-size: 48px;
+    font-size: 56px;
   }
 
   .profile-left-section {
@@ -220,7 +237,7 @@
 @media (max-width: 992px) {
   .profile-hero {
     min-height: auto;
-    padding: 40px 0;
+    padding: 50px 0;
   }
 
   .profile-left-section {
@@ -233,7 +250,7 @@
   }
 
   .profile-name {
-    font-size: 40px;
+    font-size: 44px;
   }
 
   .profile-main-image {
@@ -243,19 +260,19 @@
 
 @media (max-width: 768px) {
   .profile-hero {
-    padding: 30px 0;
+    padding: 36px 0;
   }
 
   .profile-name {
-    font-size: 32px;
+    font-size: 36px;
   }
 
   .profile-title {
-    font-size: 20px;
+    font-size: 26px;
   }
 
   .profile-credentials {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .profile-bio-full p,
@@ -264,7 +281,7 @@
   }
 
   .details-block h4 {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/img/logo-sxd.png";
 import iconGlobal from "../assets/img/Icon.svg";
 import { Link, useLocation } from "react-router-dom";
@@ -9,9 +9,27 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [animationDone, setAnimationDone] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const aboutCloseTimer = useRef(null);
   const location = useLocation();
   
-  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+    setAboutOpen(false);
+  }, [location.pathname]);
+
+  const handleAboutEnter = () => {
+    if (aboutCloseTimer.current) {
+      clearTimeout(aboutCloseTimer.current);
+      aboutCloseTimer.current = null;
+    }
+    setAboutOpen(true);
+  };
+
+  const handleAboutLeave = () => {
+    if (aboutCloseTimer.current) clearTimeout(aboutCloseTimer.current);
+    aboutCloseTimer.current = setTimeout(() => setAboutOpen(false), 180);
+  };
   
   useEffect(() => {
     // Tạm thời luôn chạy animation để test
@@ -58,7 +76,7 @@ function Header() {
         .u1 { 
           width: 40px; 
           height: 180px; 
-          background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+          background: #ff002bff;
           left: -150px; 
           top: -100px; 
           border-radius: 12px;
@@ -67,7 +85,7 @@ function Header() {
         .u2 { 
           width: 40px; 
           height: 180px; 
-          background: linear-gradient(135deg, #FF8E53, #FFB347);
+          background: #ff002bff;
           left: 900px; 
           top: -80px; 
           border-radius: 12px;
@@ -76,7 +94,7 @@ function Header() {
         .u3 { 
           width: 110px; 
           height: 40px; 
-          background: linear-gradient(135deg, #FFB347, #FFA500);
+          background: #ff002bff;
           left: -120px; 
           top: 450px; 
           border-radius: 12px;
@@ -87,7 +105,7 @@ function Header() {
         .d1 { 
           width: 40px; 
           height: 180px; 
-          background: linear-gradient(135deg, #4A90E2, #357ABD);
+          background: #ff002bff;
           left: -200px; 
           top: 100px; 
           border-radius: 12px;
@@ -96,7 +114,7 @@ function Header() {
         .d2 { 
           width: 110px; 
           height: 40px; 
-          background: linear-gradient(135deg, #357ABD, #2E5F8E);
+          background: #ff002bff;
           left: 950px; 
           top: -120px; 
           border-radius: 12px;
@@ -105,7 +123,7 @@ function Header() {
         .d3 { 
           width: 110px; 
           height: 40px; 
-          background: linear-gradient(135deg, #2E5F8E, #1E4D7B);
+          background: #ff002bff;
           left: -150px; 
           top: 480px; 
           border-radius: 12px;
@@ -114,7 +132,7 @@ function Header() {
         .d4 { 
           width: 40px; 
           height: 50px; 
-          background: linear-gradient(135deg, #5BA3F5, #4A90E2);
+          background: #ff002bff;
           left: 980px; 
           top: 180px; 
           border-radius: 12px;
@@ -123,7 +141,7 @@ function Header() {
         .d5 { 
           width: 40px; 
           height: 50px; 
-          background: linear-gradient(135deg, #6BB6FF, #5BA3F5);
+          background: #ff002bff;
           left: -220px; 
           top: -150px; 
           border-radius: 12px;
@@ -134,7 +152,7 @@ function Header() {
         .i1 { 
           width: 100px; 
           height: 35px; 
-          background: linear-gradient(135deg, #4ECB71, #3BB75E);
+          background: linear-gradient(135deg, #2F2F2F, #1A1A1A);
           left: 1000px; 
           top: -100px; 
           border-radius: 12px 12px 12px 12px;
@@ -143,7 +161,7 @@ function Header() {
         .i2 { 
           width: 35px; 
           height: 160px; 
-          background: linear-gradient(135deg, #3BB75E, #2EA44F);
+          background: linear-gradient(135deg, #1A1A1A, #000000);
           left: -250px; 
           top: -130px; 
           border-radius: 12px;
@@ -152,7 +170,7 @@ function Header() {
         .i3 { 
           width: 100px; 
           height: 35px; 
-          background: linear-gradient(135deg, #2EA44F, #248A3D);
+          background: linear-gradient(135deg, #2F2F2F, #1A1A1A);
           left: 1020px; 
           top: 500px; 
           border-radius: 12px 12px 12px 12px;
@@ -467,15 +485,11 @@ function Header() {
               cursor: "pointer",
               position: "relative",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.children[2].style.display = "flex")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.children[2].style.display = "none")
-            }
+            onMouseEnter={handleAboutEnter}
+            onMouseLeave={handleAboutLeave}
           >
-            <a
-              href="/About"
+            <Link
+              to="/About"
               style={{
                 textDecoration: "none",
                 color: "#333",
@@ -484,9 +498,23 @@ function Header() {
               }}
             >
               ABOUT US
-            </a>
+            </Link>
 
-            <i className="bi bi-chevron-down" style={{ marginLeft: 5 }}></i>
+            <button
+              type="button"
+              onClick={() => setAboutOpen((prev) => !prev)}
+              style={{
+                marginLeft: 5,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                padding: 0,
+              }}
+            >
+              <i className="bi bi-chevron-down"></i>
+            </button>
 
             <div
               style={{
@@ -497,23 +525,25 @@ function Header() {
                 borderRadius: "6px",
                 boxShadow: "0 6px 15px rgba(0,0,0,0.12)",
                 padding: "18px 22px",
-                display: "none",
+                display: aboutOpen ? "flex" : "none",
                 flexDirection: "column",
                 minWidth: "280px",
-                zIndex: 999,
+                zIndex: 1200,
               }}
+              onMouseEnter={() => setAboutOpen(true)}
+              onMouseLeave={handleAboutLeave}
             >
               {[
-                "BAN LÃNH ĐẠO",
-                "PHÒNG TỔNG HỢP",
-                "TRUNG TÂM THIẾT KẾ ĐÔ THỊ",
-                "TRUNG TÂM QUY HOẠCH ĐÔ THỊ",
-                "TRUNG TÂM THIẾT KẾ CÔNG TRÌNH",
-                "TRUNG TÂM HẠ TẦNG KỸ THUẬT",
-              ].map((v) => (
-                <a
-                  key={v}
-                  href="#"
+                { label: "BAN LÃNH ĐẠO", to: "/ban-lanh-dao" },
+                { label: "PHÒNG TỔNG HỢP", to: "/phong-tong-hop" },
+                { label: "TRUNG TÂM THIẾT KẾ ĐÔ THỊ", to: "/trung-tam-thiet-ke-do-thi" },
+                { label: "TRUNG TÂM QUY HOẠCH ĐÔ THỊ", to: "/trung-tam-quy-hoach-do-thi" },
+                { label: "TRUNG TÂM THIẾT KẾ CÔNG TRÌNH", to: "/trung-tam-thiet-ke-cong-trinh" },
+                { label: "TRUNG TÂM HẠ TẦNG KỸ THUẬT", to: "/trung-tam-ha-tang-ky-thuat" },
+              ].map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
                   style={{
                     padding: "10px 0",
                     fontSize: "14px",
@@ -523,8 +553,8 @@ function Header() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {v}
-                </a>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </li>

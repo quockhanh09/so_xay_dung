@@ -14,6 +14,8 @@ import Newsletter from "./components/Newsletter";
 import Register from "./signup-in/Register";
 import About from "./components/About";
 import Profile from "./components/Profile";
+import LeadershipPage from "./components/LeadershipPage";
+import ManageSectionPage from "./components/ManageSectionPage";
 
 import "./style/App.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -314,6 +316,14 @@ function App({ characters }) {
       role: "Designer"
     },
   ];
+
+  const sectionMembers = {
+    phongTongHop: charactersList.slice(0, 6),
+    thietKeDoThi: charactersList.slice(6, 12),
+    quyHoachDoThi: charactersList.slice(12, 18),
+    thietKeCongTrinh: charactersList.slice(18, 24),
+    haTangKyThuat: charactersList.slice(24),
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 30;
@@ -1305,6 +1315,27 @@ function App({ characters }) {
           <Route path="/projects/gatton-park" element={<ProjectDetails />} />
           <Route path="/Newsletter" element={<Newsletter />} />
           <Route path="/About" element={<About />} />
+          <Route path="/ban-lanh-dao" element={<LeadershipPage />} />
+          <Route
+            path="/phong-tong-hop"
+            element={<ManageSectionPage title="Phòng tổng hợp" storageKey="phong-tong-hop" members={sectionMembers.phongTongHop} />}
+          />
+          <Route
+            path="/trung-tam-thiet-ke-do-thi"
+            element={<ManageSectionPage title="Trung tâm thiết kế đô thị" storageKey="trung-tam-thiet-ke-do-thi" members={sectionMembers.thietKeDoThi} />}
+          />
+          <Route
+            path="/trung-tam-quy-hoach-do-thi"
+            element={<ManageSectionPage title="Trung tâm quy hoạch đô thị" storageKey="trung-tam-quy-hoach-do-thi" members={sectionMembers.quyHoachDoThi} />}
+          />
+          <Route
+            path="/trung-tam-thiet-ke-cong-trinh"
+            element={<ManageSectionPage title="Trung tâm thiết kế công trình" storageKey="trung-tam-thiet-ke-cong-trinh" members={sectionMembers.thietKeCongTrinh} />}
+          />
+          <Route
+            path="/trung-tam-ha-tang-ky-thuat"
+            element={<ManageSectionPage title="Trung tâm hạ tầng kỹ thuật" storageKey="trung-tam-ha-tang-ky-thuat" members={sectionMembers.haTangKyThuat} />}
+          />
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Achievement" element={<Achievement />} />

@@ -36,7 +36,7 @@ import banThan29 from "../assets/img/drive-download-20251216T044857Z-3-001/ảnh
 import banThan30 from "../assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/30.jpg";
 import banThan31 from "../assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/31.jpg";
 
-const leadership = {
+export const leadership = {
   director: {
     label: "VIUP",
     name: "PGS.TS.KTS HOÀNG VĨNH HƯNG",
@@ -413,72 +413,90 @@ function About() {
         </div>
       </section>
 
-      {/* BAN LÃNH ĐẠO - TÀI LIỆU IN */}
-      <section className="leadership-section print-style">
-        <div className="leadership-inner">
-          {/* VIUP SECTION */}
-          <div className="org-viup-card">
-            <div className="org-viup-left">
-              <span className="org-viup-label">VIUP</span>
-            </div>
-            <div className="org-viup-photo">
-              {leadership.director.photo ? (
-                <img src={leadership.director.photo} alt={leadership.director.name} className="grayscale-img" />
-              ) : (
-                <span>{leadership.director.initials}</span>
-              )}
-            </div>
-            <div className="org-viup-text">
-              <p className="org-text-small">{leadership.director.description}</p>
-              <p className="org-text-name">{leadership.director.name}</p>
-              <p className="org-text-title">{leadership.director.title}</p>
-              <p className="org-text-subtitle">{leadership.director.subtitle}</p>
-            </div>
-          </div>
-
-          {/* DIVIDER */}
-          <div className="org-print-divider"></div>
-
-          {/* UDI SECTION */}
-          <div className="org-udi-card">
-            <div className="org-udi-left">
-              <span className="org-udi-label">UDI</span>
-            </div>
-            <div className="org-udi-photo">
-              {leadership.udiDirector.photo ? (
-                <img src={leadership.udiDirector.photo} alt={leadership.udiDirector.name} className="grayscale-img" />
-              ) : (
-                <span>{leadership.udiDirector.initials}</span>
-              )}
-            </div>
-            <div className="org-udi-text">
-              <p className="org-text-desc">{leadership.udiDirector.description}</p>
-              <p className="org-text-name">{leadership.udiDirector.name}</p>
-              <p className="org-text-title">{leadership.udiDirector.title}</p>
-              <p className="org-text-subtitle">{leadership.udiDirector.subtitle}</p>
-              <p className="org-text-contact">Tel: {leadership.udiDirector.contact.phone}</p>
-              <p className="org-text-contact">Email: {leadership.udiDirector.contact.email}</p>
+      {/* BAN LÃNH ĐẠO - ORGANIZATIONAL TREE CHART */}
+      <section className="org-tree-section">
+        <div className="org-tree-container">
+          <h2 className="org-tree-title">BAN LÃNH ĐẠO VÀ GIÁM ĐỐC</h2>
+          
+          {/* LEVEL 1: VIUP DIRECTOR */}
+          <div className="org-tree-level level-1">
+            <div className="org-tree-node node-lg">
+              <div className="org-node-header">VIUP</div>
+              <div className="org-node-body">
+                <div className="org-node-photo">
+                  {leadership.director.photo ? (
+                    <img src={leadership.director.photo} alt={leadership.director.name} />
+                  ) : (
+                    <span>{leadership.director.initials}</span>
+                  )}
+                </div>
+                <div className="org-node-info">
+                  <p className="org-node-org">{leadership.director.description}</p>
+                  <h3 className="org-node-name">{leadership.director.name}</h3>
+                  <p className="org-node-title">{leadership.director.title}</p>
+                  <p className="org-node-subtitle">{leadership.director.subtitle}</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* CONNECTORS & DEPUTIES */}
-          <div className="org-deputies-section">
-            <div className="org-deputies-row">
-              {leadership.deputies.map((person) => (
-                <div className="org-deputy-item" key={person.name}>
-                  <p className="org-deputy-area">{person.area}</p>
-                  <div className="org-deputy-photo">
-                    {person.photo ? (
-                      <img src={person.photo} alt={person.name} className="grayscale-img" />
-                    ) : (
-                      <span>{person.initials}</span>
-                    )}
+          {/* CONNECTING LINE */}
+          <div className="org-tree-connector line-vertical"></div>
+
+          {/* LEVEL 2: UDI DIRECTOR */}
+          <div className="org-tree-level level-2">
+            <div className="org-tree-node node-lg">
+              <div className="org-node-header">UDI</div>
+              <div className="org-node-body">
+                <div className="org-node-photo">
+                  {leadership.udiDirector.photo ? (
+                    <img src={leadership.udiDirector.photo} alt={leadership.udiDirector.name} />
+                  ) : (
+                    <span>{leadership.udiDirector.initials}</span>
+                  )}
+                </div>
+                <div className="org-node-info">
+                  <p className="org-node-org">{leadership.udiDirector.description}</p>
+                  <h3 className="org-node-name">{leadership.udiDirector.name}</h3>
+                  <p className="org-node-title">{leadership.udiDirector.title}</p>
+                  <p className="org-node-subtitle">{leadership.udiDirector.subtitle}</p>
+                  <div className="org-node-contact">
+                    <p>Tel: {leadership.udiDirector.contact.phone}</p>
+                    <p>Email: {leadership.udiDirector.contact.email}</p>
                   </div>
-                  <p className="org-deputy-name">{person.name}</p>
-                  <p className="org-deputy-title">{person.title}</p>
-                  <p className="org-deputy-subtitle">{person.subtitle}</p>
-                  <p className="org-text-contact">{person.contact.phone}</p>
-                  <p className="org-text-contact">{person.contact.email}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* LEVEL 3: DEPUTIES - WITH CONNECTOR */}
+          <div className="org-tree-level level-3">
+            <div className="org-tree-connector line-horizontal"></div>
+            <div className="org-tree-deputies">
+              {leadership.deputies.map((person, idx) => (
+                <div key={person.name} className="org-tree-deputy-wrapper">
+                  <div className="org-tree-connector line-vertical-short"></div>
+                  <div className="org-tree-node node-md">
+                    <div className="org-node-header deputy-header">{person.area}</div>
+                    <div className="org-node-body">
+                      <div className="org-node-photo deputy-photo">
+                        {person.photo ? (
+                          <img src={person.photo} alt={person.name} />
+                        ) : (
+                          <span>{person.initials}</span>
+                        )}
+                      </div>
+                      <div className="org-node-info">
+                        <h4 className="org-node-name">{person.name}</h4>
+                        <p className="org-node-title">{person.title}</p>
+                        <p className="org-node-subtitle">{person.subtitle}</p>
+                        <div className="org-node-contact">
+                          <p>{person.contact.phone}</p>
+                          <p>{person.contact.email}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -524,106 +542,25 @@ function About() {
 
         {/* LIST CARD */}
         <div className="container" style={{ maxWidth: "1600px" }}>
-          <div
-            className="row"
-            style={{
-              rowGap: "80px",
-              columnGap: "40px",
-              justifyContent: "center",
-            }}
-          >
-            {currentItems.map((char, i) => (
-              <div className="col-lg-2 col-md-4 col-sm-6" key={i}>
-                <Link 
-                  to={`/profile/${char.id}`}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <div
-                    style={{
-                      width: "100%",
-                      marginBottom: "20px",
-                      cursor: "pointer",
-                      transition: "transform 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-                  >
-                    <img
-                      src={char.image}
-                      alt={char.name}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        objectFit: "cover",
-                        display: "block",
-                      }}
-                    />
+          <div className="member-card-grid">
+            {currentItems.map((char) => (
+              <Link
+                key={char.id}
+                to={`/profile/${char.id}`}
+                className="member-card__link"
+              >
+                <div className="member-card">
+                  <div className="member-card__photo">
+                    <img src={char.image} alt={char.name} />
                   </div>
-
-                  {/* NAME */}
-                  <h3
-                    style={{
-                      textAlign: "left",
-                      marginTop: "15px",
-                      marginBottom: "10px",
-                      fontFamily: "'Arial', sans-serif",
-                      fontSize: "22px",
-                      fontWeight: "600",
-                      color: "#000",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {char.name}
-                  </h3>
-
-                  {/* TITLE */}
-                  <p
-                    style={{
-                      textAlign: "left",
-                      margin: "0 0 6px 0",
-                      fontFamily: "'Arial', sans-serif",
-                      fontSize: "16px",
-                      fontWeight: "400",
-                      color: "#999",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    {char.title}
-                  </p>
-
-                  {/* SUBTITLE */}
-                  <p
-                    style={{
-                      textAlign: "left",
-                      margin: "0 0 6px 0",
-                      fontFamily: "'Arial', sans-serif",
-                      fontSize: "16px",
-                      fontWeight: "400",
-                      color: "#999",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    {char.subtitle}
-                  </p>
-
-                  {/* ROLE */}
-                  {char.role && (
-                    <p
-                      style={{
-                        textAlign: "left",
-                        margin: "0",
-                        fontFamily: "'Arial', sans-serif",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        color: "#999",
-                        lineHeight: "1.5",
-                      }}
-                    >
-                      {char.role}
-                    </p>
-                  )}
-                </Link>
-              </div>
+                  <div className="member-card__body">
+                    <h3 className="member-card__name">{char.name}</h3>
+                    {char.title && <p className="member-card__line">{char.title}</p>}
+                    {char.subtitle && <p className="member-card__line">{char.subtitle}</p>}
+                    {char.role && <p className="member-card__line">{char.role}</p>}
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
 
