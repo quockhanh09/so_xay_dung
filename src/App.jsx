@@ -7,6 +7,7 @@ import Achievement from "./components/Achievement";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Project from "./components/Project";
+import ProjectProfile from "./components/ProjectProfile";
 import Details from "./components/Deatails";
 import ProjectDetails from "./components/ProjectDetails";
 import Login from "./signup-in/Login";
@@ -16,6 +17,10 @@ import About from "./components/About";
 import Profile from "./components/Profile";
 import LeadershipPage from "./components/LeadershipPage";
 import ManageSectionPage from "./components/ManageSectionPage";
+import UrbanPlanningPage from "./components/UrbanPlanningPage";
+import ProjectDesignPage from "./components/ProjectDesignPage";
+import InfrastructurePage from "./components/InfrastructurePage";
+import LandscapeDesignPage from "./components/LandscapeDesignPage";
 
 import "./style/App.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -1311,11 +1316,16 @@ function App({ characters }) {
 
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Project" element={<Project />} />
+          <Route path="/projects/:id" element={<ProjectProfile />} />
           <Route path="/Deatails" element={<Details />} />
           <Route path="/projects/gatton-park" element={<ProjectDetails />} />
           <Route path="/Newsletter" element={<Newsletter />} />
           <Route path="/About" element={<About />} />
           <Route path="/ban-lanh-dao" element={<LeadershipPage />} />
+          <Route path="/quy-hoach-do-thi" element={<UrbanPlanningPage />} />
+          <Route path="/thiet-ke-cong-trinh" element={<ProjectDesignPage />} />
+          <Route path="/ha-tang-ky-thuat" element={<InfrastructurePage />} />
+          <Route path="/thiet-ke-canh-quan" element={<LandscapeDesignPage />} />
           <Route
             path="/phong-tong-hop"
             element={<ManageSectionPage title="Phòng tổng hợp" storageKey="phong-tong-hop" members={sectionMembers.phongTongHop} />}

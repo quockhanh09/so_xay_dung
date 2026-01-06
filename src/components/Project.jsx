@@ -4,42 +4,30 @@ import { Link } from "react-router-dom";
 // Import hình ảnh
 import bgImage from "../assets/img/sxd-ab6.png";
 import sxdbg9 from "../assets/img/sxd-ab9.png";
-import sxdbg10 from "../assets/img/sxd-ab10.png";
-import sxdbg11 from "../assets/img/sxd-ab11.png";
-import sxdbg12 from "../assets/img/sxd-ab12.png";
-import sxdbg13 from "../assets/img/sxd-ab13.png";
-import sxdbg14 from "../assets/img/sxd-ab14.png";
-import sxdbg15 from "../assets/img/sxd-ab15.png";
+
+// Import dữ liệu project từ JSON
+import projectsData from '../data/projects.json';
+import { getProjectImageByFileName } from '../utils/projectImageLoader';
 
 function Project() {
   const [page, setPage] = useState(1);
-  const projectCards = [
-    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
-    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
-    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
-    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
-    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
-    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
-    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
-    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
-    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
-    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
-    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
-    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
-    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
-    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
-    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
-    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
-    { image: sxdbg10, title: "City of Dublin Metro Area Strategic Plan", location: "Dublin, OH" },
-    { image: sxdbg11, title: "The Frederick Gunn School Tisch Center for Innovation and Active Citizenship", location: "Washington, CT" },
-    { image: sxdbg12, title: "Princeton University Racquet and Recreation Fieldhouse", location: "West Windsor Township, NJ" },
-    { image: sxdbg13, title: "Wilmington Waterfront Promenade", location: "Los Angeles, CA" },
-    { image: sxdbg14, title: "Tecnológico de Monterrey Expedition Building", location: "Monterrey, Mexico" },
-    { image: sxdbg15, title: "Boston City Hall Plaza Renovation", location: "Boston, MA" },
-    { image: sxdbg10, title: "The Lawrenceville School Tsai Commons and Field House", location: "Lawrenceville, NJ" },
-    { image: sxdbg11, title: "University of California, Berkeley Accessible Paths and Places Master Plan", location: "Berkeley, CA" },
-    
-  ];
+  
+  // Tự động tạo danh sách project từ projects.json
+  const projectCards = Object.keys(projectsData).map((id) => {
+    const project = projectsData[id];
+    return {
+      id: parseInt(id),
+      title: project.title,
+      location: project.location,
+      image: getProjectImageByFileName(project.imageFile),
+      imageFile: project.imageFile,
+      category: project.category,
+      description: project.description,
+      year: project.year,
+      client: project.client,
+      status: project.status,
+    };
+  });
 
   const rowsPerPage = 6; // 6 hàng, mỗi hàng 4 thẻ
   const itemsPerPage = rowsPerPage * 4;
@@ -134,73 +122,101 @@ function Project() {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '120px',
-            maxWidth: 1200,
+            gap: '80px',
+            maxWidth: 1400,
             margin: '0 auto',
             minHeight: 100,
             width: '100%',
           }}
         >
           {/* QUY HOẠCH */}
-          <div style={{ fontFamily: 'serif', fontSize: '2.5rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
-            <span
-              style={{
-                backgroundImage: `url(${sxdbg9})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                MozBackgroundClip: 'text',
-                MozTextFillColor: 'transparent',
-                display: 'inline-block',
-                fontWeight: 400,
-              }}
-            >
-              QUY HOẠCH
-            </span>
-          </div>
-          {/* THIẾT KẾ */}
-          <div style={{ fontFamily: 'serif', fontSize: '2.5rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
-            <span
-              style={{
-                backgroundImage: `url(${sxdbg9})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                MozBackgroundClip: 'text',
-                MozTextFillColor: 'transparent',
-                display: 'inline-block',
-                fontWeight: 400,
-              }}
-            >
-              THIẾT KẾ
-            </span>
-          </div>
+          <Link to="/quy-hoach-do-thi" style={{ textDecoration: 'none' }}>
+            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
+              <span
+                style={{
+                  backgroundImage: `url(${sxdbg9})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  MozBackgroundClip: 'text',
+                  MozTextFillColor: 'transparent',
+                  display: 'inline-block',
+                  fontWeight: 400,
+                }}
+              >
+                QUY HOẠCH
+              </span>
+            </div>
+          </Link>
+          {/* THIẾT KẾ CÔNG TRÌNH */}
+          <Link to="/thiet-ke-cong-trinh" style={{ textDecoration: 'none' }}>
+            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
+              <span
+                style={{
+                  backgroundImage: `url(${sxdbg9})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  MozBackgroundClip: 'text',
+                  MozTextFillColor: 'transparent',
+                  display: 'inline-block',
+                  fontWeight: 400,
+                }}
+              >
+                THIẾT KẾ CÔNG TRÌNH
+              </span>
+            </div>
+          </Link>
           {/* HẠ TẦNG KỸ THUẬT */}
-          <div style={{ fontFamily: 'serif', fontSize: '2.5rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
-            <span
-              style={{
-                backgroundImage: `url(${sxdbg9})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                MozBackgroundClip: 'text',
-                MozTextFillColor: 'transparent',
-                display: 'inline-block',
-                fontWeight: 400,
-              }}
-            >
-              HẠ TẦNG KỸ THUẬT
-            </span>
-          </div>
+          <Link to="/ha-tang-ky-thuat" style={{ textDecoration: 'none' }}>
+            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
+              <span
+                style={{
+                  backgroundImage: `url(${sxdbg9})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  MozBackgroundClip: 'text',
+                  MozTextFillColor: 'transparent',
+                  display: 'inline-block',
+                  fontWeight: 400,
+                }}
+              >
+                HẠ TẦNG KỸ THUẬT
+              </span>
+            </div>
+          </Link>
+          {/* THIẾT KẾ CẢNH QUAN */}
+          <Link to="/thiet-ke-canh-quan" style={{ textDecoration: 'none' }}>
+            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
+              <span
+                style={{
+                  backgroundImage: `url(${sxdbg9})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  MozBackgroundClip: 'text',
+                  MozTextFillColor: 'transparent',
+                  display: 'inline-block',
+                  fontWeight: 400,
+                }}
+              >
+                THIẾT KẾ CẢNH QUAN
+              </span>
+            </div>
+          </Link>
         </div>
 
         {/* Grid cards */}
@@ -214,40 +230,24 @@ function Project() {
             padding: '0 28px',
           }}
         >
-          {paginatedCards.map((item, index) => (
-            <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)' }}>
-                {index === 0 ? (
-                  <Link to="/projects/gatton-park" style={{ display: 'block' }}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    />
-                  </Link>
-                ) : (
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                )}
+          {paginatedCards.map((item) => (
+            <Link key={item.id} to={`/projects/${item.id}`} style={{ display: 'flex', flexDirection: 'column', gap: 14, textDecoration: 'none', cursor: 'pointer' }}>
+              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)', transition: 'transform 0.3s ease' }}
+                   onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+                   onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}>
+                <img
+                  src={item.image || item.imageUrl}
+                  alt={item.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
               </div>
-              {index === 0 ? (
-                <Link to="/projects/gatton-park" style={{ textDecoration: 'none' }}>
-                  <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
-                    {item.title}
-                  </div>
-                </Link>
-              ) : (
-                <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
-                  {item.title}
-                </div>
-              )}
+              <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
+                {item.title}
+              </div>
               <div style={{ fontFamily: 'serif', fontSize: '1.2rem', color: '#8a8a8a', letterSpacing: '0.3px' }}>
                 {item.location}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

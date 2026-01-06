@@ -1,0 +1,32 @@
+{
+  "PHONG_TONG_HOP": {
+    "id": "PHONG_TONG_HOP",
+    "name": "PHÒNG TỔNG HỢP",
+    "nameEn": "General Affairs",
+    "order": 1
+  },
+  "TT_THIET_KE_DO_THI": {
+    "id": "TT_THIET_KE_DO_THI",
+    "name": "TRUNG TÂM THIẾT KẾ ĐÔ THỊ",
+    "nameEn": "Urban Design Center",
+    "order": 2
+  },
+  "TT_QUY_HOACH_DO_THI": {
+    "id": "TT_QUY_HOACH_DO_THI",
+    "name": "TRUNG TÂM QUY HOẠCH ĐÔ THỊ",
+    "nameEn": "Urban Planning Center",
+    "order": 3
+  },
+  "TT_THIET_KE_CONG_TRINH": {
+    "id": "TT_THIET_KE_CONG_TRINH",
+    "name": "TRUNG TÂM THIẾT KẾ CÔNG TRÌNH",
+    "nameEn": "Construction Design Center",
+    "order": 4
+  },
+  "TT_HA_TANG_KY_THUAT": {
+    "id": "TT_HA_TANG_KY_THUAT",
+    "name": "TRUNG TÂM HẠ TẦNG KỸ THUẬT",
+    "nameEn": "Technical Infrastructure Center",
+    "order": 5
+  }
+}

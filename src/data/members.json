@@ -1,0 +1,967 @@
+{
+  "1": {
+    "name": "Anna Cawrse",
+    "imageNumber": 1,
+    "imageFile": "2.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+    "department": "PHONG_TONG_HOP",
+    "position": "Giám đốc",
+    "credentials": "Tiến sĩ, Kiến trúc sư trưởng",
+    "title": "Chair of Landscape Architecture, Civil Engineering, & Ecology",
+    "subtitle": "Board of Directors, Principal",
+    "role": "Landscape Architect",
+    "bio": "Với hơn 20 năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, bà đã tham gia và lãnh đạo nhiều dự án quy hoạch lớn tại Việt Nam và khu vực. Bà có chuyên môn sâu về quy hoạch tổng thể, thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "Hơn 20 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia hơn 100 dự án quy hoạch và thiết kế lớn",
+      "Chuyên gia tư vấn cho nhiều dự án quốc gia",
+      "Giảng viên thỉnh giảng tại các trường đại học"
+    ],
+    "education": [
+      "Tiến sĩ Quy hoạch Đô thị - Đại học Kiến trúc Hà Nội",
+      "Thạc sĩ Kiến trúc - Đại học Bách Khoa Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
+    ],
+    "awards": [
+      "Giải thưởng Kiến trúc Quốc gia 2020",
+      "Giải nhất cuộc thi Quy hoạch Đô thị xanh 2019",
+      "Bằng khen của Bộ Xây dựng"
+    ],
+    "contact": {
+      "email": "anna.cawrse@udi.vn",
+      "phone": "+84 123 456 789"
+    }
+  },
+  "2": {
+    "name": "Zachary Chrisco",
+    "imageNumber": 2,
+    "imageFile": "3.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    "department": "PHONG_TONG_HOP",
+    "position": "Phó Giám đốc",
+    "credentials": "Thạc sĩ, Kỹ sư Xây dựng",
+    "title": "Chair At-Large",
+    "subtitle": "Board of Directors, Principal",
+    "role": "Civil Engineer",
+    "bio": "Chuyên gia hàng đầu trong lĩnh vực hạ tầng kỹ thuật và quản lý dự án. Với kinh nghiệm 15 năm, ông đã điều phối và quản lý nhiều dự án hạ tầng quan trọng, đảm bảo tiến độ và chất lượng công trình.",
+    "experience": [
+      "15 năm kinh nghiệm quản lý dự án hạ tầng",
+      "Điều phối hơn 50 dự án lớn",
+      "Chuyên gia về hạ tầng kỹ thuật đô thị",
+      "Tư vấn cho các dự án khu công nghiệp"
+    ],
+    "education": [
+      "Thạc sĩ Xây dựng - Đại học Bách Khoa Hà Nội",
+      "Cử nhân Xây dựng Dân dụng - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Công trình chất lượng cao 2021",
+      "Bằng khen Bộ Xây dựng",
+      "Giải Ba cuộc thi Thiết kế Hạ tầng xanh"
+    ],
+    "contact": {
+      "email": "zachary.chrisco@udi.vn",
+      "phone": "+84 123 456 790"
+    }
+  },
+  "3": {
+    "name": "Caitlyn Clauson",
+    "imageNumber": 3,
+    "department": "PHONG_TONG_HOP",
+    "imageFile": "4.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=800&q=80",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Quy hoạch viên",
+    "title": "President",
+    "subtitle": "Board of Directors, Principal",
+    "role": "Planner",
+    "bio": "Chuyên gia quy hoạch với tầm nhìn chiến lược và khả năng phân tích sâu sắc về phát triển đô thị. Bà có nhiều kinh nghiệm trong quy hoạch vùng và quy hoạch đô thị tổng thể.",
+    "experience": [
+      "12 năm kinh nghiệm quy hoạch đô thị",
+      "Tham gia 40+ dự án quy hoạch vùng",
+      "Chuyên gia tư vấn quy hoạch cấp tỉnh",
+      "Nghiên cứu viên cao cấp"
+    ],
+    "education": [
+      "Thạc sĩ Quy hoạch Đô thị và Vùng",
+      "Cử nhân Quy hoạch - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải Nhì Quy hoạch Đô thị 2020",
+      "Giải thưởng Sáng tạo Quy hoạch",
+      "Khen thưởng của UBND tỉnh"
+    ],
+    "contact": {
+      "email": "caitlyn.clauson@udi.vn",
+      "phone": "+84 123 456 791"
+    }
+  },
+  "4": {
+    "name": "Thành viên 4",
+    "imageNumber": 4,
+    "imageFile": "5.jpg",
+    "department": "PHONG_TONG_HOP",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "12 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 28 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member4@udi.vn",
+      "phone": "+84 123 456 794"
+    }
+  },
+  "5": {
+    "name": "Thành viên 5",
+    "imageNumber": 5,
+    "imageFile": "6.jpg",
+    "department": "PHONG_TONG_HOP",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "13 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 30 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member5@udi.vn",
+      "phone": "+84 123 456 795"
+    }
+  },
+  "6": {
+    "name": "Thành viên 6",
+    "imageNumber": 6,
+    "imageFile": "7.jpg",
+    "department": "PHONG_TONG_HOP",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "14 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 32 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member6@udi.vn",
+      "phone": "+84 123 456 796"
+    }
+  },
+  "7": {
+    "name": "Thành viên 7",
+    "imageNumber": 7,
+    "imageFile": "8.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "15 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 34 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member7@udi.vn",
+      "phone": "+84 123 456 797"
+    }
+  },
+  "8": {
+    "name": "Thành viên 8",
+    "imageNumber": 8,
+    "imageFile": "9.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "16 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 36 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member8@udi.vn",
+      "phone": "+84 123 456 798"
+    }
+  },
+  "9": {
+    "name": "Thành viên 9",
+    "imageNumber": 9,
+    "imageFile": "10.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "17 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 38 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member9@udi.vn",
+      "phone": "+84 123 456 799"
+    }
+  },
+  "10": {
+    "name": "Thành viên 10",
+    "imageNumber": 10,
+    "imageFile": "11.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Trưởng phòng",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Trưởng phòng chuyên môn",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "18 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 40 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member10@udi.vn",
+      "phone": "+84 123 456 800"
+    }
+  },
+  "11": {
+    "name": "Thành viên 11",
+    "imageNumber": 11,
+    "imageFile": "12.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "19 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 42 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member11@udi.vn",
+      "phone": "+84 123 456 801"
+    }
+  },
+  "12": {
+    "name": "Thành viên 12",
+    "imageNumber": 12,
+    "imageFile": "13.jpg",
+    "department": "TT_THIET_KE_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "20 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 44 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member12@udi.vn",
+      "phone": "+84 123 456 802"
+    }
+  },
+  "13": {
+    "name": "Thành viên 13",
+    "imageNumber": 13,
+    "imageFile": "14.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "21 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 46 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member13@udi.vn",
+      "phone": "+84 123 456 803"
+    }
+  },
+  "14": {
+    "name": "Thành viên 14",
+    "imageNumber": 14,
+    "imageFile": "15.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "22 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 48 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member14@udi.vn",
+      "phone": "+84 123 456 804"
+    }
+  },
+  "15": {
+    "name": "Thành viên 15",
+    "imageNumber": 15,
+    "imageFile": "16.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "23 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 50 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member15@udi.vn",
+      "phone": "+84 123 456 805"
+    }
+  },
+  "16": {
+    "name": "Thành viên 16",
+    "imageNumber": 16,
+    "imageFile": "17.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "24 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 52 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member16@udi.vn",
+      "phone": "+84 123 456 806"
+    }
+  },
+  "17": {
+    "name": "Thành viên 17",
+    "imageNumber": 17,
+    "imageFile": "18.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "25 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 54 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member17@udi.vn",
+      "phone": "+84 123 456 807"
+    }
+  },
+  "18": {
+    "name": "Thành viên 18",
+    "imageNumber": 18,
+    "imageFile": "19.jpg",
+    "department": "TT_QUY_HOACH_DO_THI",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "26 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 56 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member18@udi.vn",
+      "phone": "+84 123 456 808"
+    }
+  },
+  "19": {
+    "name": "Thành viên 19",
+    "imageNumber": 19,
+    "imageFile": "20.jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "27 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 58 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member19@udi.vn",
+      "phone": "+84 123 456 809"
+    }
+  },
+  "20": {
+    "name": "Thành viên 20",
+    "imageNumber": 20,
+    "imageFile": "21.jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "28 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 60 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member20@udi.vn",
+      "phone": "+84 123 456 810"
+    }
+  },
+  "21": {
+    "name": "Thành viên 21",
+    "imageNumber": 21,
+    "imageFile": "22.jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "29 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 62 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member21@udi.vn",
+      "phone": "+84 123 456 811"
+    }
+  },
+  "22": {
+    "name": "Thành viên 22",
+    "imageNumber": 22,
+    "imageFile": "23.jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "30 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 64 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member22@udi.vn",
+      "phone": "+84 123 456 812"
+    }
+  },
+  "23": {
+    "name": "Thành viên 23",
+    "imageNumber": 23,
+    "imageFile": "24.jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "31 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 66 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member23@udi.vn",
+      "phone": "+84 123 456 813"
+    }
+  },
+  "24": {
+    "name": "Thành viên 24",
+    "imageNumber": 24,
+    "imageFile": "25 (2).jpg",
+    "department": "TT_THIET_KE_CONG_TRINH",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "32 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 68 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member24@udi.vn",
+      "phone": "+84 123 456 814"
+    }
+  },
+  "25": {
+    "name": "Thành viên 25",
+    "imageNumber": 25,
+    "imageFile": "26.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "33 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 70 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member25@udi.vn",
+      "phone": "+84 123 456 815"
+    }
+  },
+  "26": {
+    "name": "Thành viên 26",
+    "imageNumber": 26,
+    "imageFile": "27.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "34 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 72 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member26@udi.vn",
+      "phone": "+84 123 456 816"
+    }
+  },
+  "27": {
+    "name": "Thành viên 27",
+    "imageNumber": 27,
+    "imageFile": "28.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "35 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 74 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member27@udi.vn",
+      "phone": "+84 123 456 817"
+    }
+  },
+  "28": {
+    "name": "Thành viên 28",
+    "imageNumber": 28,
+    "imageFile": "29.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Quy hoạch viên",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "36 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 76 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member28@udi.vn",
+      "phone": "+84 123 456 818"
+    }
+  },
+  "29": {
+    "name": "Thành viên 29",
+    "imageNumber": 29,
+    "imageFile": "30.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kỹ sư xây dựng",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "37 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 78 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member29@udi.vn",
+      "phone": "+84 123 456 819"
+    }
+  },
+  "30": {
+    "name": "Thành viên 30",
+    "imageNumber": 30,
+    "imageFile": "31.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "38 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 80 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member30@udi.vn",
+      "phone": "+84 123 456 820"
+    }
+  },
+  "31": {
+    "name": "Thành viên 31",
+    "imageNumber": 31,
+    "imageFile": "32.jpg",
+    "department": "TT_HA_TANG_KY_THUAT",
+    "position": "Chuyên viên",
+    "credentials": "Thạc sĩ, Kiến trúc sư",
+    "title": "Chuyên viên cao cấp",
+    "subtitle": "Ban Lãnh đạo và Giám đốc Trung tâm",
+    "role": "Kiến trúc sư",
+    "bio": "Với nhiều năm kinh nghiệm trong lĩnh vực quy hoạch và thiết kế đô thị, đã tham gia nhiều dự án quan trọng. Có chuyên môn sâu về thiết kế đô thị bền vững và phát triển không gian công cộng.",
+    "experience": [
+      "38 năm kinh nghiệm trong quy hoạch đô thị",
+      "Tham gia 80 dự án quy hoạch và thiết kế",
+      "Chuyên gia tư vấn cho nhiều dự án",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Xây dựng"
+    ],
+    "awards": [
+      "Giải thưởng Thiết kế xuất sắc",
+      "Bằng khen của Bộ Xây dựng",
+      "Giải cuộc thi Quy hoạch sáng tạo"
+    ],
+    "contact": {
+      "email": "member30@udi.vn",
+      "phone": "+84 123 456 820"
+    }
+  }
+}

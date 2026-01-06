@@ -216,8 +216,9 @@
 /* Generic member card style (used across pages) */
 .member-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
   gap: 28px;
+  justify-content: start;
 }
 
 .member-card__link {

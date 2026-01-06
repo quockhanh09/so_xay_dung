@@ -10,12 +10,15 @@ function Header() {
   const [showIntro, setShowIntro] = useState(true);
   const [animationDone, setAnimationDone] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
   const aboutCloseTimer = useRef(null);
+  const projectsCloseTimer = useRef(null);
   const location = useLocation();
   
   useEffect(() => {
     setMenuOpen(false);
     setAboutOpen(false);
+    setProjectsOpen(false);
   }, [location.pathname]);
 
   const handleAboutEnter = () => {
@@ -28,7 +31,20 @@ function Header() {
 
   const handleAboutLeave = () => {
     if (aboutCloseTimer.current) clearTimeout(aboutCloseTimer.current);
-    aboutCloseTimer.current = setTimeout(() => setAboutOpen(false), 180);
+    aboutCloseTimer.current = setTimeout(() => setAboutOpen(false), 200);
+  };
+
+  const handleProjectsEnter = () => {
+    if (projectsCloseTimer.current) {
+      clearTimeout(projectsCloseTimer.current);
+      projectsCloseTimer.current = null;
+    }
+    setProjectsOpen(true);
+  };
+
+  const handleProjectsLeave = () => {
+    if (projectsCloseTimer.current) clearTimeout(projectsCloseTimer.current);
+    projectsCloseTimer.current = setTimeout(() => setProjectsOpen(false), 200);
   };
   
   useEffect(() => {
@@ -567,15 +583,11 @@ function Header() {
               cursor: "pointer",
               position: "relative",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.children[2].style.display = "flex")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.children[2].style.display = "none")
-            }
+            onMouseEnter={handleProjectsEnter}
+            onMouseLeave={handleProjectsLeave}
           >
-            <a
-              href="/Project"
+            <Link
+              to="/Project"
               style={{
                 textDecoration: "none",
                 color: "#333",
@@ -584,9 +596,23 @@ function Header() {
               }}
             >
               PROJECTS
-            </a>
+            </Link>
 
-            <i className="bi bi-chevron-down" style={{ marginLeft: 5 }}></i>
+            <button
+              type="button"
+              onClick={() => setProjectsOpen((prev) => !prev)}
+              style={{
+                marginLeft: 5,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                padding: 0,
+              }}
+            >
+              <i className="bi bi-chevron-down"></i>
+            </button>
 
             <div
               style={{
@@ -597,31 +623,34 @@ function Header() {
                 borderRadius: "6px",
                 boxShadow: "0 6px 15px rgba(0,0,0,0.12)",
                 padding: "18px 22px",
-                display: "none",
+                display: projectsOpen ? "flex" : "none",
                 flexDirection: "column",
-                minWidth: "260px",
-                zIndex: 999,
+                minWidth: "280px",
+                zIndex: 1200,
               }}
+              onMouseEnter={() => setProjectsOpen(true)}
+              onMouseLeave={handleProjectsLeave}
             >
               {[
-                "QUY HOẠCH ĐÔ THỊ",
-                "THIẾT KẾ CÔNG TRÌNH",
-                "HẠ TẦNG KỸ THUẬT",
-                "THIẾT KẾ CẢNH QUAN",
-              ].map((v) => (
-                <a
-                  key={v}
-                  href="#"
+                { label: "QUY HOẠCH ĐÔ THỊ", to: "/quy-hoach-do-thi" },
+                { label: "THIẾT KẾ CÔNG TRÌNH", to: "/thiet-ke-cong-trinh" },
+                { label: "HẠ TẦNG KỸ THUẬT", to: "/ha-tang-ky-thuat" },
+                { label: "THIẾT KẾ CẢNH QUAN", to: "/thiet-ke-canh-quan" },
+              ].map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
                   style={{
                     padding: "10px 0",
                     fontSize: "14px",
                     textDecoration: "none",
                     color: "#333",
                     letterSpacing: "0.3px",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  {v}
-                </a>
+                  {item.label}
+                </Link>
               ))}
             </div>
           </li>
