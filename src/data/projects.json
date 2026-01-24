@@ -3,13 +3,48 @@
     "id": 1,
     "title": "City of Dublin Metro Area Strategic Plan",
     "location": "Dublin, OH",
+  
     "category": "quy-hoach",
     "description": "Comprehensive strategic planning for Dublin metro area including urban development and growth management",
+    "sections": [
+      {
+        "title": "Giới thiệu dự án",
+        "texts": [
+          "Dự án này tập trung vào phát triển đô thị bền vững và quản lý tăng trưởng khu vực đô thị Dublin.",
+          "Chúng tôi hướng tới giải pháp tổng thể, hiện đại và phù hợp với nhu cầu phát triển lâu dài."
+        ]
+      },
+      {
+        "title": "Các giai đoạn thực hiện",
+        "texts": [
+          "Giai đoạn 1: Khảo sát và đánh giá hiện trạng.",
+          "Giai đoạn 2: Lập quy hoạch tổng thể và lấy ý kiến cộng đồng.",
+          "Giai đoạn 3: Triển khai các giải pháp phát triển đô thị."
+        ],
+        "images": [
+          "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+        ]
+      },
+      {
+        "title": "Kết quả mong đợi",
+        "texts": [
+          "Tạo ra môi trường sống hiện đại, xanh, sạch, đẹp cho cư dân.",
+          "Đảm bảo phát triển hài hòa giữa kinh tế, xã hội và môi trường."
+        ]
+      }
+    ],
+    
     "imageFile": "sxd-ab10.jpg",
     "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
     "year": 2022,
     "client": "City of Dublin",
-    "status": "completed"
+    "status": "completed",
+    "largeImages": [
+      "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+      
+    ]
   },
   "2": {
     "id": 2,

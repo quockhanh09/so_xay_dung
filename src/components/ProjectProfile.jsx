@@ -23,6 +23,19 @@ function ProjectProfile() {
   const projectImage = getProjectImageByFileName(project.imageFile);
   const displayImage = projectImage || project.imageUrl;
 
+  // Lấy danh sách ảnh động (nhiều ảnh, nhiều mục)
+  let galleryImages = [];
+  if (project.images && Array.isArray(project.images) && project.images.length > 0) {
+    galleryImages = project.images.map(img => getProjectImageByFileName(img) || img);
+  } else if (project.largeImages && Array.isArray(project.largeImages) && project.largeImages.length > 0) {
+    galleryImages = project.largeImages.map(img => getProjectImageByFileName(img) || img);
+  } else {
+    galleryImages = [displayImage];
+  }
+
+  // Lấy các mục động (sections)
+  const sections = Array.isArray(project.sections) ? project.sections : [];
+
   return (
     <div style={{ background: "#fff" }}>
       {/* Hero */}
@@ -121,43 +134,61 @@ function ProjectProfile() {
         </div>
       </section>
 
-      {/* Body content */}
-      <section style={{ padding: "24px 24px 80px" }}>
+      {/* Body content động */}
+      <section style={{ padding: "24px 24px 40px" }}>
         <div style={{ maxWidth: 980, margin: "0 auto" }}>
           <h2 style={{ fontFamily: "serif", fontSize: 32, lineHeight: 1.2 }}>Dự án {project.title}</h2>
-          <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>
-            {project.description}
-          </p>
+          <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>{project.description}</p>
+          {/* Render các mục động nếu có */}
+          {sections.map((sec, idx) => (
+            <div key={idx} style={{ marginTop: 40 }}>
+              {sec.title && (
+                <h2 style={{ fontFamily: "serif", fontSize: 32, lineHeight: 1.2 }}>{sec.title}</h2>
+              )}
+              {Array.isArray(sec.texts)
+                ? sec.texts.map((txt, i) => (
+                    <p key={i} style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>{txt}</p>
+                  ))
+                : sec.text && (
+                    <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>{sec.text}</p>
+                  )}
+              {/* Render ảnh trong mục nếu có */}
+              {Array.isArray(sec.images) && sec.images.length > 0 && (
+                <div style={{ display: "flex", gap: 24, flexWrap: "wrap", margin: "24px 0" }}>
+                  {sec.images.map((img, j) => (
+                    <img
+                      key={j}
+                      src={getProjectImageByFileName(img) || img}
+                      alt={sec.title || `section-img-${j}`}
+                      style={{ width: "48%", borderRadius: 10, boxShadow: "0 2px 12px rgba(0,0,0,0.07)", marginBottom: 12 }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <h2 style={{ fontFamily: "serif", fontSize: 32, marginTop: 40, lineHeight: 1.2 }}>
-            Chi tiết Dự án
-          </h2>
-          <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>
-            Dự án này là một phần của các hoạt động phát triển và thiết kế của chúng tôi.
-            Với sự tập trung vào chất lượng và sự bền vững, dự án được thực hiện nhằm
-            mang lại giải pháp tốt nhất cho khách hàng và cộng đồng. Nội dung chi tiết
-            sẽ được cập nhật trong tệp projects.json.
-          </p>
-
-          <h2 style={{ fontFamily: "serif", fontSize: 32, marginTop: 40, lineHeight: 1.2 }}>
-            Phạm vi và Tác động
-          </h2>
-          <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>
-            Dự án này được thiết kế với mục đích tạo ra tác động tích cực lâu dài.
-            Chúng tôi cam kết đem lại giải pháp sáng tạo, hiệu quả và phù hợp với
-            nhu cầu của khách hàng. Thông tin chi tiết về phạm vi dự án và các tác
-            động cụ thể sẽ được bổ sung thêm vào projects.json.
-          </p>
-
-          <h2 style={{ fontFamily: "serif", fontSize: 32, marginTop: 40, lineHeight: 1.2 }}>
-            Nội dung Chi tiết
-          </h2>
-          <p style={{ color: "#333", fontSize: 18, lineHeight: 1.8 }}>
-            Các thông tin chi tiết bổ sung về dự án này, bao gồm các mục tiêu, phương
-            pháp tiếp cận, các bước thực hiện, và kết quả dự kiến sẽ được cập nhật
-            trực tiếp từ tệp projects.json. Vui lòng kiểm tra lại sau đó để xem thông
-            tin đầy đủ nhất.
-          </p>
+      {/* Gallery nhiều ảnh cuối bài */}
+      <section style={{ padding: "0 24px 80px" }}>
+        <div style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          display: "flex",
+          gap: 32,
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap"
+        }}>
+          {galleryImages.map((img, idx) => (
+            <img
+              key={idx}
+              src={img}
+              alt={`Gallery ${idx+1}`}
+              style={{ width: galleryImages.length > 1 ? "48%" : "80%", height: "auto", borderRadius: 12, boxShadow: "0 4px 24px rgba(0,0,0,0.08)", marginBottom: 16 }}
+            />
+          ))}
         </div>
       </section>
     </div>

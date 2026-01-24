@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+const AwardDetail = lazy(() => import("./components/AwardDetail"));
 
 // import Layout from "./Layout.jsx";
 import Header from "./components/Header";
@@ -1349,6 +1350,11 @@ function App({ characters }) {
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Achievement" element={<Achievement />} />
+          <Route path="/achievement/:id" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <AwardDetail />
+            </Suspense>
+          } />
           <Route path="/profile/:id" element={<Profile />} />
         </Routes>
         
