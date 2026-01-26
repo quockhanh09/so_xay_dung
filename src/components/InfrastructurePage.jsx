@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/App.css";
 
@@ -10,7 +10,68 @@ import projectsData from '../data/projects.json';
 import { getProjectImageByFileName } from '../utils/projectImageLoader';
 
 function InfrastructurePage() {
-  const [page, setPage] = useState(1);
+  // Horizontal scroll/drag logic
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    const slider = scrollRef.current;
+    if (!slider) return;
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    const onMouseDown = (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      slider.style.cursor = 'grabbing';
+      slider.style.userSelect = 'none';
+      startX = e.pageX - slider.getBoundingClientRect().left;
+      scrollLeft = slider.scrollLeft;
+    };
+    const onMouseLeave = () => {
+      isDown = false;
+      slider.classList.remove('active');
+      slider.style.cursor = 'grab';
+      slider.style.userSelect = '';
+    };
+    const onMouseUp = () => {
+      isDown = false;
+      slider.classList.remove('active');
+      slider.style.cursor = 'grab';
+      slider.style.userSelect = '';
+    };
+    const onMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.getBoundingClientRect().left;
+      const walk = (x - startX) * 1.1;
+      slider.scrollLeft = scrollLeft - walk;
+    };
+    // Touch events
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+    const onTouchStart = (e) => {
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = slider.scrollLeft;
+    };
+    const onTouchMove = (e) => {
+      const x = e.touches[0].pageX;
+      const walk = (x - touchStartX) * 1.1;
+      slider.scrollLeft = touchScrollLeft - walk;
+    };
+    slider.addEventListener('mousedown', onMouseDown);
+    slider.addEventListener('mouseleave', onMouseLeave);
+    slider.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
+    slider.addEventListener('touchstart', onTouchStart);
+    slider.addEventListener('touchmove', onTouchMove);
+    return () => {
+      slider.removeEventListener('mousedown', onMouseDown);
+      slider.removeEventListener('mouseleave', onMouseLeave);
+      slider.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+      slider.removeEventListener('touchstart', onTouchStart);
+      slider.removeEventListener('touchmove', onTouchMove);
+    };
+  }, []);
 
   // Filter projects by category: ha-tang
   const projectCards = Object.values(projectsData)
@@ -24,16 +85,8 @@ function InfrastructurePage() {
       client: project.client,
       status: project.status,
     }));
-
-  const rowsPerPage = 6;
-  const itemsPerPage = rowsPerPage * 4;
-  const totalPages = Math.max(1, Math.ceil(projectCards.length / itemsPerPage));
-  const paginatedCards = projectCards.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
-  const goPage = (p) => {
-    const next = Math.min(Math.max(p, 1), totalPages);
-    setPage(next);
-  };
+  // Only show first 10
+  const paginatedCards = projectCards.slice(0, 10);
 
   return (
     <>
@@ -148,95 +201,113 @@ function InfrastructurePage() {
         </div>
       </section>
 
-      {/* Grid cards */}
-      <section style={{ background: '#fff', padding: '48px 0' }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, minmax(320px, 1fr))',
-            gap: '80px 64px',
-            maxWidth: 1800,
-            margin: '90px auto 0 auto',
-            padding: '0 28px',
-          }}
-        >
-          {paginatedCards.map((item) => (
-            <Link key={item.id} to={`/projects/${item.id}`} style={{ display: 'flex', flexDirection: 'column', gap: 14, textDecoration: 'none', cursor: 'pointer' }}>
-              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)', transition: 'transform 0.3s ease' }}
-                   onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
-                   onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-              </div>
-              <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
+      {/* Grid cards - horizontal scroll */}
+      <div
+        ref={scrollRef}
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '0 80px',
+          overflowX: 'auto',
+          maxWidth: 3200,
+          margin: '90px auto 0 auto',
+          padding: '0 80px 48px 80px',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none',
+          cursor: 'grab',
+          userSelect: 'none',
+          scrollBehavior: 'smooth',
+        }}
+        className="project-horizontal-scroll"
+      >
+        {paginatedCards.map((item) => (
+          <div
+            key={item.id}
+            style={{
+              minWidth: 1700,
+              maxWidth: 2000,
+              flex: '0 0 1700px',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'stretch',
+              gap: 0,
+              transition: 'box-shadow 0.3s',
+              marginBottom: 28,
+              overflow: 'hidden',
+            }}
+          >
+            {/* Image left */}
+            <div
+              style={{
+                width: 1100,
+                minWidth: 1100,
+                height: 700,
+                overflow: 'hidden',
+                borderRadius: 0,
+                transition: 'transform 0.3s ease',
+                flexShrink: 0,
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+            {/* Info right */}
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: '80px 80px 80px 60px',
+              }}
+            >
+              <Link
+                to={`/projects/${item.id}`}
+                style={{
+                  fontFamily: 'serif',
+                  fontSize: '4.2rem',
+                  fontWeight: 600,
+                  color: '#222',
+                  lineHeight: 1.1,
+                  textDecoration: 'underline',
+                  textDecorationColor: '#b3b3b3',
+                  textDecorationThickness: '3px',
+                  textUnderlineOffset: '18px',
+                  marginBottom: 38,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'inline',
+                }}
+              >
                 {item.title}
-              </div>
-              <div style={{ fontFamily: 'serif', fontSize: '1.2rem', color: '#8a8a8a', letterSpacing: '0.3px' }}>
+              </Link>
+              <Link
+                to={`/projects/${item.id}`}
+                style={{
+                  fontFamily: 'serif',
+                  fontSize: '2.2rem',
+                  color: '#8a8a8a',
+                  letterSpacing: '0.3px',
+                  marginBottom: 28,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'inline',
+                }}
+              >
                 {item.location}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, marginTop: 40, paddingBottom: 48 }}>
-            <button
-              onClick={() => goPage(page - 1)}
-              disabled={page === 1}
-              style={{
-                padding: '10px 16px',
-                border: '1px solid #ccc',
-                background: page === 1 ? '#f5f5f5' : '#fff',
-                cursor: page === 1 ? 'not-allowed' : 'pointer',
-                borderRadius: 4,
-                fontFamily: 'serif',
-              }}
-            >
-              Prev
-            </button>
-            {[...Array(totalPages)].map((_, i) => {
-              const p = i + 1;
-              const active = p === page;
-              return (
-                <button
-                  key={p}
-                  onClick={() => goPage(p)}
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    border: active ? '1px solid #222' : '1px solid #ccc',
-                    background: active ? '#222' : '#fff',
-                    color: active ? '#fff' : '#333',
-                    cursor: 'pointer',
-                    fontFamily: 'serif',
-                  }}
-                >
-                  {p}
-                </button>
-              );
-            })}
-            <button
-              onClick={() => goPage(page + 1)}
-              disabled={page === totalPages}
-              style={{
-                padding: '10px 16px',
-                border: '1px solid #ccc',
-                background: page === totalPages ? '#f5f5f5' : '#fff',
-                cursor: page === totalPages ? 'not-allowed' : 'pointer',
-                borderRadius: 4,
-                fontFamily: 'serif',
-              }}
-            >
-              Next
-            </button>
+              </Link>
+            </div>
           </div>
-        )}
-      </section>
+        ))}
+      </div>
     </>
   );
 }

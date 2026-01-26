@@ -1,0 +1,34 @@
+{
+  "columns": [
+    {
+      "title": "CHỦ NHIỆM GIẢI THƯỞNG",
+      "members": [
+        { "name": "Nguyễn Văn A" },
+        { "name": "Trần Thị B" }
+      ]
+    },
+    {
+      "title": "BAN GIÁM KHẢO",
+      "members": [
+        { "name": "Lê Văn C" },
+        { "name": "Phạm Thị D" }
+      ]
+    },
+    {
+      "title": "THÀNH VIÊN",
+      "members": [
+        { "name": "Nguyễn Văn E" },
+        { "name": "Lê Thị F" },
+        { "name": "Phạm Văn G" }
+      ]
+    },
+    {
+      "title": "GIẢI THƯỞNG",
+      "members": [
+        { "name": "Giải thưởng Kiến trúc Quốc gia 2020" },
+        { "name": "Giải nhất cuộc thi Quy hoạch Đô thị xanh 2019" },
+        { "name": "Bằng khen của Bộ Xây dựng" }
+      ]
+    }
+  ]
+}

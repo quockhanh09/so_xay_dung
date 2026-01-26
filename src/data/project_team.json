@@ -1,0 +1,71 @@
+{
+  "columns": [
+    {
+      "title": "CHỦ NHIỆM DỰ ÁN",
+      "members": [
+        { "name": "Nguyễn Văn A", "link": "/profile/1" },
+        { "name": "Trần Thị B", "link": "/profile/2" },
+        { "name": "Lê Văn C", "link": "/profile/3" },
+        { "name": "Phạm Thị D", "link": "/profile/4" },
+        { "name": "Nguyễn Văn A", "link": "/profile/1" },
+        { "name": "Trần Thị B", "link": "/profile/2" },
+        { "name": "Lê Văn C", "link": "/profile/3" },
+        { "name": "Phạm Thị D", "link": "/profile/4" }
+      ]
+    },
+    {
+      "title": "TRƯỞNG NHÓM",
+      "members": [
+        { "name": "Ngô Văn E", "link": "/profile/5" },
+        { "name": "Đỗ Thị F", "link": "/profile/6" }
+      ]
+    },
+    {
+      "title": "THÀNH VIÊN",
+      "members": [
+        { "name": "Nguyễn Văn G", "link": "/profile/7" },
+        { "name": "Lê Thị H", "link": "/profile/8" },
+        { "name": "Phạm Văn I", "link": "/profile/9" },
+        { "name": "Trần Thị K", "link": "/profile/10" },
+        { "name": "Vũ Văn L", "link": "/profile/11" },
+        { "name": "Đặng Thị M", "link": "/profile/12" }
+      ]
+    },
+    {
+      "title": "KỸ SƯ CHÍNH",
+      "members": [
+        { "name": "Phan Văn N", "link": "/profile/13" },
+        { "name": "Bùi Thị O", "link": "/profile/14" }
+      ]
+    },
+    {
+      "title": "KIẾN TRÚC SƯ",
+      "members": [
+        { "name": "Nguyễn Văn P", "link": "/profile/15" },
+        { "name": "Trần Thị Q", "link": "/profile/16" }
+      ]
+    },
+    {
+      "title": "CỘNG TÁC VIÊN",
+      "members": [
+        { "name": "Nguyễn Văn R", "link": "/profile/17" },
+        { "name": "Lê Thị S", "link": "/profile/18" },
+        { "name": "Phạm Văn T", "link": "/profile/19" }
+      ]
+    },
+    {
+      "title": "GIẢI THƯỞNG",
+      "members": [
+        { "name": "Giải Nhất Quy hoạch 2024", "link": "/achievement/1" },
+        { "name": "Bằng khen Bộ Xây dựng", "link": "/achievement/2" }
+      ]
+    },
+    {
+      "title": "ĐỐI TÁC",
+      "members": [
+        { "name": "Công ty Xây dựng ABC", "link": "https://abc.com" },
+        { "name": "Công ty Thiết kế DEF", "link": "https://def.com" }
+      ]
+    }
+  ]
+}

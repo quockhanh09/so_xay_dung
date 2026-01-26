@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import ProjectMap from "./ProjectMap";
 import { Link } from "react-router-dom";
 
 // Import hình ảnh
@@ -8,9 +9,72 @@ import sxdbg9 from "../assets/img/sxd-ab9.png";
 // Import dữ liệu project từ JSON
 import projectsData from '../data/projects.json';
 import { getProjectImageByFileName } from '../utils/projectImageLoader';
+import projectTeamData from '../data/project_team.json';
 
 function Project() {
   const [page, setPage] = useState(1);
+  // Kéo ngang bằng chuột cho project card
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    const slider = scrollRef.current;
+    if (!slider) return;
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    const onMouseDown = (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      slider.style.cursor = 'grabbing';
+      slider.style.userSelect = 'none';
+      startX = e.pageX - slider.getBoundingClientRect().left;
+      scrollLeft = slider.scrollLeft;
+    };
+    const onMouseLeave = () => {
+      isDown = false;
+      slider.classList.remove('active');
+      slider.style.cursor = 'grab';
+      slider.style.userSelect = '';
+    };
+    const onMouseUp = () => {
+      isDown = false;
+      slider.classList.remove('active');
+      slider.style.cursor = 'grab';
+      slider.style.userSelect = '';
+    };
+    const onMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.getBoundingClientRect().left;
+      const walk = (x - startX) * 1.1; // tăng tốc độ kéo
+      slider.scrollLeft = scrollLeft - walk;
+    };
+    // Touch events
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+    const onTouchStart = (e) => {
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = slider.scrollLeft;
+    };
+    const onTouchMove = (e) => {
+      const x = e.touches[0].pageX;
+      const walk = (x - touchStartX) * 1.1;
+      slider.scrollLeft = touchScrollLeft - walk;
+    };
+    slider.addEventListener('mousedown', onMouseDown);
+    slider.addEventListener('mouseleave', onMouseLeave);
+    slider.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
+    slider.addEventListener('touchstart', onTouchStart);
+    slider.addEventListener('touchmove', onTouchMove);
+    return () => {
+      slider.removeEventListener('mousedown', onMouseDown);
+      slider.removeEventListener('mouseleave', onMouseLeave);
+      slider.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+      slider.removeEventListener('touchstart', onTouchStart);
+      slider.removeEventListener('touchmove', onTouchMove);
+    };
+  }, []);
   
   // Tự động tạo danh sách project từ projects.json
   const projectCards = Object.keys(projectsData).map((id) => {
@@ -32,7 +96,8 @@ function Project() {
   const rowsPerPage = 6; // 6 hàng, mỗi hàng 4 thẻ
   const itemsPerPage = rowsPerPage * 4;
   const totalPages = Math.max(1, Math.ceil(projectCards.length / itemsPerPage));
-  const paginatedCards = projectCards.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+  // Chỉ lấy 10 project đầu tiên
+  const paginatedCards = projectCards.slice(0, 10);
 
   const goPage = (p) => {
     const next = Math.min(Math.max(p, 1), totalPages);
@@ -42,71 +107,71 @@ function Project() {
   return (
     <>
       {/* Portfolio Details Section */}
-       <section
-              id="portfolio-details"
-              className="portfolio-details section"
-              style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                padding: 0,
-                textAlign: "center",
-                position: "relative",
-                minHeight: "60vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {/* Overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  zIndex: 1,
-                }}
-              ></div>
-              {/* Centered Content */}
-              <div
-                style={{
-                  position: "relative",
-                  zIndex: 2,
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <h1
-                  style={{
-                    color: "#fff",
-                    fontSize: "3.5rem",
-                    fontWeight: 500,
-                    letterSpacing: "2px",
-                    marginBottom: "20px",
-                    fontFamily: "serif",
-                    textShadow: "0 2px 8px rgba(0,0,0,0.4)",
-                  }}
-                >
-                  UDI's PROJECTS 
-                </h1>
-                <div
-                  style={{
-                    width: "80px",
-                    height: "3px",
-                    background: "#fff",
-                    margin: "0 auto 0",
-                    marginBottom: "10px",
-                    opacity: 0.7,
-                  }}
-                ></div>
-              </div>
-            </section>
+      <section
+        id="portfolio-details"
+        className="portfolio-details section"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: 0,
+          textAlign: "center",
+          position: "relative",
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 1,
+          }}
+        ></div>
+        {/* Centered Content */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1
+            style={{
+              color: "#fff",
+              fontSize: "3.5rem",
+              fontWeight: 500,
+              letterSpacing: "2px",
+              marginBottom: "20px",
+              fontFamily: "serif",
+              textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+            }}
+          >
+            UDI's PROJECTS
+          </h1>
+          <div
+            style={{
+              width: "80px",
+              height: "3px",
+              background: "#fff",
+              margin: "0 auto 0",
+              marginBottom: "10px",
+              opacity: 0.7,
+            }}
+          ></div>
+        </div>
+      </section>
 
       {/* Tin tức gần đây */}
       <section
@@ -221,34 +286,163 @@ function Project() {
 
         {/* Grid cards */}
         <div
+          ref={scrollRef}
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, minmax(320px, 1fr))',
-            gap: '80px 64px',
-            maxWidth: 1800,
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '0 80px',
+            overflowX: 'auto',
+            maxWidth: 3200,
             margin: '90px auto 0 auto',
-            padding: '0 28px',
+            padding: '0 80px 48px 80px',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+            msOverflowStyle: 'none',
+            cursor: 'grab',
+            userSelect: 'none',
+            scrollBehavior: 'smooth',
           }}
+          className="project-horizontal-scroll"
         >
           {paginatedCards.map((item) => (
-            <Link key={item.id} to={`/projects/${item.id}`} style={{ display: 'flex', flexDirection: 'column', gap: 14, textDecoration: 'none', cursor: 'pointer' }}>
-              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: 6, boxShadow: '0 3px 18px rgba(0,0,0,0.12)', transition: 'transform 0.3s ease' }}
-                   onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
-                   onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}>
+            <div
+              key={item.id}
+              style={{
+                minWidth: 1700,
+                maxWidth: 2000,
+                flex: '0 0 1700px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'stretch',
+                gap: 0,
+                // background: '#fff',
+                // borderRadius: 0,
+                // boxShadow: '0 12px 60px rgba(0,0,0,0.16)',
+                transition: 'box-shadow 0.3s',
+                marginBottom: 28,
+                overflow: 'hidden',
+                // scrollSnapAlign: 'start',
+              }}
+            >
+              <div
+                style={{
+                  width: 1100,
+                  minWidth: 1100,
+                  height: 700,
+                  overflow: 'hidden',
+                  borderRadius: 0,
+                  // boxShadow: '0 12px 60px rgba(0,0,0,0.16)',
+                  transition: 'transform 0.3s ease',
+                  flexShrink: 0,
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+              >
                 <img
                   src={item.image || item.imageUrl}
                   alt={item.title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
-              <div style={{ fontFamily: 'serif', fontSize: '1.5rem', fontWeight: 400, color: '#222', lineHeight: 1.35, textDecoration: 'underline', textDecorationColor: '#b3b3b3', textDecorationThickness: '1px', textUnderlineOffset: '6px' }}>
-                {item.title}
+              {/* Info right */}
+              <div
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  padding: '80px 80px 80px 60px',
+                  // background: 'none',
+                }}
+              >
+                <Link
+                  to={`/projects/${item.id}`}
+                  style={{
+                    fontFamily: 'serif',
+                    fontSize: '4.2rem',
+                    fontWeight: 600,
+                    color: '#222',
+                    lineHeight: 1.1,
+                    textDecoration: 'underline',
+                    textDecorationColor: '#b3b3b3',
+                    textDecorationThickness: '3px',
+                    textUnderlineOffset: '18px',
+                    marginBottom: 38,
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'inline',
+                  }}
+                >
+                  {item.title}
+                </Link>
+                <Link
+                  to={`/projects/${item.id}`}
+                  style={{
+                    fontFamily: 'serif',
+                    fontSize: '2.2rem',
+                    color: '#8a8a8a',
+                    letterSpacing: '0.3px',
+                    marginBottom: 28,
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'inline',
+                  }}
+                >
+                  {item.location}
+                </Link>
               </div>
-              <div style={{ fontFamily: 'serif', fontSize: '1.2rem', color: '#8a8a8a', letterSpacing: '0.3px' }}>
-                {item.location}
-              </div>
-            </Link>
+            </div>
           ))}
+          {/* Map as last scrollable item */}
+          <div style={{ minWidth: 1500, maxWidth: 2000, flex: '0 0 1700px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 28 }}>
+            <div style={{ width: 1100, minWidth: 1100, height: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ProjectMap projects={projectCards} style={{ width: '700px', height: '700px', borderRadius: 16, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', margin: '0 auto' }} />
+            </div>
+            {/* Thông tin dự án bằng tiếng Việt, lấy từ JSON */}
+            <div style={{ flex: 1, padding: '40px 40px 40px 60px', minWidth: 700, maxWidth: 900, minHeight: 900, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+              <h2 style={{ fontFamily: 'serif', fontSize: 38, color: '#b6a484', fontWeight: 600, marginBottom: 24 }}>Thành phần dự án</h2>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '32px',
+                fontSize: 15,
+                color: '#222',
+                maxWidth: '100%',
+                marginBottom: 18
+              }}>
+                {(() => {
+                  // Chia đều các mục vào 3 cột
+                  const cols = [[], [], []];
+                  projectTeamData.columns.forEach((col, idx) => {
+                    cols[idx % 3].push(col);
+                  });
+                  return cols.map((group, colIdx) => (
+                    <div key={colIdx}>
+                      {group.map((section, secIdx) => (
+                        <div key={secIdx} style={{ marginBottom: 18 }}>
+                          <div style={{ color: '#aaa', fontSize: 12, fontWeight: 600, letterSpacing: 1, marginBottom: 6 }}>{section.title}</div>
+                          <div>
+                            {section.members.map((mem, mIdx) => (
+                              <div key={mIdx}>
+                                {mem.link && mem.link.startsWith('http') ? (
+                                  <a href={mem.link} target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'none', fontSize: 14, fontFamily: 'Times New Roman, Times, serif' }}>{mem.name}</a>
+                                ) : (
+                                  <Link to={mem.link} style={{ color: '#222', textDecoration: 'none', fontSize: 14, fontFamily: 'Times New Roman, Times, serif' }}>{mem.name}</Link>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ));
+                })()}
+              </div>
+            </div>
+            <div style={{ flex: 1 }} />
+          </div>
         </div>
 
         {/* Pagination */}
@@ -387,7 +581,8 @@ function Project() {
         </div>
       </section>
       {/* Sự kiện */}
-    
+
+     
     </>
   );
 }
