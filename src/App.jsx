@@ -4,6 +4,7 @@ const AwardDetail = lazy(() => import("./components/AwardDetail"));
 
 // import Layout from "./Layout.jsx";
 import Header from "./components/Header";
+import LogoAnimation from "./components/LogoAnimation";
 import Achievement from "./components/Achievement";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
@@ -80,6 +81,7 @@ import banThan31 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh 
 const eventImages = [event1, event2, event3, event4];
 
 function App({ characters }) {
+  const [showLogo, setShowLogo] = useState(true);
   const charactersList = [
     { 
       id: 1,
@@ -518,7 +520,7 @@ function App({ characters }) {
   return (
     <Router>
       <div className="index-page">
-
+        {showLogo && <LogoAnimation onFinish={() => setShowLogo(false)} />}
         <Header />
         <Routes>
 

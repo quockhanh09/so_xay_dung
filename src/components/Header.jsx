@@ -7,14 +7,12 @@ import "../style/App.css";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-  const [animationDone, setAnimationDone] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const aboutCloseTimer = useRef(null);
   const projectsCloseTimer = useRef(null);
   const location = useLocation();
-  
+
   useEffect(() => {
     setMenuOpen(false);
     setAboutOpen(false);
@@ -46,17 +44,6 @@ function Header() {
     if (projectsCloseTimer.current) clearTimeout(projectsCloseTimer.current);
     projectsCloseTimer.current = setTimeout(() => setProjectsOpen(false), 200);
   };
-  
-  useEffect(() => {
-    // Tạm thời luôn chạy animation để test
-    setTimeout(() => {
-      setShowIntro(false);
-    }, 2500);
-    setTimeout(() => {
-      setAnimationDone(true);
-    }, 3000);
-  }, []);
-  // const isLoginPage = location.pathname === "/Login";
 
   return (
     <>
@@ -422,29 +409,8 @@ function Header() {
           }
         }
       `}</style>
-      {showIntro && (
-        <div className="logo-intro-overlay">
-          <div className="udi-letters-container">
-            {/* Chữ U - 3 mảnh chính */}
-            <div className="piece u1"></div>
-            <div className="piece u2"></div>
-            <div className="piece u3"></div>
-            
-            {/* Chữ D - 5 mảnh chính */}
-            <div className="piece d1"></div>
-            <div className="piece d2"></div>
-            <div className="piece d3"></div>
-            <div className="piece d4"></div>
-            <div className="piece d5"></div>
-            
-            {/* Chữ I - 3 mảnh chính */}
-            <div className="piece i1"></div>
-            <div className="piece i2"></div>
-            <div className="piece i3"></div>
-          </div>
-        </div>
-      )}
-      <header className="udi-header" style={{ opacity: animationDone ? 1 : 0, transition: 'opacity 0.5s' }}>
+      {/* Đã loại bỏ animation chữ UDI, chỉ còn logo tĩnh */}
+      <header className="udi-header">
         {/* Hamburger button for mobile */}
         <button
           className="mobile-menu-btn"

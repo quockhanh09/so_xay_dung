@@ -72,6 +72,52 @@ function Profile() {
                     </div>
                   )}
 
+
+                  {/* Projects */}
+                  <div className="details-block">
+                    <h4>Projects</h4>
+                    {profile.projects && profile.projects.length > 0 ? (
+                      <ul>
+                        {profile.projects.map((proj, index) => (
+                          <li key={index}>
+                            {proj.projectId ? (
+                              <Link to={`/project/${proj.projectId}`}>{proj.name}</Link>
+                            ) : proj.link ? (
+                              <a href={proj.link} target="_blank" rel="noopener noreferrer">{proj.name}</a>
+                            ) : (
+                              proj.name
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>Chưa có dự án nào.</p>
+                    )}
+                  </div>
+
+
+                  {/* Awards */}
+                  <div className="details-block">
+                    <h4>Awards</h4>
+                    {profile.awards && profile.awards.length > 0 ? (
+                      <ul>
+                        {profile.awards.map((award, index) => (
+                          <li key={index}>
+                            {award.projectId ? (
+                              <Link to={`/project/${award.projectId}`}>{award.name}</Link>
+                            ) : award.link ? (
+                              <a href={award.link} target="_blank" rel="noopener noreferrer">{award.name}</a>
+                            ) : (
+                              award.name
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>Chưa có giải thưởng nào.</p>
+                    )}
+                  </div>
+
                   {/* Contact */}
                   <div className="details-block">
                     <h4>Contact</h4>

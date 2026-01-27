@@ -23,9 +23,15 @@
       "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
     ],
     "awards": [
-      "Giải thưởng Kiến trúc Quốc gia 2020",
-      "Giải nhất cuộc thi Quy hoạch Đô thị xanh 2019",
-      "Bằng khen của Bộ Xây dựng"
+    ],
+    "projects": [
+      { "name": "Dự án quy hoạch khu đô thị mới Hà Nội", "link": "/project" },
+      { "name": "Thiết kế cảnh quan công viên trung tâm TP.HCM", "link": "/project" }
+    ],
+    "awards": [
+      { "name": "Giải thưởng Kiến trúc Quốc gia 2020", "link": "/Achievement" },
+      { "name": "Giải nhất cuộc thi Quy hoạch Đô thị xanh 2019", "link": "/Achievement" },
+      { "name": "Bằng khen của Bộ Xây dựng", "link": "/Achievement" }
     ],
     "contact": {
       "email": "anna.cawrse@udi.vn",

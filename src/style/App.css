@@ -1,3 +1,47 @@
+/* Logo Animation Overlay */
+.logo-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+
+.logo-animate {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  transition: all 0.8s cubic-bezier(0.7,0.2,0.2,1);
+
+}
+
+.logo-animate-out {
+  position: fixed;
+  top: 24px;
+  left: 48px;
+  width: 48px;
+  height: 48px;
+  opacity: 0.7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.8s cubic-bezier(0.7,0.2,0.2,1);
+}
+
+.logo-animation-overlay .logo-animate-out {
+  animation: logo-fadeout 0.5s 0.7s forwards;
+}
+
+@keyframes logo-fadeout {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
 /**
 * Template Name: Dewi
 * Template URL: https://bootstrapmade.com/dewi-free-multi-purpose-html-template/

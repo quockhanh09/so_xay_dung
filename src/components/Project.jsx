@@ -355,29 +355,22 @@ function Project() {
                   // background: 'none',
                 }}
               >
-                <Link
-                  to={`/projects/${item.id}`}
+                <div
                   style={{
                     fontFamily: 'serif',
                     fontSize: '4.2rem',
                     fontWeight: 600,
                     color: '#222',
                     lineHeight: 1.1,
-                    textDecoration: 'underline',
-                    textDecorationColor: '#b3b3b3',
-                    textDecorationThickness: '3px',
-                    textUnderlineOffset: '18px',
                     marginBottom: 38,
                     background: 'none',
                     border: 'none',
-                    cursor: 'pointer',
                     display: 'inline',
                   }}
                 >
                   {item.title}
-                </Link>
-                <Link
-                  to={`/projects/${item.id}`}
+                </div>
+                <div
                   style={{
                     fontFamily: 'serif',
                     fontSize: '2.2rem',
@@ -386,12 +379,11 @@ function Project() {
                     marginBottom: 28,
                     background: 'none',
                     border: 'none',
-                    cursor: 'pointer',
                     display: 'inline',
                   }}
                 >
                   {item.location}
-                </Link>
+                </div>
               </div>
             </div>
           ))}
