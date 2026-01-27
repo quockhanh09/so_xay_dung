@@ -494,13 +494,13 @@ function Project() {
                           src={modalImages[currentImageIndex]}
                           alt="project large"
                           style={{
-                            maxWidth: '60vw',
-                            maxHeight: '80vh',
-                            minWidth: 400,
-                            minHeight: 300,
-                            // borderRadius: 8, // bỏ bo góc
-                            // boxShadow: '0 4px 32px rgba(0,0,0,0.25)', // bỏ shadow
-                            objectFit: 'contain',
+                            width: 1000,
+                            height: 800,
+                            maxWidth: 1000,
+                            maxHeight: 800,
+                            minWidth: 1000,
+                            minHeight: 800,
+                            objectFit: 'cover',
                             background: '#fff',
                             display: 'block',
                             margin: 0,

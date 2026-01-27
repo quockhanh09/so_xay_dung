@@ -97,5 +97,69 @@
       "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80"
     ],
     "popupText": "Khu vực sinh hoạt chung và nhà thi đấu cho trường Lawrenceville, thiết kế hiện đại, phục vụ đa dạng hoạt động học sinh."
+  },
+  "8": {
+    "id": 8,
+    "title": "Green Urban Park Masterplan",
+    "category": "thiet-ke-canh-quan",
+    "avatar": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "popupText": [
+      "Quy hoạch tổng thể công viên đô thị xanh, tăng cường không gian công cộng và bảo tồn hệ sinh thái.",
+      "Dự án điểm nhấn của thành phố năm 2026."
+    ]
+  },
+  "9": {
+    "id": 9,
+    "title": "Smart City Infrastructure Upgrade",
+    "category": "ha-tang-ky-thuat",
+    "avatar": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "popupText": "Nâng cấp hạ tầng kỹ thuật cho thành phố thông minh, tích hợp công nghệ IoT và năng lượng tái tạo."
+  },
+  "10": {
+    "id": 10,
+    "title": "Riverfront Eco-Resort Design",
+    "category": "thiet-ke-canh-quan",
+    "avatar": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "popupText": [
+      "Thiết kế khu nghỉ dưỡng sinh thái ven sông, hài hòa với thiên nhiên.",
+      "Dự án đạt giải thưởng kiến trúc xanh 2025."
+    ]
+  },
+  "11": {
+    "id": 11,
+    "title": "Urban Light Rail Transit System",
+    "category": "ha-tang-ky-thuat",
+    "avatar": "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "popupText": "Hệ thống đường sắt đô thị nhẹ, kết nối các khu vực trọng điểm, giảm ùn tắc giao thông."
+  },
+  "12": {
+    "id": 12,
+    "title": "Central Business District Redevelopment",
+    "category": "quy-hoach-do-thi",
+    "avatar": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503389152951-9c3d0c6b7a2a?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "popupText": [
+      "Tái phát triển khu trung tâm thương mại, xây dựng các tòa nhà xanh và thông minh.",
+      "Dự án hợp tác quốc tế năm 2026."
+    ]
   }
 }

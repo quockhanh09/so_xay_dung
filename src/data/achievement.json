@@ -43,6 +43,174 @@
         "Bằng khen dành cho các cá nhân, tập thể xuất sắc.",
         "Ghi chú: Thành tích nổi bật trong lĩnh vực xây dựng."
       ]
+    },
+    {
+      "id": 4,
+      "title": "Giải thưởng Thiết kế Đô thị Sáng tạo 2021",
+      "shortDesc": "Tôn vinh dự án thiết kế đô thị sáng tạo, ứng dụng công nghệ mới.",
+      "desc": "Dự án đoạt giải đã ứng dụng công nghệ BIM và giải pháp xanh trong thiết kế đô thị.",
+      "images": [
+        "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Thiết kế Đô thị Sáng tạo 2021.",
+        "Dự án nổi bật về ứng dụng công nghệ mới.",
+        "Ghi chú: Được trao bởi Hội Quy hoạch Đô thị Việt Nam."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Giải thưởng Quy hoạch Vùng xuất sắc 2022",
+      "shortDesc": "Dự án quy hoạch vùng tiêu biểu, phát triển bền vững.",
+      "desc": "Dự án đạt giải đã góp phần phát triển kinh tế - xã hội vùng trọng điểm.",
+      "images": [
+        "https://images.unsplash.com/photo-1503389152951-9c3d0c6b7a2a?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Quy hoạch Vùng xuất sắc 2022.",
+        "Dự án tiêu biểu về phát triển vùng.",
+        "Ghi chú: Được trao tại hội nghị quốc tế."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Giải thưởng Công trình Xanh 2023",
+      "shortDesc": "Công trình kiến trúc xanh, tiết kiệm năng lượng.",
+      "desc": "Công trình đạt giải có thiết kế thân thiện môi trường, sử dụng vật liệu tái chế.",
+      "images": [
+        "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Công trình Xanh 2023.",
+        "Công trình nổi bật về tiết kiệm năng lượng.",
+        "Ghi chú: Được bình chọn bởi cộng đồng kiến trúc sư."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Giải thưởng Đô thị Thông minh 2024",
+      "shortDesc": "Dự án ứng dụng công nghệ thông minh trong quản lý đô thị.",
+      "desc": "Dự án đoạt giải đã triển khai hệ thống IoT và quản lý dữ liệu lớn cho đô thị.",
+      "images": [
+        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Đô thị Thông minh 2024.",
+        "Dự án tiên phong về chuyển đổi số đô thị.",
+        "Ghi chú: Được trao bởi Bộ Thông tin & Truyền thông."
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Giải thưởng Cảnh quan Đô thị đẹp 2025",
+      "shortDesc": "Tôn vinh dự án cảnh quan đô thị xuất sắc.",
+      "desc": "Dự án đạt giải đã tạo ra không gian công cộng xanh, thân thiện với cộng đồng.",
+      "images": [
+        "https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Cảnh quan Đô thị đẹp 2025.",
+        "Không gian công cộng tiêu biểu.",
+        "Ghi chú: Được cộng đồng bình chọn."
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Giải thưởng Thiết kế Công trình Công cộng 2023",
+      "shortDesc": "Công trình công cộng có thiết kế sáng tạo, phục vụ cộng đồng.",
+      "desc": "Công trình đoạt giải đã đáp ứng tốt nhu cầu sử dụng và thẩm mỹ đô thị.",
+      "images": [
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Thiết kế Công trình Công cộng 2023.",
+        "Công trình phục vụ cộng đồng xuất sắc.",
+        "Ghi chú: Được trao bởi Hội đồng Kiến trúc Quốc gia."
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Giải thưởng Quy hoạch Giao thông Đô thị 2022",
+      "shortDesc": "Dự án quy hoạch giao thông đô thị hiệu quả, giảm ùn tắc.",
+      "desc": "Dự án đạt giải đã cải thiện đáng kể hệ thống giao thông đô thị.",
+      "images": [
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Quy hoạch Giao thông Đô thị 2022.",
+        "Giải pháp giao thông thông minh.",
+        "Ghi chú: Được trao tại hội thảo quốc tế."
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Giải thưởng Đổi mới Sáng tạo trong Kiến trúc 2024",
+      "shortDesc": "Tôn vinh ý tưởng đổi mới sáng tạo trong kiến trúc.",
+      "desc": "Dự án đoạt giải đã mang lại giải pháp kiến trúc độc đáo, sáng tạo.",
+      "images": [
+        "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Đổi mới Sáng tạo trong Kiến trúc 2024.",
+        "Ý tưởng kiến trúc độc đáo.",
+        "Ghi chú: Được trao bởi Hội Kiến trúc sư Việt Nam."
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Giải thưởng Phát triển Đô thị Bền vững 2025",
+      "shortDesc": "Dự án phát triển đô thị bền vững, thân thiện môi trường.",
+      "desc": "Dự án đạt giải đã áp dụng các giải pháp xanh, tiết kiệm năng lượng.",
+      "images": [
+        "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Phát triển Đô thị Bền vững 2025.",
+        "Giải pháp xanh cho đô thị.",
+        "Ghi chú: Được trao bởi Bộ Xây dựng."
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Giải thưởng Quy hoạch Nông thôn mới 2023",
+      "shortDesc": "Dự án quy hoạch nông thôn mới, nâng cao chất lượng sống.",
+      "desc": "Dự án đoạt giải đã góp phần phát triển nông thôn bền vững.",
+      "images": [
+        "https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Quy hoạch Nông thôn mới 2023.",
+        "Phát triển nông thôn bền vững.",
+        "Ghi chú: Được trao tại hội nghị quốc gia."
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Giải thưởng Công trình Văn hóa tiêu biểu 2024",
+      "shortDesc": "Công trình văn hóa có giá trị nghệ thuật và cộng đồng cao.",
+      "desc": "Công trình đạt giải đã trở thành điểm nhấn văn hóa của địa phương.",
+      "images": [
+        "https://images.unsplash.com/photo-1503389152951-9c3d0c6b7a2a?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Công trình Văn hóa tiêu biểu 2024.",
+        "Công trình văn hóa nổi bật.",
+        "Ghi chú: Được cộng đồng bình chọn."
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Giải thưởng Quy hoạch Đô thị thông minh 2025",
+      "shortDesc": "Dự án quy hoạch đô thị ứng dụng công nghệ thông minh.",
+      "desc": "Dự án đạt giải đã triển khai các giải pháp quản lý đô thị thông minh, hiệu quả.",
+      "images": [
+        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "popupText": [
+        "Chi tiết về Giải thưởng Quy hoạch Đô thị thông minh 2025.",
+        "Giải pháp đô thị thông minh.",
+        "Ghi chú: Được trao tại diễn đàn quốc tế."
+      ]
     }
   ]
 }
