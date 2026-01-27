@@ -11,10 +11,16 @@ import projectsData from '../data/projects.json';
 import { getProjectImageByFileName } from '../utils/projectImageLoader';
 import projectTeamData from '../data/project_team.json';
 
+
 function Project() {
   const [page, setPage] = useState(1);
   // Kéo ngang bằng chuột cho project card
   const scrollRef = useRef(null);
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImages, setModalImages] = useState([]); // array of image urls
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   useEffect(() => {
     const slider = scrollRef.current;
     if (!slider) return;
@@ -75,21 +81,28 @@ function Project() {
       slider.removeEventListener('touchmove', onTouchMove);
     };
   }, []);
-  
+
   // Tự động tạo danh sách project từ projects.json
   const projectCards = Object.keys(projectsData).map((id) => {
     const project = projectsData[id];
+    // Lấy images đúng chuẩn (chỉ link hoặc file, ưu tiên link)
+    let images = [];
+    if (Array.isArray(project.images) && project.images.length > 0) {
+      images = project.images.map(img => {
+        if (typeof img === 'string' && (img.startsWith('http://') || img.startsWith('https://'))) {
+          return img;
+        } else {
+          return getProjectImageByFileName(img);
+        }
+      });
+    }
     return {
       id: parseInt(id),
       title: project.title,
-      location: project.location,
-      image: getProjectImageByFileName(project.imageFile),
-      imageFile: project.imageFile,
-      category: project.category,
+      avatar: project.avatar,
       description: project.description,
-      year: project.year,
-      client: project.client,
-      status: project.status,
+      images,
+      popupText: project.popupText,
     };
   });
 
@@ -103,6 +116,35 @@ function Project() {
     const next = Math.min(Math.max(p, 1), totalPages);
     setPage(next);
   };
+
+  // Modal handlers
+  const openModal = (images, idx = 0) => {
+    setModalImages(images);
+    setCurrentImageIndex(idx);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden'; // prevent scroll
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImages([]);
+    setCurrentImageIndex(0);
+    document.body.style.overflow = '';
+  };
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % modalImages.length);
+  };
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
+  };
+
+  // Auto-slide images in modal
+  useEffect(() => {
+    if (!isModalOpen || modalImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % modalImages.length);
+    }, 3000); // 3 giây chuyển ảnh
+    return () => clearInterval(interval);
+  }, [isModalOpen, modalImages]);
 
   return (
     <>
@@ -315,13 +357,9 @@ function Project() {
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 gap: 0,
-                // background: '#fff',
-                // borderRadius: 0,
-                // boxShadow: '0 12px 60px rgba(0,0,0,0.16)',
                 transition: 'box-shadow 0.3s',
                 marginBottom: 28,
                 overflow: 'hidden',
-                // scrollSnapAlign: 'start',
               }}
             >
               <div
@@ -331,18 +369,22 @@ function Project() {
                   height: 700,
                   overflow: 'hidden',
                   borderRadius: 0,
-                  // boxShadow: '0 12px 60px rgba(0,0,0,0.16)',
                   transition: 'transform 0.3s ease',
                   flexShrink: 0,
+                  cursor: 'pointer',
+                  position: 'relative',
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
                 onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                onClick={() => openModal(item.images, 0)}
+                title="Xem ảnh lớn"
               >
                 <img
-                  src={item.image || item.imageUrl}
+                  src={item.avatar}
                   alt={item.title}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
+                <div style={{position:'absolute',bottom:18,right:18,background:'rgba(0,0,0,0.5)',color:'#fff',padding:'6px 16px',borderRadius:8,fontSize:16,opacity:0.8,letterSpacing:1}}>Xem ảnh</div>
               </div>
               {/* Info right */}
               <div
@@ -352,7 +394,6 @@ function Project() {
                   flexDirection: 'column',
                   justifyContent: 'center',
                   padding: '80px 80px 80px 60px',
-                  // background: 'none',
                 }}
               >
                 <div
@@ -387,6 +428,176 @@ function Project() {
               </div>
             </div>
           ))}
+                {/* Modal popup for image gallery */}
+                {isModalOpen && (
+                  <div
+                    style={{
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      width: '100vw',
+                      height: '100vh',
+                      background: 'rgba(0,0,0,0.85)',
+                      zIndex: 9999,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      transition: 'opacity 0.2s',
+                    }}
+                    onClick={closeModal}
+                  >
+                    <div
+                      style={{
+                        position: 'relative',
+                        maxWidth: '90vw',
+                        maxHeight: '90vh',
+                        minWidth: 400,
+                        minHeight: 300,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'rgba(0,0,0,0.01)',
+                        // borderRadius: 12, // bỏ bo góc
+                        // boxShadow: '0 8px 48px rgba(0,0,0,0.25)', // bỏ shadow
+                        padding: 0,
+                        flexDirection: 'row',
+                        gap: 0,
+                      }}
+                      onClick={e => e.stopPropagation()}
+                    >
+                      {/* Prev button */}
+                      {modalImages.length > 1 && (
+                        <button
+                          onClick={prevImage}
+                          style={{
+                            position: 'absolute',
+                            left: -40,
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            background: 'rgba(0,0,0,0.5)',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '50%',
+                            width: 32,
+                            height: 32,
+                            fontSize: 20,
+                            cursor: 'pointer',
+                            zIndex: 2,
+                          }}
+                          title="Ảnh trước"
+                        >&#8592;</button>
+                      )}
+                      {/* Image + text */}
+                      <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',gap:24}}>
+                        <img
+                          src={modalImages[currentImageIndex]}
+                          alt="project large"
+                          style={{
+                            maxWidth: '60vw',
+                            maxHeight: '80vh',
+                            minWidth: 400,
+                            minHeight: 300,
+                            // borderRadius: 8, // bỏ bo góc
+                            // boxShadow: '0 4px 32px rgba(0,0,0,0.25)', // bỏ shadow
+                            objectFit: 'contain',
+                            background: '#fff',
+                            display: 'block',
+                            margin: 0,
+                          }}
+                        />
+                        {/* Text bên phải ảnh */}
+                        <div style={{
+                          minWidth: 180,
+                          maxWidth: 320,
+                          color: '#fff',
+                          fontSize: 18,
+                          fontWeight: 400,
+                          opacity: 0.92,
+                          fontFamily: 'serif',
+                          lineHeight: 1.4,
+                          padding: '12px 0 12px 18px',
+                          borderLeft: '2px solid #b6a484',
+                          background: 'rgba(0,0,0,0.10)',
+                          textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                          wordBreak: 'break-word',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 6,
+                        }}>
+                          {/* Hiển thị nhiều popupText nếu là array */}
+                          {(() => {
+                            const project = projectCards.find(p => p.images && p.images.includes(modalImages[currentImageIndex]));
+                            if (!project) return null;
+                            if (Array.isArray(project.popupText)) {
+                              return project.popupText.map((txt, idx) => (
+                                <div key={idx} style={{fontSize:17,color:'#fff',opacity:0.98,marginBottom:4}}>{txt}</div>
+                              ));
+                            } else if (typeof project.popupText === 'string') {
+                              return <div style={{fontSize:17,color:'#fff',opacity:0.98}}>{project.popupText}</div>;
+                            } else {
+                              return <>
+                                <div style={{fontSize:20,fontWeight:600,color:'#fff',marginBottom:4,opacity:0.98}}>{project.title}</div>
+                                {project.location && <div style={{fontSize:15,color:'#e0e0e0',opacity:0.85}}>{project.location}</div>}
+                              </>;
+                            }
+                          })()}
+                        </div>
+                      </div>
+                      {/* Next button */}
+                      {modalImages.length > 1 && (
+                        <button
+                          onClick={nextImage}
+                          style={{
+                            position: 'absolute',
+                            right: -40,
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            background: 'rgba(0,0,0,0.5)',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '50%',
+                            width: 32,
+                            height: 32,
+                            fontSize: 20,
+                            cursor: 'pointer',
+                            zIndex: 2,
+                          }}
+                          title="Ảnh tiếp theo"
+                        >&#8594;</button>
+                      )}
+                      {/* Close button */}
+                      <button
+                        onClick={closeModal}
+                        style={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          background: 'rgba(0,0,0,0.7)',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: 28,
+                          height: 28,
+                          fontSize: 16,
+                          cursor: 'pointer',
+                          zIndex: 3,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: 0,
+                        }}
+                        title="Đóng"
+                      >&#10005;</button>
+                      {/* Image index indicator */}
+                      {modalImages.length > 1 && (
+                        <div style={{position:'absolute',bottom:14,right:14,color:'#fff',background:'rgba(0,0,0,0.5)',padding:'4px 12px',borderRadius:8,fontSize:13,opacity:0.8,letterSpacing:1}}>
+                          {currentImageIndex+1} / {modalImages.length}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
           {/* Map as last scrollable item */}
           <div style={{ minWidth: 1500, maxWidth: 2000, flex: '0 0 1700px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 28 }}>
             <div style={{ width: 1100, minWidth: 1100, height: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

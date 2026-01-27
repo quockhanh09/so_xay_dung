@@ -19,10 +19,7 @@ import About from "./components/About";
 import Profile from "./components/Profile";
 import LeadershipPage from "./components/LeadershipPage";
 import ManageSectionPage from "./components/ManageSectionPage";
-import UrbanPlanningPage from "./components/UrbanPlanningPage";
-import ProjectDesignPage from "./components/ProjectDesignPage";
-import InfrastructurePage from "./components/InfrastructurePage";
-import LandscapeDesignPage from "./components/LandscapeDesignPage";
+import ProjectCategory from "./components/ProjectCategory";
 
 import "./style/App.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -1325,10 +1322,10 @@ function App({ characters }) {
           <Route path="/Newsletter" element={<Newsletter />} />
           <Route path="/About" element={<About />} />
           <Route path="/ban-lanh-dao" element={<LeadershipPage />} />
-          <Route path="/quy-hoach-do-thi" element={<UrbanPlanningPage />} />
-          <Route path="/thiet-ke-cong-trinh" element={<ProjectDesignPage />} />
-          <Route path="/ha-tang-ky-thuat" element={<InfrastructurePage />} />
-          <Route path="/thiet-ke-canh-quan" element={<LandscapeDesignPage />} />
+          <Route path="/quy-hoach-do-thi" element={<ProjectCategory category="quy-hoach-do-thi" title="QUY HOẠCH ĐÔ THỊ" />} />
+          <Route path="/thiet-ke-cong-trinh" element={<ProjectCategory category="thiet-ke-cong-trinh" title="THIẾT KẾ CÔNG TRÌNH" />} />
+          <Route path="/ha-tang-ky-thuat" element={<ProjectCategory category="ha-tang-ky-thuat" title="HẠ TẦNG KỸ THUẬT" />} />
+          <Route path="/thiet-ke-canh-quan" element={<ProjectCategory category="thiet-ke-canh-quan" title="THIẾT KẾ CẢNH QUAN" />} />
           <Route
             path="/phong-tong-hop"
             element={<ManageSectionPage title="Phòng tổng hợp" storageKey="phong-tong-hop" members={sectionMembers.phongTongHop} />}

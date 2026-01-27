@@ -163,7 +163,7 @@ function About() {
           
           {/* LEVEL 1: VIUP DIRECTOR */}
           <div className="org-tree-level level-1">
-            <div className="org-tree-node node-lg">
+            <Link to="/profile/director" className="org-tree-node node-lg" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <div className="org-node-header">VIUP</div>
               <div className="org-node-body">
                 <div className="org-node-photo">
@@ -180,7 +180,7 @@ function About() {
                   <p className="org-node-subtitle">{leadership.director.subtitle}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* CONNECTING LINE */}
@@ -188,7 +188,7 @@ function About() {
 
           {/* LEVEL 2: UDI DIRECTOR */}
           <div className="org-tree-level level-2">
-            <div className="org-tree-node node-lg">
+            <Link to="/profile/udiDirector" className="org-tree-node node-lg" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <div className="org-node-header">UDI</div>
               <div className="org-node-body">
                 <div className="org-node-photo">
@@ -209,39 +209,42 @@ function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* LEVEL 3: DEPUTIES - WITH CONNECTOR */}
           <div className="org-tree-level level-3">
             <div className="org-tree-connector line-horizontal"></div>
             <div className="org-tree-deputies">
-              {leadership.deputies.map((person, idx) => (
-                <div key={person.name} className="org-tree-deputy-wrapper">
-                  <div className="org-tree-connector line-vertical-short"></div>
-                  <div className="org-tree-node node-md">
-                    <div className="org-node-header deputy-header">{person.area}</div>
-                    <div className="org-node-body">
-                      <div className="org-node-photo deputy-photo">
-                        {person.photo ? (
-                          <img src={person.photo} alt={person.name} />
-                        ) : (
-                          <span>{person.initials}</span>
-                        )}
-                      </div>
-                      <div className="org-node-info">
-                        <h4 className="org-node-name">{person.name}</h4>
-                        <p className="org-node-title">{person.title}</p>
-                        <p className="org-node-subtitle">{person.subtitle}</p>
-                        <div className="org-node-contact">
-                          <p>{person.contact.phone}</p>
-                          <p>{person.contact.email}</p>
+              {leadership.deputies.map((person, idx) => {
+                const deputyId = person.initials === 'SMT' ? 'deputy-SMT' : person.initials === 'KTT' ? 'deputy-KTT' : `deputy-${idx}`;
+                return (
+                  <div key={person.name} className="org-tree-deputy-wrapper">
+                    <div className="org-tree-connector line-vertical-short"></div>
+                    <Link to={`/profile/${deputyId}`} className="org-tree-node node-md" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
+                      <div className="org-node-header deputy-header">{person.area}</div>
+                      <div className="org-node-body">
+                        <div className="org-node-photo deputy-photo">
+                          {person.photo ? (
+                            <img src={person.photo} alt={person.name} />
+                          ) : (
+                            <span>{person.initials}</span>
+                          )}
+                        </div>
+                        <div className="org-node-info">
+                          <h4 className="org-node-name">{person.name}</h4>
+                          <p className="org-node-title">{person.title}</p>
+                          <p className="org-node-subtitle">{person.subtitle}</p>
+                          <div className="org-node-contact">
+                            <p>{person.contact.phone}</p>
+                            <p>{person.contact.email}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

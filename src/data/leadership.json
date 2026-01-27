@@ -1,0 +1,149 @@
+[
+  {
+    "id": "director",
+    "label": "VIUP",
+    "name": "PGS.TS.KTS HOÀNG VĨNH HƯNG",
+    "title": "VIỆN TRƯỞNG",
+    "subtitle": "VIUP Director",
+    "description": "VIỆN QUY HOẠCH ĐÔ THỊ VÀ NÔNG THÔN QUỐC GIA",
+    "credentials": "PGS.TS.KTS, Viện trưởng VIUP",
+    "bio": "PGS.TS.KTS Hoàng Vĩnh Hưng là chuyên gia đầu ngành về quy hoạch đô thị và nông thôn, với hơn 30 năm kinh nghiệm trong nghiên cứu, giảng dạy và thực tiễn triển khai các dự án lớn trên toàn quốc.",
+    "experience": [
+      "Viện trưởng VIUP từ 2015 đến nay",
+      "Chủ nhiệm nhiều đề tài nghiên cứu cấp Nhà nước về quy hoạch đô thị",
+      "Giảng viên thỉnh giảng tại Đại học Kiến trúc Hà Nội"
+    ],
+    "education": [
+      "Tiến sĩ Quy hoạch đô thị - Đại học Xây dựng Hà Nội",
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội"
+    ],
+    "awards": [
+      { "name": "Huân chương Lao động hạng Nhì" },
+      { "name": "Bằng khen của Thủ tướng Chính phủ" }
+    ],
+    "projects": [
+      { "name": "Quy hoạch chung Thủ đô Hà Nội đến năm 2030" },
+      { "name": "Quy hoạch vùng Đồng bằng sông Hồng" }
+    ],
+    "role": "Viện trưởng",
+    "imageFile": "director.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
+    "department": "BAN_LANH_DAO",
+    "position": "Viện trưởng",
+    "contact": {
+      "phone": "+84 912 345 678",
+      "email": "hung.hoang@viup.vn"
+    },
+    "initials": "HVH"
+  },
+  {
+    "id": "udiDirector",
+    "label": "UDI",
+    "name": "ĐỖ KIM DUNG",
+    "title": "GIÁM ĐỐC VIỆN",
+    "subtitle": "UDI Director",
+    "description": "VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ",
+    "credentials": "Thạc sĩ, Giám đốc UDI",
+    "bio": "Bà Đỗ Kim Dung có hơn 20 năm kinh nghiệm trong lĩnh vực thiết kế đô thị, từng đảm nhiệm nhiều vị trí quản lý và chủ trì các dự án lớn về phát triển đô thị bền vững.",
+    "experience": [
+      "Giám đốc UDI từ 2018 đến nay",
+      "Chủ trì dự án phát triển đô thị xanh tại TP.HCM",
+      "Thành viên Hội đồng Kiến trúc Quốc gia"
+    ],
+    "education": [
+      "Thạc sĩ Quy hoạch đô thị - Đại học Kiến trúc TP.HCM",
+      "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
+    ],
+    "awards": [
+      { "name": "Bằng khen của Bộ Xây dựng" }
+    ],
+    "projects": [
+      { "name": "Thiết kế đô thị ven sông Sài Gòn" },
+      { "name": "Quy hoạch khu đô thị mới Thủ Thiêm" }
+    ],
+    "role": "Giám đốc UDI",
+    "imageFile": "udiDirector.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80",
+    "department": "BAN_LANH_DAO",
+    "position": "Giám đốc UDI",
+    "contact": {
+      "phone": "+84 903 255 628",
+      "email": "dzung.kimdodo@udi.com.vn"
+    },
+    "initials": "DKD"
+  },
+  {
+    "id": "deputy-SMT",
+    "label": "QUY HOẠCH",
+    "area": "QUY HOẠCH",
+    "areaEn": "Planning",
+    "name": "SẤM MINH TUẤN",
+    "title": "PHÓ GIÁM ĐỐC VIỆN",
+    "subtitle": "Vice Director",
+    "credentials": "Thạc sĩ, Phó Giám đốc Viện",
+    "bio": "Ông Sấm Minh Tuấn là chuyên gia quy hoạch với nhiều năm kinh nghiệm trong quản lý và phát triển các dự án quy hoạch đô thị trọng điểm.",
+    "experience": [
+      "Phó Giám đốc Viện UDI từ 2020",
+      "Chủ trì dự án quy hoạch khu công nghiệp Phú Bình",
+      "Thành viên Hội đồng thẩm định quy hoạch tỉnh Hà Nam"
+    ],
+    "education": [
+      "Thạc sĩ Quy hoạch đô thị - Đại học Xây dựng Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
+    ],
+    "awards": [
+      { "name": "Bằng khen của UBND tỉnh Hà Nam" }
+    ],
+    "projects": [
+      { "name": "Quy hoạch khu công nghiệp Phú Bình" },
+      { "name": "Quy hoạch đô thị Nhân Mỹ" }
+    ],
+    "role": "Phó Giám đốc Viện",
+    "imageFile": "deputy-SMT.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=800&q=80",
+    "department": "BAN_LANH_DAO",
+    "position": "Phó Giám đốc Viện",
+    "contact": {
+      "phone": "+84 969 556 688",
+      "email": "tuan.sam@udi.com.vn"
+    },
+    "initials": "SMT"
+  },
+  {
+    "id": "deputy-KTT",
+    "label": "KIẾN TRÚC",
+    "area": "KIẾN TRÚC",
+    "areaEn": "Architecture",
+    "name": "KHÚC THẾ TÂM",
+    "title": "PHÓ GIÁM ĐỐC VIỆN",
+    "subtitle": "Vice Director",
+    "credentials": "Thạc sĩ, Phó Giám đốc Viện",
+    "bio": "Bà Khúc Thế Tâm là kiến trúc sư với nhiều năm kinh nghiệm trong lĩnh vực thiết kế kiến trúc và quy hoạch đô thị, từng tham gia nhiều dự án lớn trong và ngoài nước.",
+    "experience": [
+      "Phó Giám đốc Viện UDI từ 2021",
+      "Chủ trì thiết kế kiến trúc các khu đô thị mới tại Hà Nam",
+      "Thành viên Hội Kiến trúc sư Việt Nam"
+    ],
+    "education": [
+      "Thạc sĩ Kiến trúc - Đại học Kiến trúc Hà Nội",
+      "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
+    ],
+    "awards": [
+      { "name": "Giải thưởng Kiến trúc Quốc gia" }
+    ],
+    "projects": [
+      { "name": "Thiết kế đô thị Thái Hà" },
+      { "name": "Quy hoạch khu đô thị Hòa Hậu" }
+    ],
+    "role": "Phó Giám đốc Viện",
+    "imageFile": "deputy-KTT.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80",
+    "department": "BAN_LANH_DAO",
+    "position": "Phó Giám đốc Viện",
+    "contact": {
+      "phone": "+84 986 868 449",
+      "email": "tam.khuc@udi.com.vn"
+    },
+    "initials": "KTT"
+  }
+]

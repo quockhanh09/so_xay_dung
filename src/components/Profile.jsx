@@ -1,15 +1,42 @@
 import { useParams, Link } from 'react-router-dom';
 import '../style/Profile.css';
 import membersData from '../data/members.json';
+import leadershipData from '../data/leadership.json';
 import { getImageByFileName } from '../utils/imageLoader';
 
 function Profile() {
   const { id } = useParams();
 
-  // Lấy dữ liệu từ file JSON
-  const memberData = membersData[id];
-  
-  if (!memberData) {
+  // Kiểm tra id có thuộc leadership không
+  const leader = Array.isArray(leadershipData)
+    ? leadershipData.find((item) => item.id === id)
+    : undefined;
+
+  let profile = null;
+  if (leader) {
+    // Nếu là lãnh đạo, ưu tiên dùng imageUrl, fallback sang photo
+    profile = {
+      ...leader,
+      image: leader.imageUrl || leader.photo || leader.image,
+      contact: leader.contact || {},
+      credentials: leader.credentials || '',
+      bio: leader.bio || '',
+      experience: leader.experience || [],
+      education: leader.education || [],
+      projects: leader.projects || [],
+      awards: leader.awards || [],
+      role: leader.role || '',
+    };
+  } else if (membersData[id]) {
+    // Nếu là member thường
+    const memberData = membersData[id];
+    profile = {
+      ...memberData,
+      image: getImageByFileName(memberData.imageFile),
+    };
+  }
+
+  if (!profile) {
     return (
       <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
         <h2>Không tìm thấy thông tin</h2>
@@ -17,12 +44,6 @@ function Profile() {
       </div>
     );
   }
-
-  // Tạo profile object với ảnh từ imageFile trong JSON
-  const profile = {
-    ...memberData,
-    image: getImageByFileName(memberData.imageFile)
-  };
 
 
   return (
