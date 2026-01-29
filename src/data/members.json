@@ -5,7 +5,6 @@
     "imageFile": "2.jpg",
     "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
     "department": "PHONG_TONG_HOP",
-    "position": "Giám đốc",
     "credentials": "Tiến sĩ, Kiến trúc sư trưởng",
     "title": "Chair of Landscape Architecture, Civil Engineering, & Ecology",
     "subtitle": "Board of Directors, Principal",
@@ -22,8 +21,7 @@
       "Thạc sĩ Kiến trúc - Đại học Bách Khoa Hà Nội",
       "Cử nhân Kiến trúc - Đại học Kiến trúc Hà Nội"
     ],
-    "awards": [
-    ],
+   
     "projects": [
       { "name": "Dự án quy hoạch khu đô thị mới Hà Nội", "link": "/project" },
       { "name": "Thiết kế cảnh quan công viên trung tâm TP.HCM", "link": "/project" }
@@ -36,34 +34,8 @@
     "contact": {
       "email": "anna.cawrse@udi.vn",
       "phone": "+84 123 456 789"
-    },
-    "sections": [
-      {
-        "title": "Giới thiệu cá nhân",
-        "texts": [
-          "Anna là chuyên gia hàng đầu trong lĩnh vực quy hoạch đô thị và thiết kế cảnh quan.",
-          "Bà đã lãnh đạo nhiều dự án lớn trong và ngoài nước."
-        ]
-      },
-      {
-        "title": "Dự án tiêu biểu",
-        "texts": [
-          "Dự án quy hoạch khu đô thị mới Hà Nội.",
-          "Thiết kế cảnh quan công viên trung tâm TP.HCM."
-        ],
-        "images": [
-          "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
-        ]
-      },
-      {
-        "title": "Thành tựu nổi bật",
-        "texts": [
-          "Giải thưởng Kiến trúc Quốc gia 2020.",
-          "Bằng khen của Bộ Xây dựng."
-        ]
-      }
-    ]
+    }
+   
   },
   "2": {
     "name": "Zachary Chrisco",

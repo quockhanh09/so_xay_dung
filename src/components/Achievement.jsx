@@ -181,220 +181,210 @@ function Achievement() {
       </section>
 
       {/* Horizontal scrollable awards */}
-      <section style={{ background: '#fff', padding: '60px 0', width: '100%' }}>
-        <div
-          ref={scrollRef}
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '0 80px',
-            overflowX: 'auto',
-            maxWidth: 3200,
-            margin: '0 auto',
-            padding: '0 80px 48px 80px',
-            scrollbarWidth: 'none',
-            WebkitOverflowScrolling: 'touch',
-            msOverflowStyle: 'none',
-            cursor: 'grab',
-            userSelect: 'none',
-            scrollBehavior: 'smooth',
-          }}
-          className="achievement-horizontal-scroll"
-        >
-          {awards.map((award) => (
-            <div
-              key={award.id}
-              style={{
-                minWidth: 1200,
-                maxWidth: 1400,
-                flex: '0 0 1200px',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'stretch',
-                overflow: "hidden",
-                cursor: "pointer",
-                transition: "box-shadow 0.2s",
-                marginBottom: 48,
-              }}
-              onClick={() => openModal(award, 0)}
-              title="Xem ảnh lớn"
-            >
-              <div style={{ width: 600, minWidth: 600, height: 600, overflow: "hidden", flexShrink: 0 }}>
-                <img
-                  src={award.images && award.images.length > 0 ? award.images[0] : award.image}
-                  alt={award.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-              <div style={{ padding: 64, flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "left" }}>
-                <div
-                  style={{ fontFamily: 'serif', fontSize: 52, color: '#2d3436', fontWeight: 700, marginBottom: 32 }}
-                >
-                  {award.title}
+        <section style={{ background: '#fff', padding: '60px 0', width: '100%' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '48px 0',
+              maxWidth: 1200,
+              margin: '0 auto',
+              padding: '0 24px',
+            }}
+          >
+            {awards.map((award) => (
+              <div
+                key={award.id}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'stretch',
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  transition: "box-shadow 0.2s",
+                  background: '#f5f5f596',
+                   boxShadow: '0 2px 16px rgba(255, 255, 255, 0.07)',
+                }}
+                onClick={() => openModal(award, 0)}
+                title="Xem ảnh lớn"
+              >
+                <div style={{ width: 400, minWidth: 400, height: 320, overflow: "hidden", flexShrink: 0 }}>
+                  <img
+                    src={award.images && award.images.length > 0 ? award.images[0] : award.image}
+                    alt={award.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
                 </div>
-                <div style={{ color: '#555', fontSize: 28, marginBottom: 28 }}>{award.shortDesc}</div>
+                <div style={{ padding: 40, flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "left" }}>
+                  <div
+                    style={{ fontFamily: 'serif', fontSize: 36, color: '#2d3436', fontWeight: 700, marginBottom: 18 }}
+                  >
+                    {award.title}
+                  </div>
+                  <div style={{ color: '#555', fontSize: 20, marginBottom: 18 }}>{award.shortDesc}</div>
+                </div>
               </div>
-            </div>
-          ))}
-          {/* Modal popup for image gallery */}
-          {isModalOpen && modalAward && (
-            <div
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                background: 'rgba(0,0,0,0.85)',
-                zIndex: 9999,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                transition: 'opacity 0.2s',
-              }}
-              onClick={closeModal}
-            >
+            ))}
+            {/* Modal popup for image gallery */}
+            {isModalOpen && modalAward && (
               <div
                 style={{
-                  position: 'relative',
-                  maxWidth: '90vw',
-                  maxHeight: '90vh',
-                  minWidth: 400,
-                  minHeight: 300,
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100vw',
+                  height: '100vh',
+                  background: 'rgba(0,0,0,0.85)',
+                  zIndex: 9999,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'rgba(0,0,0,0.01)',
-                  padding: 0,
-                  flexDirection: 'row',
-                  gap: 0,
+                  flexDirection: 'column',
+                  transition: 'opacity 0.2s',
                 }}
-                onClick={e => e.stopPropagation()}
+                onClick={closeModal}
               >
-                {/* Prev button */}
-                {modalImages.length > 1 && (
-                  <button
-                    onClick={prevImage}
-                    style={{
-                      position: 'absolute',
-                      left: -40,
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(0,0,0,0.5)',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: 32,
-                      height: 32,
-                      fontSize: 20,
-                      cursor: 'pointer',
-                      zIndex: 2,
-                    }}
-                    title="Ảnh trước"
-                  >&#8592;</button>
-                )}
-                {/* Image + text */}
-                <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',gap:24}}>
-                  <img
-                    src={modalImages[currentImageIndex]}
-                    alt="award large"
-                    style={{
-                      maxWidth: '60vw',
-                      maxHeight: '80vh',
-                      minWidth: 400,
-                      minHeight: 300,
-                      objectFit: 'contain',
-                      background: '#fff',
-                      display: 'block',
-                      margin: 0,
-                    }}
-                  />
-                  {/* Text bên phải ảnh */}
-                  <div style={{
-                    minWidth: 180,
-                    maxWidth: 320,
-                    color: '#fff',
-                    fontSize: 18,
-                    fontWeight: 400,
-                    opacity: 0.92,
-                    fontFamily: 'serif',
-                    lineHeight: 1.4,
-                    padding: '12px 0 12px 18px',
-                    borderLeft: '2px solid #b6a484',
-                    background: 'rgba(0,0,0,0.10)',
-                    textShadow: '0 2px 8px rgba(0,0,0,0.18)',
-                    wordBreak: 'break-word',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 6,
-                  }}>
-                    {modalAward.popupText ? (
-                      <div style={{fontSize:17,color:'#fff',opacity:0.98}}>{modalAward.popupText}</div>
-                    ) : (
-                      <>
-                        <div style={{fontSize:20,fontWeight:600,color:'#fff',marginBottom:4,opacity:0.98}}>{modalAward.title}</div>
-                        {modalAward.shortDesc && <div style={{fontSize:15,color:'#e0e0e0',opacity:0.85}}>{modalAward.shortDesc}</div>}
-                      </>
-                    )}
-                  </div>
-                </div>
-                {/* Next button */}
-                {modalImages.length > 1 && (
-                  <button
-                    onClick={nextImage}
-                    style={{
-                      position: 'absolute',
-                      right: -40,
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(0,0,0,0.5)',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: 32,
-                      height: 32,
-                      fontSize: 20,
-                      cursor: 'pointer',
-                      zIndex: 2,
-                    }}
-                    title="Ảnh tiếp theo"
-                  >&#8594;</button>
-                )}
-                {/* Close button */}
-                <button
-                  onClick={closeModal}
+                <div
                   style={{
-                    position: 'absolute',
-                    top: 8,
-                    right: 8,
-                    background: 'rgba(0,0,0,0.7)',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: 28,
-                    height: 28,
-                    fontSize: 16,
-                    cursor: 'pointer',
-                    zIndex: 3,
+                    position: 'relative',
+                    maxWidth: '90vw',
+                    maxHeight: '90vh',
+                    minWidth: 400,
+                    minHeight: 300,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    background: 'rgba(0,0,0,0.01)',
                     padding: 0,
+                    flexDirection: 'row',
+                    gap: 0,
                   }}
-                  title="Đóng"
-                >&#10005;</button>
-                {/* Image index indicator */}
-                {modalImages.length > 1 && (
-                  <div style={{position:'absolute',bottom:14,right:14,color:'#fff',background:'rgba(0,0,0,0.5)',padding:'4px 12px',borderRadius:8,fontSize:13,opacity:0.8,letterSpacing:1}}>
-                    {currentImageIndex+1} / {modalImages.length}
+                  onClick={e => e.stopPropagation()}
+                >
+                  {/* Prev button */}
+                  {modalImages.length > 1 && (
+                    <button
+                      onClick={prevImage}
+                      style={{
+                        position: 'absolute',
+                        left: -40,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.5)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: 32,
+                        height: 32,
+                        fontSize: 20,
+                        cursor: 'pointer',
+                        zIndex: 2,
+                      }}
+                      title="Ảnh trước"
+                    >&#8592;</button>
+                  )}
+                  {/* Image + text */}
+                  <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',gap:24}}>
+                    <img
+                      src={modalImages[currentImageIndex]}
+                      alt="award large"
+                      style={{
+                        maxWidth: '60vw',
+                        maxHeight: '80vh',
+                        minWidth: 400,
+                        minHeight: 300,
+                        objectFit: 'contain',
+                        background: '#fff',
+                        display: 'block',
+                        margin: 0,
+                      }}
+                    />
+                    {/* Text bên phải ảnh */}
+                    <div style={{
+                      minWidth: 180,
+                      maxWidth: 320,
+                      color: '#fff',
+                      fontSize: 18,
+                      fontWeight: 400,
+                      opacity: 0.92,
+                      fontFamily: 'serif',
+                      lineHeight: 1.4,
+                      padding: '12px 0 12px 18px',
+                      borderLeft: '2px solid #b6a484',
+                      background: 'rgba(0,0,0,0.10)',
+                      textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                      wordBreak: 'break-word',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}>
+                      {modalAward.popupText ? (
+                        <div style={{fontSize:17,color:'#fff',opacity:0.98}}>{modalAward.popupText}</div>
+                      ) : (
+                        <>
+                          <div style={{fontSize:20,fontWeight:600,color:'#fff',marginBottom:4,opacity:0.98}}>{modalAward.title}</div>
+                          {modalAward.shortDesc && <div style={{fontSize:15,color:'#e0e0e0',opacity:0.85}}>{modalAward.shortDesc}</div>}
+                        </>
+                      )}
+                    </div>
                   </div>
-                )}
+                  {/* Next button */}
+                  {modalImages.length > 1 && (
+                    <button
+                      onClick={nextImage}
+                      style={{
+                        position: 'absolute',
+                        right: -40,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.5)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: 32,
+                        height: 32,
+                        fontSize: 20,
+                        cursor: 'pointer',
+                        zIndex: 2,
+                      }}
+                      title="Ảnh tiếp theo"
+                    >&#8594;</button>
+                  )}
+                  {/* Close button */}
+                  <button
+                    onClick={closeModal}
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      right: 8,
+                      background: 'rgba(0,0,0,0.7)',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: 28,
+                      height: 28,
+                      fontSize: 16,
+                      cursor: 'pointer',
+                      zIndex: 3,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: 0,
+                    }}
+                    title="Đóng"
+                  >&#10005;</button>
+                  {/* Image index indicator */}
+                  {modalImages.length > 1 && (
+                    <div style={{position:'absolute',bottom:14,right:14,color:'#fff',background:'rgba(0,0,0,0.5)',padding:'4px 12px',borderRadius:8,fontSize:13,opacity:0.8,letterSpacing:1}}>
+                      {currentImageIndex+1} / {modalImages.length}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </div>
+        </section>
     </>
   );
 }
