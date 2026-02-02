@@ -1,0 +1,55 @@
+/* Project Navigation Container - Responsive */
+
+/* Desktop (1200px+) - No changes needed, keep default inline styles */
+
+/* Tablet (768px - 1199px) */
+@media (max-width: 1200px) {
+  .project-section > div:first-of-type {
+    gap: 60px !important;
+    padding: 0 30px !important;
+  }
+  
+  .project-section > div:first-of-type > a > div {
+    font-size: 1.5rem !important;
+    letter-spacing: 1.5px !important;
+  }
+}
+
+/* Mobile (600px - 767px) */
+@media (max-width: 768px) {
+  .project-section > div:first-of-type {
+    gap: 32px !important;
+    padding: 0 20px !important;
+    min-height: auto !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .project-section > div:first-of-type > a {
+    flex: 0 1 calc(50% - 16px) !important;
+  }
+  
+  .project-section > div:first-of-type > a > div {
+    font-size: 1.1rem !important;
+    letter-spacing: 1px !important;
+    white-space: normal !important;
+  }
+}
+
+/* Mobile Small (< 480px) */
+@media (max-width: 480px) {
+  .project-section > div:first-of-type {
+    gap: 16px !important;
+    padding: 0 12px !important;
+    min-height: auto !important;
+  }
+  
+  .project-section > div:first-of-type > a {
+    flex: 0 1 calc(50% - 8px) !important;
+  }
+  
+  .project-section > div:first-of-type > a > div {
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+    white-space: normal !important;
+  }
+}

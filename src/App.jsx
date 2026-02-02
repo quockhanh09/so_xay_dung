@@ -530,7 +530,7 @@ function App({ characters }) {
                     className="parallax-window fullscreen hero-flex"
                     style={{
                       width: "100%",
-                      height: "420px",
+                      height: "clamp(350px, 60vh, 420px)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -551,23 +551,24 @@ function App({ characters }) {
                       }}
                     />
 
-                    <div className="container hero-container" style={{ zIndex: 2 }}>
+                    <div className="container hero-container" style={{ zIndex: 2, padding: "0 20px" }}>
                       <div className="hero-main" style={{ textAlign: "center" }}>
 
                         {/* WRAPPER — QUAN TRỌNG */}
-                        <div style={{ display: "inline-block", textAlign: "center" }}>
+                        <div style={{ display: "inline-block", textAlign: "center", maxWidth: "100%" }}>
 
                           <h1
                             style={{
                               color: "#fff",
                               fontFamily: "'Times New Roman', Times, serif",
-                              fontSize: "64px",
+                              fontSize: "clamp(32px, 8vw, 64px)",
                               margin: 0,
                               marginBottom: "4px",
-                              letterSpacing: "6px",
+                              letterSpacing: "clamp(2px, 0.5vw, 6px)",
                               fontWeight: 400,
                               lineHeight: "1.1",
-                              whiteSpace: "nowrap",
+                              whiteSpace: "normal",
+                              wordBreak: "keep-all",
                             }}
                           >
                             ABOUT US!
@@ -577,22 +578,34 @@ function App({ characters }) {
                           <span
                             style={{
                               display: "block",
-                              width: "300px",
-                              height: "6px",
-                              margin: "0 auto",        // luôn nằm giữa
+                              width: "min(300px, 80%)",
+                              height: "clamp(4px, 0.5vw, 6px)",
+                              margin: "0 auto",
                               background: "#fff",
                               opacity: 0.95,
-                              marginBottom: "25px",
+                              marginBottom: "clamp(15px, 3vw, 25px)",
                             }}
                           />
 
                           <div style={{
                             color: "#fff",
                             fontFamily: "'Times New Roman', Times, serif",
+                            padding: "0 15px",
                           }}>
-                            <div style={{ fontSize: 18 }}>VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ ( URBAN DESIGN INSTITUTE - UDI)</div>
-                            <div>Viện nghiên cứu thiết kế đô thị (UDI) là tổ chức Nhà nước có chức năng nghiên cứu, thiết kế đô thị, biên soạn tài liệu pháp lý, cung cấp tư vấn quy hoạch, hợp tác quốc tế, thực hiện dự án khoa học và đào tạo nhân lực cho VIUP. Với hơn 50 chuyên gia giàu kinh nghiệm, UDI cam kết mang lại giá trị thực sự cho khách hàng.
-
+                            <div style={{ 
+                              fontSize: "clamp(14px, 2.5vw, 18px)",
+                              marginBottom: "clamp(10px, 2vw, 15px)",
+                              fontWeight: 500,
+                            }}>
+                              VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ ( URBAN DESIGN INSTITUTE - UDI)
+                            </div>
+                            <div style={{
+                              fontSize: "clamp(13px, 2vw, 15px)",
+                              lineHeight: "1.6",
+                              maxWidth: "900px",
+                              margin: "0 auto",
+                            }}>
+                              Viện nghiên cứu thiết kế đô thị (UDI) là tổ chức Nhà nước có chức năng nghiên cứu, thiết kế đô thị, biên soạn tài liệu pháp lý, cung cấp tư vấn quy hoạch, hợp tác quốc tế, thực hiện dự án khoa học và đào tạo nhân lực cho VIUP. Với hơn 50 chuyên gia giàu kinh nghiệm, UDI cam kết mang lại giá trị thực sự cho khách hàng.
                             </div>
                           </div>
                         </div>
@@ -607,22 +620,25 @@ function App({ characters }) {
                   className="about section"
                   style={{
                     display: "flex",
+                    flexDirection: "row",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "stretch",
                     width: "100%",
-                    height: "80vh",
+                    minHeight: "clamp(400px, 60vh, 80vh)",
                     padding: "0",
                     background: "#f9f9f9",
+                    flexWrap: "wrap",
                   }}
                 >
                   {/* Trái: Hình ảnh */}
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: "1 1 300px", minWidth: "250px" }}>
                     <img
                       src={sxdbg2}
                       alt="Urban development"
                       style={{
                         width: "100%",
-                        height: "100vh",
+                        height: "100%",
+                        minHeight: "300px",
                         objectFit: "cover",
                       }}
                     />
@@ -631,18 +647,24 @@ function App({ characters }) {
                   {/* Giữa: Nội dung */}
                   <div
                     style={{
-                      flex: 1,
+                      flex: "1 1 400px",
+                      minWidth: "280px",
                       textAlign: "center",
-                      padding: "0 40px",
+                      padding: "clamp(30px, 5vw, 60px) clamp(20px, 5vw, 40px)",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
                     <h2
                       style={{
-                        fontSize: "18px",
+                        fontSize: "clamp(16px, 2.5vw, 18px)",
                         fontWeight: "400",
-                        marginBottom: "16px",
-                        letterSpacing: "1px",
+                        marginBottom: "clamp(12px, 2vw, 16px)",
+                        letterSpacing: "clamp(0.5px, 0.1vw, 1px)",
                         color: "#333",
+                        fontFamily: "'Times New Roman', Times, serif",
                       }}
                     >
                       PROJECTS CỦA CHÚNG TÔI
@@ -650,9 +672,10 @@ function App({ characters }) {
 
                     <p
                       style={{
-                        fontSize: "15px",
+                        fontSize: "clamp(14px, 2vw, 15px)",
                         lineHeight: "1.6",
                         color: "#5555558c",
+                        maxWidth: "600px",
                       }}
                     >
                       Projects của chúng tôi mang đến cho khách hàng những trải nghiệm
@@ -662,13 +685,14 @@ function App({ characters }) {
                   </div>
 
                   {/* Phải: Hình ảnh */}
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: "1 1 300px", minWidth: "250px" }}>
                     <img
                       src={sxdbg1}
                       alt="Interior view"
                       style={{
                         width: "100%",
-                        height: "100vh",
+                        height: "100%",
+                        minHeight: "300px",
                         objectFit: "cover",
                       }}
                     />
@@ -678,16 +702,19 @@ function App({ characters }) {
                 <section
                   style={{
                     width: "100%",
-                    padding: "40px 0",
+                    padding: "clamp(30px, 5vw, 40px) clamp(15px, 3vw, 20px)",
                     backgroundColor: "#f5f5f5",
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
+                      flexWrap: "wrap",
                       justifyContent: "center",
-                      gap: "40px",
+                      gap: "clamp(15px, 3vw, 40px)",
                       width: "100%",
+                      maxWidth: "1200px",
+                      margin: "0 auto",
                     }}
                   >
                     {[
@@ -698,17 +725,20 @@ function App({ characters }) {
                       <div
                         key={i}
                         style={{
-                          width: "30%",
-                          height: "160px",
+                          flex: "1 1 250px",
+                          minWidth: "200px",
+                          height: "clamp(120px, 20vw, 160px)",
                           backgroundColor: "#fff",
                           border: "1px solid #e5e5e5",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                           fontFamily: "'Times New Roman', Times, serif",
-                          fontSize: "20px",
-                          letterSpacing: "1px",
+                          fontSize: "clamp(16px, 2.5vw, 20px)",
+                          letterSpacing: "clamp(0.5px, 0.1vw, 1px)",
                           color: "#2c2c2c",
+                          padding: "15px",
+                          textAlign: "center",
                         }}
                       >
                         {text}
@@ -726,27 +756,29 @@ function App({ characters }) {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    height: "70vh",                 // chiều cao giống ảnh
+                    minHeight: "clamp(400px, 50vh, 70vh)",
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",       // canh giữa theo chiều dọc
-                    alignItems: "center",           // canh giữa theo chiều ngang
+                    justifyContent: "center",
+                    alignItems: "center",
                     color: "#fff",
                     textAlign: "center",
-                    padding: "0 20px",
+                    padding: "clamp(40px, 8vw, 80px) 20px",
                   }}
                 >
                   {/* TIÊU ĐỀ LỚN */}
                   <h2
                     style={{
                       fontFamily: "'Times New Roman', serif",
-                      fontSize: "60px",
+                      fontSize: "clamp(28px, 6vw, 60px)",
                       fontWeight: "600",
-                      marginBottom: "15px",
-                      borderBottom: "3px solid #fff", // gạch dưới như ảnh
-                      paddingBottom: "5px",
+                      marginBottom: "clamp(10px, 2vw, 15px)",
+                      borderBottom: "clamp(2px, 0.3vw, 3px) solid #fff",
+                      paddingBottom: "clamp(3px, 0.5vw, 5px)",
                       display: "inline-block",
+                      wordBreak: "break-word",
+                      maxWidth: "90%",
                     }}
                   >
                     ACHIEVEMENT AWARDS!
@@ -756,9 +788,9 @@ function App({ characters }) {
                   <p
                     style={{
                       fontFamily: "'Times New Roman', serif",
-                      fontSize: "18px",
-                      marginTop: "10px",
-                      letterSpacing: "2px",
+                      fontSize: "clamp(14px, 2.5vw, 18px)",
+                      marginTop: "clamp(8px, 1.5vw, 10px)",
+                      letterSpacing: "clamp(1px, 0.2vw, 2px)",
                     }}
                   >
                     THE VIEWS
@@ -769,27 +801,28 @@ function App({ characters }) {
                   id="stats"
                   style={{
                     background: "#f7f7f7",
-                    padding: "60px 0",
+                    padding: "clamp(40px, 6vw, 60px) clamp(15px, 3vw, 20px)",
                     width: "100%",
                   }}
                 >
                   <div className="container">
-                    <div className="row" style={{ margin: 0, padding: 0 }}>
+                    <div className="row" style={{ margin: 0, padding: 0, gap: "20px", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
 
                       {/* CARD 1 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12">
+                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
                         <div
                           style={{
                             background: "#fff",
-                            padding: "35px 30px",
+                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
                             boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "320px",
+                            minHeight: "clamp(280px, 35vw, 320px)",
+                            height: "100%",
                           }}
                         >
                           <h3
                             style={{
                               fontFamily: "'Times New Roman', serif",
-                              fontSize: "20px",
+                              fontSize: "clamp(16px, 2.5vw, 20px)",
                               lineHeight: "1.5",
                               fontWeight: "bold",
                               textTransform: "uppercase",
@@ -799,7 +832,7 @@ function App({ characters }) {
                           >
                             Các giải thưởng của hội quy hoạch và phát triển đô thị Việt Nam
                           </h3>
-                          <p style={{ marginTop: "20px", color: "#555", lineHeight: "1.7", fontSize: "15px" }}>
+                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
                             luctus nec ullamcorper mattis, pulvinar dapibus leo.
                           </p>
@@ -807,19 +840,20 @@ function App({ characters }) {
                       </div>
 
                       {/* CARD 2 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12">
+                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
                         <div
                           style={{
                             background: "#fff",
-                            padding: "35px 30px",
+                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
                             boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "320px",
+                            minHeight: "clamp(280px, 35vw, 320px)",
+                            height: "100%",
                           }}
                         >
                           <h3
                             style={{
                               fontFamily: "'Times New Roman', serif",
-                              fontSize: "20px",
+                              fontSize: "clamp(16px, 2.5vw, 20px)",
                               lineHeight: "1.5",
                               fontWeight: "bold",
                               textTransform: "uppercase",
@@ -829,7 +863,7 @@ function App({ characters }) {
                           >
                             Các giải thưởng của hội kiến trúc sư Việt Nam
                           </h3>
-                          <p style={{ marginTop: "20px", color: "#555", lineHeight: "1.7", fontSize: "15px" }}>
+                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
                             luctus nec ullamcorper mattis, pulvinar dapibus leo.
                           </p>
@@ -837,19 +871,20 @@ function App({ characters }) {
                       </div>
 
                       {/* CARD 3 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12">
+                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
                         <div
                           style={{
                             background: "#fff",
-                            padding: "35px 30px",
+                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
                             boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "320px",
+                            minHeight: "clamp(280px, 35vw, 320px)",
+                            height: "100%",
                           }}
                         >
                           <h3
                             style={{
                               fontFamily: "'Times New Roman', serif",
-                              fontSize: "20px",
+                              fontSize: "clamp(16px, 2.5vw, 20px)",
                               lineHeight: "1.5",
                               fontWeight: "bold",
                               textTransform: "uppercase",
@@ -859,7 +894,7 @@ function App({ characters }) {
                           >
                             Các giải thưởng trong các cuộc thi quốc tế về thiết kế ý tưởng
                           </h3>
-                          <p style={{ marginTop: "20px", color: "#555", lineHeight: "1.7", fontSize: "15px" }}>
+                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
                             luctus nec ullamcorper mattis, pulvinar dapibus leo.
                           </p>
@@ -867,19 +902,20 @@ function App({ characters }) {
                       </div>
 
                       {/* CARD 4 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12">
+                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
                         <div
                           style={{
                             background: "#fff",
-                            padding: "35px 30px",
+                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
                             boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "320px",
+                            minHeight: "clamp(280px, 35vw, 320px)",
+                            height: "100%",
                           }}
                         >
                           <h3
                             style={{
                               fontFamily: "'Times New Roman', serif",
-                              fontSize: "20px",
+                              fontSize: "clamp(16px, 2.5vw, 20px)",
                               lineHeight: "1.5",
                               fontWeight: "bold",
                               textTransform: "uppercase",
@@ -889,7 +925,7 @@ function App({ characters }) {
                           >
                             Các ấn phẩm đã được xuất bản của viện thiết kế (Publications)
                           </h3>
-                          <p style={{ marginTop: "20px", color: "#555", lineHeight: "1.7", fontSize: "15px" }}>
+                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
                             luctus nec ullamcorper mattis, pulvinar dapibus leo.
                           </p>

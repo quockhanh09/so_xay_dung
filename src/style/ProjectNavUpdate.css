@@ -1,0 +1,82 @@
+/* Project Navigation Responsive Styles */
+
+/* Desktop (1200px+) */
+.project-nav-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 80px !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  min-height: 100px !important;
+  width: 100% !important;
+  flex-wrap: wrap !important;
+  padding: 0 20px !important;
+}
+
+.project-nav-item {
+  font-family: serif !important;
+  font-size: 2rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px !important;
+  background: none !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease !important;
+}
+
+.project-nav-item:hover {
+  transform: scale(1.05) !important;
+}
+
+.project-nav-item span {
+  display: inline-block !important;
+  font-weight: 400 !important;
+}
+
+/* Tablet (768px - 1199px) */
+@media (max-width: 1200px) {
+  .project-nav-container {
+    gap: 60px !important;
+    padding: 0 30px !important;
+  }
+  
+  .project-nav-item {
+    font-size: 1.5rem !important;
+    letter-spacing: 1.5px !important;
+  }
+}
+
+/* Tablet Small (600px - 767px) */
+@media (max-width: 768px) {
+  .project-nav-container {
+    gap: 32px !important;
+    padding: 0 20px !important;
+    min-height: auto !important;
+  }
+  
+  .project-nav-item {
+    font-size: 1.1rem !important;
+    letter-spacing: 1px !important;
+    white-space: normal !important;
+    flex: 0 1 calc(50% - 16px) !important;
+  }
+}
+
+/* Mobile (< 480px) */
+@media (max-width: 480px) {
+  .project-nav-container {
+    gap: 16px !important;
+    padding: 0 12px !important;
+    min-height: auto !important;
+  }
+  
+  .project-nav-item {
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+    white-space: normal !important;
+    flex: 0 1 calc(50% - 8px) !important;
+  }
+}

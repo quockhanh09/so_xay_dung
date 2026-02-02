@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProjectMap from "./ProjectMap";
 import { Link } from "react-router-dom";
+import '../style/ProjectNavResponsive.css';
 
 // Import hình ảnh
 import bgImage from "../assets/img/sxd-ab6.png";
@@ -222,6 +223,7 @@ function Project() {
           padding: '48px 0',
           width: '100%',
         }}
+        className="project-section"
       >
         <div
           style={{
@@ -331,16 +333,16 @@ function Project() {
           ref={scrollRef}
           style={{
             display: 'flex',
-            flexDirection: 'row',
-            gap: '0 80px',
-            overflowX: 'auto',
-            maxWidth: 3200,
+            flexDirection: 'column',
+            gap: '80px 0',
+            overflowY: 'auto',
+            maxWidth: 1400,
             margin: '90px auto 0 auto',
             padding: '0 80px 48px 80px',
             scrollbarWidth: 'none',
             WebkitOverflowScrolling: 'touch',
             msOverflowStyle: 'none',
-            cursor: 'grab',
+            cursor: 'default',
             userSelect: 'none',
             scrollBehavior: 'smooth',
           }}
@@ -350,23 +352,23 @@ function Project() {
             <div
               key={item.id}
               style={{
-                minWidth: 1700,
-                maxWidth: 2000,
-                flex: '0 0 1700px',
+                width: '100%',
+                maxWidth: 1400,
+                flex: '0 0 auto',
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignItems: 'stretch',
                 gap: 0,
                 transition: 'box-shadow 0.3s',
                 marginBottom: 28,
                 overflow: 'hidden',
               }}
+              className="project-card-container"
             >
               <div
                 style={{
-                  width: 1100,
-                  minWidth: 1100,
-                  height: 700,
+                  width: '100%',
+                  height: 500,
                   overflow: 'hidden',
                   borderRadius: 0,
                   transition: 'transform 0.3s ease',
@@ -374,6 +376,7 @@ function Project() {
                   cursor: 'pointer',
                   position: 'relative',
                 }}
+                className="project-card-image"
                 onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
                 onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 onClick={() => openModal(item.images, 0)}
@@ -386,35 +389,37 @@ function Project() {
                 />
                 <div style={{position:'absolute',bottom:18,right:18,background:'rgba(0,0,0,0.5)',color:'#fff',padding:'6px 16px',borderRadius:8,fontSize:16,opacity:0.8,letterSpacing:1}}>Xem ảnh</div>
               </div>
-              {/* Info right */}
+              {/* Info below image */}
               <div
                 style={{
-                  flex: 1,
+                  width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
-                  padding: '80px 80px 80px 60px',
+                  justifyContent: 'flex-start',
+                  padding: '40px 0',
                 }}
+                className="project-card-info"
               >
                 <div
                   style={{
                     fontFamily: 'serif',
-                    fontSize: '4.2rem',
+                    fontSize: '3rem',
                     fontWeight: 600,
                     color: '#222',
                     lineHeight: 1.1,
-                    marginBottom: 38,
+                    marginBottom: 16,
                     background: 'none',
                     border: 'none',
                     display: 'inline',
                   }}
+                  className="project-card-title"
                 >
                   {item.title}
                 </div>
                 <div
                   style={{
                     fontFamily: 'serif',
-                    fontSize: '2.2rem',
+                    fontSize: '1.5rem',
                     color: '#8a8a8a',
                     letterSpacing: '0.3px',
                     marginBottom: 28,
@@ -422,6 +427,7 @@ function Project() {
                     border: 'none',
                     display: 'inline',
                   }}
+                  className="project-card-location"
                 >
                   {item.location}
                 </div>
@@ -599,22 +605,22 @@ function Project() {
                   </div>
                 )}
           {/* Map as last scrollable item */}
-          <div style={{ minWidth: 1500, maxWidth: 2000, flex: '0 0 1700px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 28 }}>
-            <div style={{ width: 1100, minWidth: 1100, height: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ProjectMap projects={projectCards} style={{ width: '700px', height: '700px', borderRadius: 16, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', margin: '0 auto' }} />
+          <div style={{ width: '100%', maxWidth: 1400, flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', marginBottom: 28, gap: '40px' }} className="project-map-container">
+            <div style={{ width: '100%',  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }} className="project-map-wrapper">
+              <ProjectMap projects={projectCards} style={{ width: '100%', height: '100%', borderRadius: 16, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', margin: '0 auto' }} />
             </div>
             {/* Thông tin dự án bằng tiếng Việt, lấy từ JSON */}
-            <div style={{ flex: 1, padding: '40px 40px 40px 60px', minWidth: 700, maxWidth: 900, minHeight: 900, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-              <h2 style={{ fontFamily: 'serif', fontSize: 38, color: '#b6a484', fontWeight: 600, marginBottom: 24 }}>Thành phần dự án</h2>
+            <div style={{ width: '100%', padding: '0', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0 }} className="project-team-section">
+              <h2 style={{ fontFamily: 'serif', fontSize: 38, color: '#b6a484', fontWeight: 600, marginBottom: 24 }} className="project-team-title">Thành phần dự án</h2>
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: '32px',
                 fontSize: 15,
                 color: '#222',
-                maxWidth: '100%',
+                width: '100%',
                 marginBottom: 18
-              }}>
+              }} className="project-team-grid">
                 {(() => {
                   // Chia đều các mục vào 3 cột
                   const cols = [[], [], []];
@@ -644,7 +650,6 @@ function Project() {
                 })()}
               </div>
             </div>
-            <div style={{ flex: 1 }} />
           </div>
         </div>
 

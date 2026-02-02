@@ -6906,3 +6906,180 @@ a.nav-link.active .icon-img {
     
     display: none;
 }
+
+/* Responsive Project Section */
+.project-horizontal-scroll {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.project-horizontal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-horizontal-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.project-horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #b6a484;
+  border-radius: 3px;
+}
+
+.project-horizontal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9b8967;
+}
+
+.project-map-container {
+  position: relative;
+  z-index: 1;
+  gap: 56px;
+}
+
+.project-team-section {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  padding-top: 24px;
+  clear: both;
+  background: #fff;
+}
+
+.project-map-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  z-index: 0;
+}
+
+.project-map-wrapper .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  z-index: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1200px) {
+  .project-horizontal-scroll {
+    padding: 0 40px 48px 40px !important;
+  }
+  
+  .project-card-container {
+    max-width: 100% !important;
+  }
+  
+  .project-card-image {
+    height: 400px !important;
+  }
+  
+  .project-card-title {
+    font-size: 2rem !important;
+  }
+  
+  .project-card-location {
+    font-size: 1.2rem !important;
+  }
+  
+  .project-card-info {
+    padding: 30px 0 !important;
+  }
+  
+  .project-team-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  
+    .project-map-container {
+      gap: 40px !important;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .project-horizontal-scroll {
+    padding: 0 20px 48px 20px !important;
+    margin: 60px auto 0 auto !important;
+  }
+  
+  .project-card-image {
+    height: 300px !important;
+  }
+  
+  .project-card-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .project-card-location {
+    font-size: 1rem !important;
+  }
+  
+  .project-card-info {
+    padding: 24px 0 !important;
+  }
+  
+  .project-team-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 20px !important;
+  }
+  
+  .project-map-container {
+    gap: 28px !important;
+  }
+  
+  .project-map-container > div:first-child {
+    height: 350px !important;
+  }
+  
+  .project-team-section {
+    padding: 0 !important;
+    padding-top: 8px !important;
+  }
+  
+  .project-team-title {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-horizontal-scroll {
+    padding: 0 16px 32px 16px !important;
+    gap: 40px 0 !important;
+  }
+  
+  .project-card-image {
+    height: 250px !important;
+  }
+  
+  .project-card-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .project-card-location {
+    font-size: 0.9rem !important;
+  }
+  
+  .project-card-info {
+    padding: 16px 0 !important;
+  }
+  
+  .project-map-container {
+    gap: 24px !important;
+  }
+  
+  .project-map-container > div:first-child {
+    height: 300px !important;
+  }
+  
+  .project-team-section {
+    padding: 0 !important;
+    padding-top: 6px !important;
+  }
+  
+  .project-team-title {
+    font-size: 22px !important;
+  }
+  
+  .project-section {
+    padding: 48px 0 60px 0 !important;
+  }
+}
