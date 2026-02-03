@@ -10,11 +10,9 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Project from "./components/Project";
 import ProjectProfile from "./components/ProjectProfile";
-import Details from "./components/Deatails";
+
 import ProjectDetails from "./components/ProjectDetails";
-import Login from "./signup-in/Login";
-import Newsletter from "./components/Newsletter";
-import Register from "./signup-in/Register";
+
 import About from "./components/About";
 import Profile from "./components/Profile";
 import LeadershipPage from "./components/LeadershipPage";
@@ -37,10 +35,7 @@ import sxdbg2 from "./assets/img/sxd-ab2.png"
 import sxdbg3 from "./assets/img/sxd-ab3.png"
 import sxdbg4 from "./assets/img/sxd-ab4.png"
 
-import event1 from "./assets/img/lucarly-08.png";
-import event2 from "./assets/img/lucarly-02.png";
-import event3 from "./assets/img/lucarly-01.png";
-import event4 from "./assets/img/kram-11.png";
+
 
 // ===== Ảnh bản thân =====
 import banThan2 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/2.jpg";
@@ -75,7 +70,6 @@ import banThan30 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh 
 import banThan31 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/31.jpg";
 
 
-const eventImages = [event1, event2, event3, event4];
 
 function App({ characters }) {
   const [showLogo, setShowLogo] = useState(true);
@@ -1353,9 +1347,9 @@ function App({ characters }) {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Project" element={<Project />} />
           <Route path="/projects/:id" element={<ProjectProfile />} />
-          <Route path="/Deatails" element={<Details />} />
+          
           <Route path="/projects/gatton-park" element={<ProjectDetails />} />
-          <Route path="/Newsletter" element={<Newsletter />} />
+          
           <Route path="/About" element={<About />} />
           <Route path="/ban-lanh-dao" element={<LeadershipPage />} />
           <Route path="/quy-hoach-do-thi" element={<ProjectCategory category="quy-hoach-do-thi" title="QUY HOẠCH ĐÔ THỊ" />} />
@@ -1382,8 +1376,7 @@ function App({ characters }) {
             path="/trung-tam-ha-tang-ky-thuat"
             element={<ManageSectionPage title="Trung tâm hạ tầng kỹ thuật" storageKey="trung-tam-ha-tang-ky-thuat" members={sectionMembers.haTangKyThuat} />}
           />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
+          
           <Route path="/Achievement" element={<Achievement />} />
           <Route path="/achievement/:id" element={
             <Suspense fallback={<div>Loading...</div>}>

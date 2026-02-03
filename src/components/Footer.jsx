@@ -1,7 +1,7 @@
 import logobg from "../assets/img/sxd-ab5.png";
 import "../style/App.css";
-import chinhSach from "../assets/img/Chính sách bảo mật.pdf";
-import dieuKhoan from "../assets/img/The Guardians_Điều khoản sử dụng.pdf";
+
+
 import facebookIcon from "../assets/img/Facebook.svg";
 import youtubeIcon from "../assets/img/Icon-youtube.svg";
 import instagramIcon from "../assets/img/Icon-insta.svg";
@@ -81,13 +81,7 @@ function Footer() {
 
         <div className="fgi-divider" />
 
-        <div className="fgi-bottom">
-          <div className="fgi-copy">Bản quyền thuộc về @VKENTERTAINMENTJSC.</div>
-          <div className="fgi-links">
-            <a href={chinhSach}>CHÍNH SÁCH QUYỀN RIÊNG TƯ</a> |
-            <a href={dieuKhoan}> ĐIỀU KHOẢN SỬ DỤNG</a>
-          </div>
-        </div>
+       
       </div>
     </footer>
   );
