@@ -1,117 +1,141 @@
-import React, { useState, useRef, useEffect } from "react";
-import ProjectMap from "./ProjectMap";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../style/ProjectNavResponsive.css';
 
 // Import hình ảnh
 import bgImage from "../assets/img/sxd-ab6.png";
-import sxdbg9 from "../assets/img/sxd-ab9.png";
 
 // Import dữ liệu project từ JSON
 import projectsData from '../data/projects.json';
 import { getProjectImageByFileName } from '../utils/projectImageLoader';
-import projectTeamData from '../data/project_team.json';
+
+const resolveProjectAsset = (asset) => {
+  if (!asset || typeof asset !== 'string') {
+    return '';
+  }
+
+  if (asset.startsWith('http://') || asset.startsWith('https://')) {
+    return asset;
+  }
+
+  return getProjectImageByFileName(asset) || '';
+};
 
 
 function Project() {
   const [page, setPage] = useState(1);
-  // Kéo ngang bằng chuột cho project card
-  const scrollRef = useRef(null);
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState([]); // array of image urls
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedType, setSelectedType] = useState('all');
+  const [selectedScale, setSelectedScale] = useState('all');
 
-  useEffect(() => {
-    const slider = scrollRef.current;
-    if (!slider) return;
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    const onMouseDown = (e) => {
-      isDown = true;
-      slider.classList.add('active');
-      slider.style.cursor = 'grabbing';
-      slider.style.userSelect = 'none';
-      startX = e.pageX - slider.getBoundingClientRect().left;
-      scrollLeft = slider.scrollLeft;
-    };
-    const onMouseLeave = () => {
-      isDown = false;
-      slider.classList.remove('active');
-      slider.style.cursor = 'grab';
-      slider.style.userSelect = '';
-    };
-    const onMouseUp = () => {
-      isDown = false;
-      slider.classList.remove('active');
-      slider.style.cursor = 'grab';
-      slider.style.userSelect = '';
-    };
-    const onMouseMove = (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.getBoundingClientRect().left;
-      const walk = (x - startX) * 1.1; // tăng tốc độ kéo
-      slider.scrollLeft = scrollLeft - walk;
-    };
-    // Touch events
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-    const onTouchStart = (e) => {
-      touchStartX = e.touches[0].pageX;
-      touchScrollLeft = slider.scrollLeft;
-    };
-    const onTouchMove = (e) => {
-      const x = e.touches[0].pageX;
-      const walk = (x - touchStartX) * 1.1;
-      slider.scrollLeft = touchScrollLeft - walk;
-    };
-    slider.addEventListener('mousedown', onMouseDown);
-    slider.addEventListener('mouseleave', onMouseLeave);
-    slider.addEventListener('mouseup', onMouseUp);
-    slider.addEventListener('mousemove', onMouseMove);
-    slider.addEventListener('touchstart', onTouchStart);
-    slider.addEventListener('touchmove', onTouchMove);
-    return () => {
-      slider.removeEventListener('mousedown', onMouseDown);
-      slider.removeEventListener('mouseleave', onMouseLeave);
-      slider.removeEventListener('mouseup', onMouseUp);
-      slider.removeEventListener('mousemove', onMouseMove);
-      slider.removeEventListener('touchstart', onTouchStart);
-      slider.removeEventListener('touchmove', onTouchMove);
-    };
-  }, []);
+  const handleCardImageError = (event, fallbackSrc) => {
+    if (event.currentTarget.dataset.fallbackApplied === 'true') {
+      event.currentTarget.src = bgImage;
+      return;
+    }
+
+    event.currentTarget.dataset.fallbackApplied = 'true';
+    event.currentTarget.src = fallbackSrc || bgImage;
+  };
 
   // Tự động tạo danh sách project từ projects.json
   const projectCards = Object.keys(projectsData).map((id) => {
     const project = projectsData[id];
+    const numericId = parseInt(id, 10);
     // Lấy images đúng chuẩn (chỉ link hoặc file, ưu tiên link)
     let images = [];
     if (Array.isArray(project.images) && project.images.length > 0) {
-      images = project.images.map(img => {
-        if (typeof img === 'string' && (img.startsWith('http://') || img.startsWith('https://'))) {
-          return img;
-        } else {
-          return getProjectImageByFileName(img);
-        }
-      });
+      images = project.images
+        .map((img) => resolveProjectAsset(img))
+        .filter(Boolean);
     }
+
+    const avatar = resolveProjectAsset(project.avatar) || images[0] || bgImage;
+    const typeKey = (() => {
+      if (project.category === 'quy-hoach-do-thi') {
+        return numericId % 4 === 0 ? 'quy-hoach-nong-thon' : 'quy-hoach-do-thi';
+      }
+      if (project.category === 'thiet-ke-cong-trinh') {
+        return 'thiet-ke-cong-trinh';
+      }
+      if (project.category === 'thiet-ke-canh-quan' || project.category === 'ha-tang-ky-thuat') {
+        return 'thiet-ke-do-thi';
+      }
+      return 'quy-hoach';
+    })();
+
+    const scaleKey = (() => {
+      if (typeKey === 'quy-hoach-do-thi' || typeKey === 'quy-hoach-nong-thon' || typeKey === 'quy-hoach') {
+        const planningScales = ['quy-hoach-tong-the', 'quy-hoach-phan-khu', 'quy-hoach-chi-tiet'];
+        return planningScales[numericId % planningScales.length];
+      }
+      return numericId % 2 === 0 ? 'thiet-ke-kien-truc' : 'thiet-ke-do-thi';
+    })();
+
+    const locations = ['Ha Noi', 'Bac Giang', 'Da Nang', 'Hai Phong', 'Ninh Binh', 'Quang Ninh'];
+    const years = [2023, 2022, 2024, 2025, 2021, 2026];
+    const excerpt = project.description || (Array.isArray(project.popupText) ? project.popupText[0] : project.popupText) || '';
+
     return {
-      id: parseInt(id),
+      id: numericId,
       title: project.title,
-      avatar: project.avatar,
-      description: project.description,
+      category: project.category,
+      avatar,
+      description: excerpt,
       images,
       popupText: project.popupText,
+      typeKey,
+      scaleKey,
+      location: locations[numericId % locations.length],
+      year: years[numericId % years.length],
     };
   });
 
-  const rowsPerPage = 6; // 6 hàng, mỗi hàng 4 thẻ
-  const itemsPerPage = rowsPerPage * 4;
-  const totalPages = Math.max(1, Math.ceil(projectCards.length / itemsPerPage));
-  // Chỉ lấy 10 project đầu tiên
-  const paginatedCards = projectCards.slice(0, 10);
+  const typeOptions = [
+    { key: 'all', label: 'Tất cả' },
+    { key: 'quy-hoach', label: 'Quy hoạch' },
+    { key: 'quy-hoach-do-thi', label: 'Quy hoạch đô thị' },
+    { key: 'thiet-ke-cong-trinh', label: 'Thiết kế công trình' },
+    { key: 'thiet-ke-do-thi', label: 'Thiết kế đô thị' },
+    { key: 'quy-hoach-nong-thon', label: 'Quy hoạch nông thôn' },
+  ];
+
+  const scaleOptions = [
+    { key: 'all', label: 'Tất cả' },
+    { key: 'quy-hoach-tong-the', label: 'Quy hoạch tổng thể' },
+    { key: 'quy-hoach-phan-khu', label: 'Quy hoạch phân khu' },
+    { key: 'quy-hoach-chi-tiet', label: 'Quy hoạch chi tiết' },
+    { key: 'thiet-ke-kien-truc', label: 'Thiết kế kiến trúc' },
+    { key: 'thiet-ke-do-thi', label: 'Thiết kế đô thị' },
+  ];
+
+  const badgeLabels = {
+    'quy-hoach': 'Quy hoạch',
+    'quy-hoach-do-thi': 'Quy hoạch đô thị',
+    'thiet-ke-cong-trinh': 'Thiết kế công trình',
+    'thiet-ke-do-thi': 'Thiết kế đô thị',
+    'quy-hoach-nong-thon': 'Quy hoạch nông thôn',
+  };
+
+  const filteredProjects = projectCards.filter((project) => {
+    const matchesType = selectedType === 'all'
+      || project.typeKey === selectedType
+      || (selectedType === 'quy-hoach' && project.category === 'quy-hoach-do-thi');
+    const matchesScale = selectedScale === 'all' || project.scaleKey === selectedScale;
+    return matchesType && matchesScale;
+  });
+
+  const itemsPerPage = 6;
+  const totalPages = Math.max(1, Math.ceil(filteredProjects.length / itemsPerPage));
+  const startIndex = (page - 1) * itemsPerPage;
+  const paginatedCards = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    setPage(1);
+  }, [selectedType, selectedScale]);
 
   const goPage = (p) => {
     const next = Math.min(Math.max(p, 1), totalPages);
@@ -157,8 +181,8 @@ function Project() {
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          padding: 0,
-          textAlign: "center",
+          padding: "0 24px",
+          textAlign: "left",
           position: "relative",
           minHeight: "60vh",
           display: "flex",
@@ -188,609 +212,506 @@ function Project() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            maxWidth: "1400px",
+            margin: "0 auto",
+            paddingTop: "56px",
           }}
         >
+          <div
+            style={{
+              width: "100%",
+              maxWidth: "360px",
+              color: "rgba(255,255,255,0.92)",
+              fontSize: "0.95rem",
+              fontWeight: 400,
+              letterSpacing: "0.2px",
+              marginBottom: "14px",
+              textShadow: "0 2px 10px rgba(0,0,0,0.35)",
+            }}
+          >
+            <Link
+              to="/"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              Trang chủ
+            </Link>{" "}
+            <span style={{ opacity: 0.75 }}>/</span>{" "}
+            <span style={{ opacity: 0.95 }}>Dự án tiêu biểu</span>
+          </div>
           <h1
             style={{
               color: "#fff",
-              fontSize: "3.5rem",
-              fontWeight: 500,
-              letterSpacing: "2px",
-              marginBottom: "20px",
+              fontSize: "clamp(3.2rem, 5vw, 5rem)",
+              fontWeight: 700,
+              letterSpacing: "-1px",
+              lineHeight: 0.92,
+              marginBottom: 0,
               fontFamily: "serif",
-              textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+              textShadow: "0 4px 18px rgba(0,0,0,0.42)",
+              maxWidth: "360px",
+              width: "100%",
             }}
           >
-            UDI's PROJECTS
+            Dự án
+            <br />
+            Tiêu biểu
           </h1>
-          <div
-            style={{
-              width: "80px",
-              height: "3px",
-              background: "#fff",
-              margin: "0 auto 0",
-              marginBottom: "10px",
-              opacity: 0.7,
-            }}
-          ></div>
         </div>
       </section>
 
-      {/* Tin tức gần đây */}
       <section
         style={{
-          background: '#fff',
-          padding: '48px 0',
+          background: '#f5f3ef',
+          padding: '56px 0 72px',
           width: '100%',
         }}
         className="project-section"
       >
         <div
+          className="project-grid-shell"
           style={{
             display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '80px',
-            maxWidth: 1400,
+            gap: '24px',
+            maxWidth: 1500,
             margin: '0 auto',
-            minHeight: 100,
-            width: '100%',
+            padding: '0 20px',
+            alignItems: 'flex-start',
           }}
         >
-          {/* QUY HOẠCH */}
-          <Link to="/quy-hoach-do-thi" style={{ textDecoration: 'none' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
-              <span
-                style={{
-                  backgroundImage: `url(${sxdbg9})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  MozBackgroundClip: 'text',
-                  MozTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  fontWeight: 400,
-                }}
-              >
-                QUY HOẠCH
-              </span>
+          <aside
+            className="project-filter-sidebar"
+            style={{
+              width: 220,
+              minWidth: 220,
+              background: '#fbfaf8',
+              borderRadius: 24,
+              padding: '24px 18px',
+              boxShadow: '0 18px 40px rgba(15, 23, 42, 0.05)',
+              position: 'sticky',
+              top: 24,
+            }}
+          >
+            <div className="project-filter-title" style={{ fontSize: 34, fontWeight: 700, color: '#0f172a', marginBottom: 24, fontFamily: 'serif' }}>
+              Bộ lọc
             </div>
-          </Link>
-          {/* THIẾT KẾ CÔNG TRÌNH */}
-          <Link to="/thiet-ke-cong-trinh" style={{ textDecoration: 'none' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
-              <span
-                style={{
-                  backgroundImage: `url(${sxdbg9})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  MozBackgroundClip: 'text',
-                  MozTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  fontWeight: 400,
-                }}
-              >
-                THIẾT KẾ CÔNG TRÌNH
-              </span>
-            </div>
-          </Link>
-          {/* HẠ TẦNG KỸ THUẬT */}
-          <Link to="/ha-tang-ky-thuat" style={{ textDecoration: 'none' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
-              <span
-                style={{
-                  backgroundImage: `url(${sxdbg9})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  MozBackgroundClip: 'text',
-                  MozTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  fontWeight: 400,
-                }}
-              >
-                HẠ TẦNG KỸ THUẬT
-              </span>
-            </div>
-          </Link>
-          {/* THIẾT KẾ CẢNH QUAN */}
-          <Link to="/thiet-ke-canh-quan" style={{ textDecoration: 'none' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2rem', fontWeight: 400, letterSpacing: 2, background: 'none', textAlign: 'center', lineHeight: 1.1, whiteSpace: 'nowrap', cursor: 'pointer' }}>
-              <span
-                style={{
-                  backgroundImage: `url(${sxdbg9})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  MozBackgroundClip: 'text',
-                  MozTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  fontWeight: 400,
-                }}
-              >
-                THIẾT KẾ CẢNH QUAN
-              </span>
-            </div>
-          </Link>
-        </div>
 
-        {/* Grid cards */}
-        <div
-          ref={scrollRef}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '80px 0',
-            overflowY: 'auto',
-            maxWidth: 1400,
-            margin: '90px auto 0 auto',
-            padding: '0 80px 48px 80px',
-            scrollbarWidth: 'none',
-            WebkitOverflowScrolling: 'touch',
-            msOverflowStyle: 'none',
-            cursor: 'default',
-            userSelect: 'none',
-            scrollBehavior: 'smooth',
-          }}
-          className="project-horizontal-scroll"
-        >
-          {paginatedCards.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                width: '100%',
-                maxWidth: 1400,
-                flex: '0 0 auto',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'stretch',
-                gap: 0,
-                transition: 'box-shadow 0.3s',
-                marginBottom: 28,
-                overflow: 'hidden',
-              }}
-              className="project-card-container"
-            >
-              <div
-                style={{
-                  width: '100%',
-                  height: 500,
-                  overflow: 'hidden',
-                  borderRadius: 0,
-                  transition: 'transform 0.3s ease',
-                  flexShrink: 0,
-                  cursor: 'pointer',
-                  position: 'relative',
-                }}
-                className="project-card-image"
-                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                onClick={() => openModal(item.images, 0)}
-                title="Xem ảnh lớn"
-              >
-                <img
-                  src={item.avatar}
-                  alt={item.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-                <div style={{position:'absolute',bottom:18,right:18,background:'rgba(0,0,0,0.5)',color:'#fff',padding:'6px 16px',borderRadius:8,fontSize:16,opacity:0.8,letterSpacing:1}}>Xem ảnh</div>
+            <div style={{ marginBottom: 28 }}>
+              <div className="project-filter-group-title" style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 12 }}>
+                Loại hình
               </div>
-              {/* Info below image */}
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                  padding: '40px 0',
-                }}
-                className="project-card-info"
-              >
-                <div
-                  style={{
-                    fontFamily: 'serif',
-                    fontSize: '3rem',
-                    fontWeight: 600,
-                    color: '#222',
-                    lineHeight: 1.1,
-                    marginBottom: 16,
-                    background: 'none',
-                    border: 'none',
-                    display: 'inline',
-                  }}
-                  className="project-card-title"
-                >
-                  {item.title}
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'serif',
-                    fontSize: '1.5rem',
-                    color: '#8a8a8a',
-                    letterSpacing: '0.3px',
-                    marginBottom: 28,
-                    background: 'none',
-                    border: 'none',
-                    display: 'inline',
-                  }}
-                  className="project-card-location"
-                >
-                  {item.location}
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {typeOptions.map((option) => {
+                  const active = selectedType === option.key;
+                  return (
+                    <button
+                      className={`project-filter-button${active ? ' is-active' : ''}`}
+                      key={option.key}
+                      onClick={() => setSelectedType(option.key)}
+                      style={{
+                        border: 'none',
+                        borderRadius: 8,
+                        padding: '14px 16px',
+                        textAlign: 'left',
+                        fontSize: 16,
+                        fontWeight: active ? 700 : 500,
+                        color: active ? '#fff' : '#1f2937',
+                        background: active ? '#149b90' : '#efefef',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
-          ))}
-                {/* Modal popup for image gallery */}
-                {isModalOpen && (
+
+            <div>
+              <div className="project-filter-group-title" style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 12 }}>
+                Quy mô
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {scaleOptions.map((option) => {
+                  const active = selectedScale === option.key;
+                  return (
+                    <button
+                      className={`project-filter-button${active ? ' is-active' : ''}`}
+                      key={option.key}
+                      onClick={() => setSelectedScale(option.key)}
+                      style={{
+                        border: 'none',
+                        borderRadius: 8,
+                        padding: '14px 16px',
+                        textAlign: 'left',
+                        fontSize: 16,
+                        fontWeight: active ? 700 : 500,
+                        color: active ? '#fff' : '#1f2937',
+                        background: active ? '#149b90' : '#efefef',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </aside>
+
+          <div className="project-grid-content" style={{ flex: 1, minWidth: 0 }}>
+            <div className="project-grid-count" style={{ fontSize: 18, color: '#4b5563', marginBottom: 28 }}>
+              Hiển thị {paginatedCards.length} dự án
+            </div>
+
+            <div
+              className="project-card-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                gap: '28px',
+              }}
+            >
+              {paginatedCards.map((item) => (
+                <article
+                  className="project-card"
+                  key={item.id}
+                  style={{
+                    background: '#fff',
+                    borderRadius: 24,
+                    overflow: 'hidden',
+                    border: '1px solid rgba(15, 23, 42, 0.06)',
+                    boxShadow: '0 22px 50px rgba(15, 23, 42, 0.07)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
                   <div
+                    className="project-card-media"
                     style={{
-                      position: 'fixed',
-                      top: 0,
-                      left: 0,
-                      width: '100vw',
-                      height: '100vh',
-                      background: 'rgba(0,0,0,0.85)',
-                      zIndex: 9999,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'column',
-                      transition: 'opacity 0.2s',
+                      position: 'relative',
+                      height: 190,
+                      overflow: 'hidden',
+                      cursor: 'pointer',
                     }}
-                    onClick={closeModal}
+                    onClick={() => openModal(item.images, 0)}
+                    title="Xem ảnh lớn"
                   >
+                    <img
+                      className="project-card-image"
+                      src={item.avatar}
+                      alt={item.title}
+                      onError={(event) => handleCardImageError(event, item.images[0])}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
                     <div
                       style={{
-                        position: 'relative',
-                        maxWidth: '90vw',
-                        maxHeight: '90vh',
-                        minWidth: 400,
-                        minHeight: 300,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: 'rgba(0,0,0,0.01)',
-                        // borderRadius: 12, // bỏ bo góc
-                        // boxShadow: '0 8px 48px rgba(0,0,0,0.25)', // bỏ shadow
-                        padding: 0,
-                        flexDirection: 'row',
-                        gap: 0,
+                        position: 'absolute',
+                        top: 14,
+                        left: 14,
+                        background: '#149b90',
+                        color: '#fff',
+                        padding: '8px 14px',
+                        borderRadius: 999,
+                        fontSize: 13,
+                        fontWeight: 700,
+                        lineHeight: 1,
+                        boxShadow: '0 10px 24px rgba(20, 155, 144, 0.28)',
                       }}
-                      onClick={e => e.stopPropagation()}
                     >
-                      {/* Prev button */}
-                      {modalImages.length > 1 && (
-                        <button
-                          onClick={prevImage}
-                          style={{
-                            position: 'absolute',
-                            left: -40,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            background: 'rgba(0,0,0,0.5)',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '50%',
-                            width: 32,
-                            height: 32,
-                            fontSize: 20,
-                            cursor: 'pointer',
-                            zIndex: 2,
-                          }}
-                          title="Ảnh trước"
-                        >&#8592;</button>
-                      )}
-                      {/* Image + text */}
-                      <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',gap:24}}>
-                        <img
-                          src={modalImages[currentImageIndex]}
-                          alt="project large"
-                          style={{
-                            width: 1000,
-                            height: 800,
-                            maxWidth: 1000,
-                            maxHeight: 800,
-                            minWidth: 1000,
-                            minHeight: 800,
-                            objectFit: 'cover',
-                            background: '#fff',
-                            display: 'block',
-                            margin: 0,
-                          }}
-                        />
-                        {/* Text bên phải ảnh */}
-                        <div style={{
-                          minWidth: 180,
-                          maxWidth: 320,
-                          color: '#fff',
-                          fontSize: 18,
-                          fontWeight: 400,
-                          opacity: 0.92,
-                          fontFamily: 'serif',
-                          lineHeight: 1.4,
-                          padding: '12px 0 12px 18px',
-                          borderLeft: '2px solid #b6a484',
-                          background: 'rgba(0,0,0,0.10)',
-                          textShadow: '0 2px 8px rgba(0,0,0,0.18)',
-                          wordBreak: 'break-word',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: 6,
-                        }}>
-                          {/* Hiển thị nhiều popupText nếu là array */}
-                          {(() => {
-                            const project = projectCards.find(p => p.images && p.images.includes(modalImages[currentImageIndex]));
-                            if (!project) return null;
-                            if (Array.isArray(project.popupText)) {
-                              return project.popupText.map((txt, idx) => (
-                                <div key={idx} style={{fontSize:17,color:'#fff',opacity:0.98,marginBottom:4}}>{txt}</div>
-                              ));
-                            } else if (typeof project.popupText === 'string') {
-                              return <div style={{fontSize:17,color:'#fff',opacity:0.98}}>{project.popupText}</div>;
-                            } else {
-                              return <>
-                                <div style={{fontSize:20,fontWeight:600,color:'#fff',marginBottom:4,opacity:0.98}}>{project.title}</div>
-                                {project.location && <div style={{fontSize:15,color:'#e0e0e0',opacity:0.85}}>{project.location}</div>}
-                              </>;
-                            }
-                          })()}
-                        </div>
-                      </div>
-                      {/* Next button */}
-                      {modalImages.length > 1 && (
-                        <button
-                          onClick={nextImage}
-                          style={{
-                            position: 'absolute',
-                            right: -40,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            background: 'rgba(0,0,0,0.5)',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '50%',
-                            width: 32,
-                            height: 32,
-                            fontSize: 20,
-                            cursor: 'pointer',
-                            zIndex: 2,
-                          }}
-                          title="Ảnh tiếp theo"
-                        >&#8594;</button>
-                      )}
-                      {/* Close button */}
-                      <button
-                        onClick={closeModal}
-                        style={{
-                          position: 'absolute',
-                          top: 8,
-                          right: 8,
-                          background: 'rgba(0,0,0,0.7)',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: '50%',
-                          width: 28,
-                          height: 28,
-                          fontSize: 16,
-                          cursor: 'pointer',
-                          zIndex: 3,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          padding: 0,
-                        }}
-                        title="Đóng"
-                      >&#10005;</button>
-                      {/* Image index indicator */}
-                      {modalImages.length > 1 && (
-                        <div style={{position:'absolute',bottom:14,right:14,color:'#fff',background:'rgba(0,0,0,0.5)',padding:'4px 12px',borderRadius:8,fontSize:13,opacity:0.8,letterSpacing:1}}>
-                          {currentImageIndex+1} / {modalImages.length}
-                        </div>
-                      )}
+                      {badgeLabels[item.typeKey] || 'Dự án'}
                     </div>
                   </div>
-                )}
-          {/* Map as last scrollable item */}
-          <div style={{ width: '100%', maxWidth: 1400, flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', marginBottom: 28, gap: '40px' }} className="project-map-container">
-            <div style={{ width: '100%',  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }} className="project-map-wrapper">
-              <ProjectMap projects={projectCards} style={{ width: '100%', height: '100%', borderRadius: 16, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', margin: '0 auto' }} />
-            </div>
-            {/* Thông tin dự án bằng tiếng Việt, lấy từ JSON */}
-            <div style={{ width: '100%', padding: '0', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flexShrink: 0 }} className="project-team-section">
-              <h2 style={{ fontFamily: 'serif', fontSize: 38, color: '#b6a484', fontWeight: 600, marginBottom: 24 }} className="project-team-title">Thành phần dự án</h2>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '32px',
-                fontSize: 15,
-                color: '#222',
-                width: '100%',
-                marginBottom: 18
-              }} className="project-team-grid">
-                {(() => {
-                  // Chia đều các mục vào 3 cột
-                  const cols = [[], [], []];
-                  projectTeamData.columns.forEach((col, idx) => {
-                    cols[idx % 3].push(col);
-                  });
-                  return cols.map((group, colIdx) => (
-                    <div key={colIdx}>
-                      {group.map((section, secIdx) => (
-                        <div key={secIdx} style={{ marginBottom: 18 }}>
-                          <div style={{ color: '#aaa', fontSize: 12, fontWeight: 600, letterSpacing: 1, marginBottom: 6 }}>{section.title}</div>
-                          <div>
-                            {section.members.map((mem, mIdx) => (
-                              <div key={mIdx}>
-                                {mem.link && mem.link.startsWith('http') ? (
-                                  <a href={mem.link} target="_blank" rel="noopener noreferrer" style={{ color: '#222', textDecoration: 'none', fontSize: 14, fontFamily: 'Times New Roman, Times, serif' }}>{mem.name}</a>
-                                ) : (
-                                  <Link to={mem.link} style={{ color: '#222', textDecoration: 'none', fontSize: 14, fontFamily: 'Times New Roman, Times, serif' }}>{mem.name}</Link>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
+
+                  <div className="project-card-body" style={{ padding: '16px 18px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div
+                      className="project-card-title"
+                      style={{
+                        color: '#1f2937',
+                        fontSize: '1.06rem',
+                        fontWeight: 700,
+                        lineHeight: 1.32,
+                        marginBottom: 10,
+                        fontFamily: 'serif',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {item.title}
                     </div>
-                  ));
-                })()}
-              </div>
+
+                    <div
+                      className="project-card-description"
+                      style={{
+                        color: '#6b7280',
+                        fontSize: 14,
+                        lineHeight: 1.55,
+                        marginBottom: 12,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {item.description}
+                    </div>
+
+                    <div className="project-card-meta" style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#6b7280', fontSize: 14, marginTop: 'auto' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M12 21C15 17.4 18 14.7 18 10.5C18 6.91 15.31 4 12 4C8.69 4 6 6.91 6 10.5C6 14.7 9 17.4 12 21Z" stroke="#9ca3af" strokeWidth="1.8" />
+                          <circle cx="12" cy="10" r="2.3" stroke="#9ca3af" strokeWidth="1.8" />
+                        </svg>
+                        {item.location}
+                      </span>
+                      <span>{item.year}</span>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
+
+            {paginatedCards.length === 0 && (
+              <div
+                style={{
+                  background: '#fff',
+                  borderRadius: 20,
+                  border: '1px solid rgba(15, 23, 42, 0.06)',
+                  padding: '40px 28px',
+                  color: '#4b5563',
+                  fontSize: 18,
+                }}
+              >
+                Không có dự án phù hợp với bộ lọc hiện tại.
+              </div>
+            )}
+
+            {totalPages > 1 && (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, marginTop: 32 }}>
+                <button
+                  onClick={() => goPage(page - 1)}
+                  disabled={page === 1}
+                  style={{
+                    padding: '12px 18px',
+                    border: '1px solid #d1d5db',
+                    background: page === 1 ? '#f3f4f6' : '#fff',
+                    color: '#374151',
+                    cursor: page === 1 ? 'not-allowed' : 'pointer',
+                    borderRadius: 10,
+                    fontWeight: 600,
+                  }}
+                >
+                  Prev
+                </button>
+                {[...Array(totalPages)].map((_, i) => {
+                  const p = i + 1;
+                  const active = p === page;
+                  return (
+                    <button
+                      key={p}
+                      onClick={() => goPage(p)}
+                      style={{
+                        width: 42,
+                        height: 42,
+                        borderRadius: 12,
+                        border: active ? '1px solid #149b90' : '1px solid #d1d5db',
+                        background: active ? '#149b90' : '#fff',
+                        color: active ? '#fff' : '#374151',
+                        cursor: 'pointer',
+                        fontWeight: 700,
+                      }}
+                    >
+                      {p}
+                    </button>
+                  );
+                })}
+                <button
+                  onClick={() => goPage(page + 1)}
+                  disabled={page === totalPages}
+                  style={{
+                    padding: '12px 18px',
+                    border: '1px solid #d1d5db',
+                    background: page === totalPages ? '#f3f4f6' : '#fff',
+                    color: '#374151',
+                    cursor: page === totalPages ? 'not-allowed' : 'pointer',
+                    borderRadius: 10,
+                    fontWeight: 600,
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+            )}
+
           </div>
         </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, marginTop: 40 }}>
-            <button
-              onClick={() => goPage(page - 1)}
-              disabled={page === 1}
+        {isModalOpen && (
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              background: 'rgba(0,0,0,0.85)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              transition: 'opacity 0.2s',
+            }}
+            onClick={closeModal}
+          >
+            <div
               style={{
-                padding: '10px 16px',
-                border: '1px solid #ccc',
-                background: page === 1 ? '#f5f5f5' : '#fff',
-                cursor: page === 1 ? 'not-allowed' : 'pointer',
-                borderRadius: 4,
-                fontFamily: 'serif',
+                position: 'relative',
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                minWidth: 400,
+                minHeight: 300,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(0,0,0,0.01)',
+                padding: 0,
+                flexDirection: 'row',
+                gap: 0,
               }}
+              onClick={(e) => e.stopPropagation()}
             >
-              Prev
-            </button>
-            {[...Array(totalPages)].map((_, i) => {
-              const p = i + 1;
-              const active = p === page;
-              return (
+              {modalImages.length > 1 && (
                 <button
-                  key={p}
-                  onClick={() => goPage(p)}
+                  onClick={prevImage}
                   style={{
-                    width: 38,
-                    height: 38,
+                    position: 'absolute',
+                    left: -40,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'rgba(0,0,0,0.5)',
+                    color: '#fff',
+                    border: 'none',
                     borderRadius: '50%',
-                    border: active ? '1px solid #222' : '1px solid #ccc',
-                    background: active ? '#222' : '#fff',
-                    color: active ? '#fff' : '#333',
+                    width: 32,
+                    height: 32,
+                    fontSize: 20,
                     cursor: 'pointer',
-                    fontFamily: 'serif',
+                    zIndex: 2,
                   }}
-                >
-                  {p}
-                </button>
-              );
-            })}
-            <button
-              onClick={() => goPage(page + 1)}
-              disabled={page === totalPages}
-              style={{
-                padding: '10px 16px',
-                border: '1px solid #ccc',
-                background: page === totalPages ? '#f5f5f5' : '#fff',
-                cursor: page === totalPages ? 'not-allowed' : 'pointer',
-                borderRadius: 4,
-                fontFamily: 'serif',
-              }}
-            >
-              Next
-            </button>
+                  title="Ảnh trước"
+                >&#8592;</button>
+              )}
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
+                <img
+                  src={modalImages[currentImageIndex]}
+                  alt="project large"
+                  style={{
+                    width: 1000,
+                    height: 800,
+                    maxWidth: 1000,
+                    maxHeight: 800,
+                    minWidth: 1000,
+                    minHeight: 800,
+                    objectFit: 'cover',
+                    background: '#fff',
+                    display: 'block',
+                    margin: 0,
+                  }}
+                />
+                <div style={{
+                  minWidth: 180,
+                  maxWidth: 320,
+                  color: '#fff',
+                  fontSize: 18,
+                  fontWeight: 400,
+                  opacity: 0.92,
+                  fontFamily: 'serif',
+                  lineHeight: 1.4,
+                  padding: '12px 0 12px 18px',
+                  borderLeft: '2px solid #b6a484',
+                  background: 'rgba(0,0,0,0.10)',
+                  textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                  wordBreak: 'break-word',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                }}>
+                  {(() => {
+                    const project = projectCards.find((p) => p.images && p.images.includes(modalImages[currentImageIndex]));
+                    if (!project) return null;
+                    if (Array.isArray(project.popupText)) {
+                      return project.popupText.map((txt, idx) => (
+                        <div key={idx} style={{ fontSize: 17, color: '#fff', opacity: 0.98, marginBottom: 4 }}>{txt}</div>
+                      ));
+                    }
+                    if (typeof project.popupText === 'string') {
+                      return <div style={{ fontSize: 17, color: '#fff', opacity: 0.98 }}>{project.popupText}</div>;
+                    }
+                    return <>
+                      <div style={{ fontSize: 20, fontWeight: 600, color: '#fff', marginBottom: 4, opacity: 0.98 }}>{project.title}</div>
+                      {project.location && <div style={{ fontSize: 15, color: '#e0e0e0', opacity: 0.85 }}>{project.location}</div>}
+                    </>;
+                  })()}
+                </div>
+              </div>
+              {modalImages.length > 1 && (
+                <button
+                  onClick={nextImage}
+                  style={{
+                    position: 'absolute',
+                    right: -40,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'rgba(0,0,0,0.5)',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: 32,
+                    height: 32,
+                    fontSize: 20,
+                    cursor: 'pointer',
+                    zIndex: 2,
+                  }}
+                  title="Ảnh tiếp theo"
+                >&#8594;</button>
+              )}
+              <button
+                onClick={closeModal}
+                style={{
+                  position: 'absolute',
+                  top: 8,
+                  right: 8,
+                  background: 'rgba(0,0,0,0.7)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 28,
+                  height: 28,
+                  fontSize: 16,
+                  cursor: 'pointer',
+                  zIndex: 3,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: 0,
+                }}
+                title="Đóng"
+              >&#10005;</button>
+              {modalImages.length > 1 && (
+                <div style={{ position: 'absolute', bottom: 14, right: 14, color: '#fff', background: 'rgba(0,0,0,0.5)', padding: '4px 12px', borderRadius: 8, fontSize: 13, opacity: 0.8, letterSpacing: 1 }}>
+                  {currentImageIndex + 1} / {modalImages.length}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </section>
 
-        <section style={{ background: '#fff', padding: '60px 0 80px 0', width: '100%' }}>
-        {/* Stats row */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '32px',
-          maxWidth: 1400,
-          margin: '0 auto 60px auto',
-          alignItems: 'end',
-        }}>
-          {/* Stat 1 */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2.7rem', color: '#222', fontWeight: 400, letterSpacing: 1, marginBottom: 8 }}>3450</div>
-            <div style={{ fontSize: '1rem', color: '#444', letterSpacing: 1, marginBottom: 12 }}>SQUARE AREAS</div>
-            <div style={{ height: 3, background: '#d2c6ad', width: '90%', margin: '0 auto', opacity: 0.7 }}></div>
-          </div>
-          {/* Stat 2 */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2.7rem', color: '#222', fontWeight: 400, letterSpacing: 1, marginBottom: 8 }}>2422</div>
-            <div style={{ fontSize: '1rem', color: '#444', letterSpacing: 1, marginBottom: 12 }}>CAR PARKING</div>
-            <div style={{ height: 3, background: '#d2c6ad', width: '90%', margin: '0 auto', opacity: 0.7 }}></div>
-          </div>
-          {/* Stat 3 */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2.7rem', color: '#222', fontWeight: 400, letterSpacing: 1, marginBottom: 8 }}>1890</div>
-            <div style={{ fontSize: '1rem', color: '#444', letterSpacing: 1, marginBottom: 12 }}>APARTMENTS</div>
-            <div style={{ height: 3, background: '#d2c6ad', width: '90%', margin: '0 auto', opacity: 0.7 }}></div>
-          </div>
-          {/* Stat 4 */}
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontFamily: 'serif', fontSize: '2.7rem', color: '#222', fontWeight: 400, letterSpacing: 1, marginBottom: 8 }}>4125</div>
-            <div style={{ fontSize: '1rem', color: '#444', letterSpacing: 1, marginBottom: 12 }}>ROOMS</div>
-            <div style={{ height: 3, background: '#d2c6ad', width: '90%', margin: '0 auto', opacity: 0.7 }}></div>
-          </div>
-        </div>
-        {/* Title & Button */}
-        <div style={{ textAlign: 'center', marginTop: 60 }}>
-          <div style={{
-            fontFamily: 'serif',
-            fontSize: '3.2rem',
-            color: '#c3b393',
-            fontWeight: 400,
-            marginBottom: 18,
-            letterSpacing: 1,
-          }}>
-            HOME IS WAITING FOR YOU HERE
-          </div>
-          <div style={{
-            fontFamily: 'serif',
-            fontSize: '2.7rem',
-            color: '#333',
-            fontWeight: 400,
-            marginBottom: 32,
-            letterSpacing: 1,
-          }}>
-            SCHEDULE A TOUR
-          </div>
-          <button
-            style={{
-              background: '#b6a484',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 2,
-              padding: '12px 36px',
-              fontSize: '1rem',
-              fontWeight: 500,
-              letterSpacing: '1px',
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-              transition: 'background 0.2s',
-            }}
-            onMouseOver={e => (e.currentTarget.style.background = '#a08c6a')}
-            onMouseOut={e => (e.currentTarget.style.background = '#b6a484')}
-          >
-            BOOK A VISIT
-          </button>
-        </div>
-      </section>
-      {/* Sự kiện */}
 
-     
     </>
   );
 }

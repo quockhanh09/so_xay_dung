@@ -28,12 +28,11 @@ import 'swiper/swiper-bundle.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'flag-icons/css/flag-icons.min.css'
 
-import heroBg from "./assets/img/sxd-bg.png";
-
 import sxdbg1 from "./assets/img/sxd-ab1.png"
 import sxdbg2 from "./assets/img/sxd-ab2.png"
 import sxdbg3 from "./assets/img/sxd-ab3.png"
 import sxdbg4 from "./assets/img/sxd-ab4.png"
+import vietnamOutline from "./data/vietnam_outline.json";
 
 
 
@@ -68,6 +67,42 @@ import banThan28 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh 
 import banThan29 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/29.jpg";
 import banThan30 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/30.jpg";
 import banThan31 from "./assets/img/drive-download-20251216T044857Z-3-001/ảnh bán thân/31.jpg";
+
+const buildVietnamPathData = () => {
+  const coords =
+    vietnamOutline?.features?.[0]?.geometry?.coordinates?.[0] ?? [];
+
+  if (!coords.length) {
+    return {
+      viewBox: "0 0 100 200",
+      path: "",
+    };
+  }
+
+  const projected = coords.map(([lon, lat]) => ({ x: lon, y: -lat }));
+  const xs = projected.map((p) => p.x);
+  const ys = projected.map((p) => p.y);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const width = maxX - minX;
+  const height = maxY - minY;
+  const padX = width * 0.22;
+  const padY = height * 0.2;
+
+  const path =
+    projected
+      .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(4)} ${p.y.toFixed(4)}`)
+      .join(" ") + " Z";
+
+  return {
+    viewBox: `${(minX - padX).toFixed(4)} ${(minY - padY).toFixed(4)} ${(width + padX * 2).toFixed(4)} ${(height + padY * 2).toFixed(4)}`,
+    path,
+  };
+};
+
+const vietnamMapSvg = buildVietnamPathData();
 
 
 
@@ -360,6 +395,74 @@ function App({ characters }) {
   ];
 
   const [newComment, setNewComment] = useState("");
+  const [featuredFilter, setFeaturedFilter] = useState("Tất cả");
+  const [hoveredFeaturedId, setHoveredFeaturedId] = useState(null);
+  const [isFeaturedCtaHovered, setIsFeaturedCtaHovered] = useState(false);
+
+  const featuredTabs = [
+    "Tất cả",
+    "Quy hoạch",
+    "Quy hoạch đô thị",
+    "Thiết kế công trình",
+    "Thiết kế đô thị",
+    "Quy hoạch nông thôn",
+  ];
+
+  const featuredProjects = [
+    {
+      id: 1,
+      title: "Quy hoạch phân khu đô thị Đông Anh",
+      location: "Hà Nội",
+      year: "2023",
+      category: "Quy hoạch",
+      image: sxdbg1,
+    },
+    {
+      id: 2,
+      title: "Thiết kế Trung tâm Hành chính tỉnh Bắc Giang",
+      location: "Bắc Giang",
+      year: "2022",
+      category: "Thiết kế công trình",
+      image: sxdbg2,
+    },
+    {
+      id: 3,
+      title: "Quy hoạch đô thị ven sông Hồng",
+      location: "Hà Nội",
+      year: "2023",
+      category: "Quy hoạch đô thị",
+      image: sxdbg3,
+    },
+    {
+      id: 4,
+      title: "Quy hoạch Khu công nghiệp sinh thái Hải Phòng",
+      location: "Hải Phòng",
+      year: "2022",
+      category: "Quy hoạch",
+      image: sxdbg4,
+    },
+    {
+      id: 5,
+      title: "Thiết kế Khu nhà ở xã hội Thanh Hóa",
+      location: "Thanh Hóa",
+      year: "2023",
+      category: "Thiết kế đô thị",
+      image: sxdbg2,
+    },
+    {
+      id: 6,
+      title: "Quy hoạch Nông thôn mới xã Đại Đồng",
+      location: "Bắc Ninh",
+      year: "2022",
+      category: "Quy hoạch nông thôn",
+      image: sxdbg1,
+    },
+  ];
+
+  const visibleFeaturedProjects =
+    featuredFilter === "Tất cả"
+      ? featuredProjects
+      : featuredProjects.filter((project) => project.category === featuredFilter);
 
   // hàm render 1 cột
   const renderColumn = (comments) => (
@@ -519,91 +622,48 @@ function App({ characters }) {
             path="/"
             element={
               <>
-                <section id="hero" className="hero section" style={{ margin: 0, padding: 0 }}>
+                <section id="hero" className="hero section udi-home-hero" style={{ margin: 0, padding: 0 }}>
                   <div
-                    className="parallax-window fullscreen hero-flex"
+                    className="udi-home-hero-bg"
                     style={{
-                      width: "100%",
-                      height: "clamp(350px, 60vh, 420px)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      position: "relative",
-                      overflow: "hidden",
-                      backgroundImage: `url(${heroBg})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      backgroundImage: `url(${sxdbg1})`,
                     }}
                   >
-                    {/* dark overlay */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "rgba(0,0,0,0.45)",
-                        zIndex: 1,
-                      }}
-                    />
-
-                    <div className="container hero-container" style={{ zIndex: 2, padding: "0 20px" }}>
-                      <div className="hero-main" style={{ textAlign: "center" }}>
-
-                        {/* WRAPPER — QUAN TRỌNG */}
-                        <div style={{ display: "inline-block", textAlign: "center", maxWidth: "100%" }}>
-
-                          <h1
-                            style={{
-                              color: "#fff",
-                              fontFamily: "'Times New Roman', Times, serif",
-                              fontSize: "clamp(32px, 8vw, 64px)",
-                              margin: 0,
-                              marginBottom: "4px",
-                              letterSpacing: "clamp(2px, 0.5vw, 6px)",
-                              fontWeight: 400,
-                              lineHeight: "1.1",
-                              whiteSpace: "normal",
-                              wordBreak: "keep-all",
-                            }}
-                          >
-                            ABOUT US!
-                          </h1>
-
-                          {/* GẠCH THẲNG NGAY DƯỚI CHỮ */}
-                          <span
-                            style={{
-                              display: "block",
-                              width: "min(300px, 80%)",
-                              height: "clamp(4px, 0.5vw, 6px)",
-                              margin: "0 auto",
-                              background: "#fff",
-                              opacity: 0.95,
-                              marginBottom: "clamp(15px, 3vw, 25px)",
-                            }}
-                          />
-
-                          <div style={{
-                            color: "#fff",
-                            fontFamily: "'Times New Roman', Times, serif",
-                            padding: "0 15px",
-                          }}>
-                            <div style={{ 
-                              fontSize: "clamp(14px, 2.5vw, 18px)",
-                              marginBottom: "clamp(10px, 2vw, 15px)",
-                              fontWeight: 500,
-                            }}>
-                              VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ ( URBAN DESIGN INSTITUTE - UDI)
-                            </div>
-                            <div style={{
-                              fontSize: "clamp(13px, 2vw, 15px)",
-                              lineHeight: "1.6",
-                              maxWidth: "900px",
-                              margin: "0 auto",
-                            }}>
-                              Viện nghiên cứu thiết kế đô thị (UDI) là tổ chức Nhà nước có chức năng nghiên cứu, thiết kế đô thị, biên soạn tài liệu pháp lý, cung cấp tư vấn quy hoạch, hợp tác quốc tế, thực hiện dự án khoa học và đào tạo nhân lực cho VIUP. Với hơn 50 chuyên gia giàu kinh nghiệm, UDI cam kết mang lại giá trị thực sự cho khách hàng.
-                            </div>
-                          </div>
+                    <div className="udi-home-hero-overlay" />
+                    <div className="udi-home-hero-container">
+                      <div className="udi-home-hero-content">
+                        <h1>
+                          Kiến trúc <span className="udi-home-hero-accent">Bền vững</span>
+                          <br />
+                          Quy hoạch <span className="udi-home-hero-accent">Tương lai</span>
+                        </h1>
+                        <p>
+                          Đồng hành cùng sự phát triển của địa phương, tạo dựng không gian sống chất lượng cao
+                          với tầm nhìn dài hạn và trách nhiệm xã hội.
+                        </p>
+                        <div className="udi-home-hero-actions">
+                          <Link to="/Project" className="udi-hero-btn udi-hero-btn-primary">
+                            Khám phá dự án
+                          </Link>
+                          <Link to="/About" className="udi-hero-btn udi-hero-btn-outline">
+                            Xem năng lực
+                          </Link>
                         </div>
+                      </div>
 
+                      <div className="udi-home-hero-stats" aria-label="Thong ke noi bat">
+                        <div>
+                          <strong>15+</strong>
+                          <span>Năm kinh nghiệm</span>
+                        </div>
+                        <div>
+                          <strong>200+</strong>
+                          <span>Dự án</span>
+                        </div>
+                        <div>
+                          <strong>50+</strong>
+                          <span>Tỉnh thành</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -613,729 +673,643 @@ function App({ characters }) {
                   id="about"
                   className="about section"
                   style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "stretch",
                     width: "100%",
-                    minHeight: "clamp(400px, 60vh, 80vh)",
-                    padding: "0",
-                    background: "#f9f9f9",
-                    flexWrap: "wrap",
+                    background: "#f3f3f3",
+                    padding: "clamp(40px, 6vw, 72px) clamp(16px, 4vw, 44px)",
                   }}
                 >
-                  {/* Trái: Hình ảnh */}
-                  <div style={{ flex: "1 1 300px", minWidth: "250px" }}>
-                    <img
-                      src={sxdbg2}
-                      alt="Urban development"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        minHeight: "300px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-
-                  {/* Giữa: Nội dung */}
                   <div
                     style={{
-                      flex: "1 1 400px",
-                      minWidth: "280px",
+                      width: "100%",
+                      maxWidth: "1220px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <p
+                      style={{
+                        margin: 0,
+                        marginBottom: "clamp(8px, 1.3vw, 12px)",
+                        textTransform: "uppercase",
+                        letterSpacing: "1.4px",
+                        fontSize: "clamp(11px, 1.1vw, 14px)",
+                        fontWeight: 500,
+                        color: "#667085",
+                      }}
+                    >
+                      Lĩnh vực hoạt động
+                    </p>
+
+                    <h2
+                      style={{
+                        margin: 0,
+                        color: "#0b203d",
+                        fontFamily: "\"Times New Roman\", Times, serif",
+                        fontWeight: 700,
+                        fontSize: "clamp(32px, 5vw, 52px)",
+                        lineHeight: 1.05,
+                      }}
+                    >
+                      Ba trụ cột
+                      <br />
+                      Năng lực cốt lõi
+                    </h2>
+
+                    <div
+                      style={{
+                        marginTop: "clamp(24px, 4vw, 48px)",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "clamp(14px, 2vw, 24px)",
+                      }}
+                    >
+                      {[
+                        {
+                          icon: "bi-compass",
+                          title: "Quy hoạch vùng - đô thị",
+                          desc: "Tư vấn lập quy hoạch vùng, quy hoạch tỉnh, quy hoạch phân khu và quy hoạch chi tiết các khu đô thị mới, khu dân cư, khu công nghiệp với tầm nhìn phát triển bền vững.",
+                        },
+                        {
+                          icon: "bi-rulers",
+                          title: "Thiết kế kiến trúc - công trình",
+                          desc: "Thiết kế kiến trúc công trình công cộng, hạ tầng kỹ thuật, thiết kế đô thị, cảnh quan đô thị với phong cách hiện đại, thân thiện môi trường và bản sắc địa phương.",
+                        },
+                        {
+                          icon: "bi-graph-up-arrow",
+                          title: "Nghiên cứu - Tư vấn chiến lược",
+                          desc: "Nghiên cứu phát triển kinh tế - xã hội, tư vấn chiến lược phát triển đô thị, đánh giá tác động môi trường, ứng dụng công nghệ số trong quy hoạch và quản lý đô thị.",
+                        },
+                      ].map((item) => (
+                        <article
+                          key={item.title}
+                          style={{
+                            flex: "1 1 300px",
+                            minWidth: "280px",
+                            background: "#fff",
+                            border: "1px solid #d9dee7",
+                            borderRadius: "14px",
+                            padding: "clamp(20px, 2.6vw, 28px)",
+                          }}
+                        >
+                          <i
+                            className={`bi ${item.icon}`}
+                            style={{
+                              fontSize: "24px",
+                              color: "#0b203d",
+                              display: "inline-block",
+                              marginBottom: "18px",
+                            }}
+                            aria-hidden="true"
+                          />
+
+                          <h3
+                            style={{
+                              margin: 0,
+                              color: "#0b203d",
+                              fontSize: "clamp(21px, 2.1vw, 30px)",
+                              lineHeight: 1.2,
+                              fontFamily: "\"Times New Roman\", Times, serif",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {item.title}
+                          </h3>
+
+                          <p
+                            style={{
+                              marginTop: "14px",
+                              marginBottom: "20px",
+                              color: "#3d4b5f",
+                              lineHeight: 1.7,
+                              fontSize: "clamp(14px, 1.1vw, 16px)",
+                            }}
+                          >
+                            {item.desc}
+                          </p>
+
+                          <a
+                            href="#"
+                            style={{
+                              color: "#0a7d63",
+                              textDecoration: "none",
+                              fontWeight: 600,
+                              fontSize: "clamp(15px, 1.1vw, 17px)",
+                              letterSpacing: "0.2px",
+                            }}
+                          >
+                            Tìm hiểu thêm {"->"}
+                          </a>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                <section
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#f3f4f6",
+                    padding: "clamp(36px, 6vw, 64px) clamp(16px, 4vw, 40px)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "1220px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "16px",
+                        marginBottom: "clamp(22px, 3.5vw, 34px)",
+                      }}
+                    >
+                      <h2
+                        style={{
+                          margin: 0,
+                          color: "#071a34",
+                          fontFamily: "\"Times New Roman\", Times, serif",
+                          fontSize: "clamp(36px, 5vw, 52px)",
+                          lineHeight: 0.95,
+                          fontWeight: 700,
+                        }}
+                      >
+                        Dự án
+                        <br />
+                        Tiêu biểu
+                      </h2>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          gap: "10px",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        {featuredTabs.map((tab) => {
+                          const isActive = featuredFilter === tab;
+
+                          return (
+                            <button
+                              key={tab}
+                              type="button"
+                              onClick={() => setFeaturedFilter(tab)}
+                              style={{
+                                border: "none",
+                                borderRadius: "999px",
+                                padding: "9px 16px",
+                                fontSize: "14px",
+                                fontWeight: 600,
+                                lineHeight: 1,
+                                cursor: "pointer",
+                                transition: "all 0.2s ease",
+                                background: isActive ? "#12a39a" : "#eef0f3",
+                                color: isActive ? "#ffffff" : "#243247",
+                              }}
+                            >
+                              {tab}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                        gap: "clamp(16px, 2vw, 24px)",
+                      }}
+                    >
+                      {visibleFeaturedProjects.map((project) => {
+                        const isHovered = hoveredFeaturedId === project.id;
+
+                        return (
+                        <article
+                          key={project.id}
+                          onMouseEnter={() => setHoveredFeaturedId(project.id)}
+                          onMouseLeave={() => setHoveredFeaturedId(null)}
+                          style={{
+                            background: "#fff",
+                            borderRadius: "14px",
+                            border: "1px solid #e2e6ec",
+                            overflow: "hidden",
+                            boxShadow: isHovered
+                              ? "0 16px 34px rgba(13, 28, 56, 0.16)"
+                              : "0 2px 10px rgba(13, 28, 56, 0.04)",
+                            transform: isHovered ? "translateY(-8px)" : "translateY(0)",
+                            transition: "transform .25s ease, box-shadow .25s ease",
+                          }}
+                        >
+                          <div style={{ position: "relative" }}>
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              style={{
+                                width: "100%",
+                                height: "196px",
+                                objectFit: "cover",
+                                display: "block",
+                                transform: isHovered ? "scale(1.05)" : "scale(1)",
+                                transition: "transform .35s ease",
+                              }}
+                            />
+
+                            <span
+                              style={{
+                                position: "absolute",
+                                top: "12px",
+                                left: "12px",
+                                borderRadius: "999px",
+                                padding: "5px 11px",
+                                fontSize: "11px",
+                                fontWeight: 700,
+                                color: "#fff",
+                                background: "#0ea5a0",
+                                boxShadow: isHovered
+                                  ? "0 8px 18px rgba(14, 165, 160, 0.34)"
+                                  : "none",
+                                transition: "box-shadow .25s ease",
+                              }}
+                            >
+                              {project.category}
+                            </span>
+                          </div>
+
+                          <div style={{ padding: "16px 18px 15px" }}>
+                            <h3
+                              style={{
+                                margin: 0,
+                                color: isHovered ? "#0d8f89" : "#0e1f38",
+                                fontSize: "clamp(14px, 1.05vw, 22px)",
+                                lineHeight: 1.32,
+                                fontFamily: "system-ui, -apple-system, \"Segoe UI\", sans-serif",
+                                fontWeight: 700,
+                                transition: "color .25s ease",
+                              }}
+                            >
+                              {project.title}
+                            </h3>
+
+                            <div
+                              style={{
+                                marginTop: "10px",
+                                display: "flex",
+                                gap: "12px",
+                                flexWrap: "wrap",
+                                alignItems: "center",
+                                color: "#55657d",
+                                fontSize: "13px",
+                              }}
+                            >
+                              <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                                <i className="bi bi-geo-alt" aria-hidden="true" />
+                                {project.location}
+                              </span>
+                              <span>{project.year}</span>
+                            </div>
+                          </div>
+                        </article>
+                        );
+                      })}
+                    </div>
+
+                    <div style={{ textAlign: "center", marginTop: "clamp(26px, 4vw, 38px)" }}>
+                      <Link
+                        to="/Project"
+                        onMouseEnter={() => setIsFeaturedCtaHovered(true)}
+                        onMouseLeave={() => setIsFeaturedCtaHovered(false)}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          padding: "13px 28px",
+                          borderRadius: "999px",
+                          textDecoration: "none",
+                          background: isFeaturedCtaHovered ? "#0d2a52" : "#091a36",
+                          color: "#fff",
+                          fontWeight: 700,
+                          letterSpacing: "0.2px",
+                          boxShadow: isFeaturedCtaHovered
+                            ? "0 14px 28px rgba(9, 26, 54, 0.34)"
+                            : "0 8px 20px rgba(9, 26, 54, 0.2)",
+                          transform: isFeaturedCtaHovered ? "translateY(-2px)" : "translateY(0)",
+                          transition: "all .22s ease",
+                        }}
+                      >
+                        Xem tất cả dự án <span aria-hidden="true">&rarr;</span>
+                      </Link>
+                    </div>
+                  </div>
+                </section>
+
+                {/* ===== DẤU ẤN TOÀN QUỐC ===== */}
+                <section
+                  id="nationwide-footprint"
+                  style={{
+                    background: "#f1f1f1",
+                    width: "100%",
+                    padding: "clamp(40px, 6vw, 64px) clamp(16px, 3.2vw, 26px)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      maxWidth: "1140px",
+                      margin: "0 auto",
                       textAlign: "center",
-                      padding: "clamp(30px, 5vw, 60px) clamp(20px, 5vw, 40px)",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
                     }}
                   >
                     <h2
                       style={{
-                        fontSize: "clamp(16px, 2.5vw, 18px)",
-                        fontWeight: "400",
-                        marginBottom: "clamp(12px, 2vw, 16px)",
-                        letterSpacing: "clamp(0.5px, 0.1vw, 1px)",
-                        color: "#333",
-                        fontFamily: "'Times New Roman', Times, serif",
+                        margin: 0,
+                        color: "#091d3a",
+                        fontFamily: "\"Times New Roman\", Times, serif",
+                        fontSize: "clamp(34px, 6vw, 62px)",
+                        lineHeight: 0.96,
+                        fontWeight: 700,
+                        letterSpacing: "0.2px",
                       }}
                     >
-                      PROJECTS CỦA CHÚNG TÔI
+                      Dấu ấn trên
+                      <br />
+                      Toàn quốc
                     </h2>
 
                     <p
                       style={{
-                        fontSize: "clamp(14px, 2vw, 15px)",
-                        lineHeight: "1.6",
-                        color: "#5555558c",
-                        maxWidth: "600px",
+                        margin: "clamp(14px, 2.5vw, 22px) auto 0",
+                        color: "#263750",
+                        maxWidth: "760px",
+                        fontSize: "clamp(14px, 1.5vw, 30px)",
+                        lineHeight: 1.6,
                       }}
                     >
-                      Projects của chúng tôi mang đến cho khách hàng những trải nghiệm
-                      hài lòng nhất với sự tự tin về chất lượng nhân sự hoạt động trong
-                      lĩnh vực.
+                      Với hơn 200 dự án được triển khai tại 50+ tỉnh thành, chúng tôi tự hào đồng hành
+                      cùng sự phát triển của các địa phương trên khắp cả nước.
                     </p>
-                  </div>
 
-                  {/* Phải: Hình ảnh */}
-                  <div style={{ flex: "1 1 300px", minWidth: "250px" }}>
-                    <img
-                      src={sxdbg1}
-                      alt="Interior view"
+                    <div
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        minHeight: "300px",
-                        objectFit: "cover",
+                        marginTop: "clamp(26px, 4vw, 40px)",
+                        borderRadius: "22px",
+                        background: "#dce7e6",
+                        boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.5)",
+                        minHeight: "clamp(420px, 62vw, 610px)",
+                        position: "relative",
+                        overflow: "hidden",
+                        padding: "clamp(18px, 2vw, 24px)",
                       }}
-                    />
+                    >
+                      <svg
+                        viewBox={vietnamMapSvg.viewBox}
+                        aria-hidden="true"
+                        style={{
+                          position: "absolute",
+                          left: "52%",
+                          top: "49%",
+                          width: "clamp(260px, 36vw, 420px)",
+                          height: "clamp(400px, 56vw, 560px)",
+                          transform: "translate(-50%, -50%)",
+                          opacity: 0.72,
+                          filter: "blur(5px)",
+                        }}
+                      >
+                        <path fill="#aebbbb" d={vietnamMapSvg.path} />
+                      </svg>
+
+                      {[
+                        { top: "22%", left: "50.5%", value: "15", big: true },
+                        { top: "18%", left: "57.5%", value: "8" },
+                        { top: "20.5%", left: "63.5%", value: "12" },
+                        { top: "21.2%", left: "48.2%", value: "45" },
+                        { top: "26.2%", left: "58.5%", value: "18" },
+                        { top: "34.5%", left: "45.5%", value: "22" },
+                        { top: "41.5%", left: "43%", value: "16" },
+                        { top: "58.5%", left: "51.5%", value: "14" },
+                        { top: "56.5%", left: "55%", value: "28" },
+                        { top: "67%", left: "54%", value: "10" },
+                        { top: "74%", left: "56.5%", value: "19" },
+                        { top: "88.5%", left: "49.5%", value: "52", big: true },
+                        { top: "86%", left: "55%", value: "20" },
+                        { top: "90.8%", left: "58%", value: "11" },
+                        { top: "93%", left: "43%", value: "17" },
+                      ].map((pin) => (
+                        <div
+                          key={`${pin.top}-${pin.left}-${pin.value}`}
+                          style={{
+                            position: "absolute",
+                            top: pin.top,
+                            left: pin.left,
+                            transform: "translate(-50%, -50%)",
+                            pointerEvents: "none",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: pin.big ? "20px" : "16px",
+                              height: pin.big ? "20px" : "16px",
+                              borderRadius: "999px",
+                              background: "#0d9a96",
+                              border: "3px solid #e7ffff",
+                              boxShadow: "0 0 0 2px rgba(13,154,150,0.35)",
+                            }}
+                          />
+                          <span
+                            style={{
+                              position: "absolute",
+                              left: "70%",
+                              top: "-7px",
+                              borderRadius: "999px",
+                              background: "#ff7a18",
+                              color: "#fff",
+                              fontSize: "10px",
+                              fontWeight: 700,
+                              lineHeight: 1,
+                              padding: "4px 5px",
+                              boxShadow: "0 3px 8px rgba(255,122,24,0.35)",
+                            }}
+                          >
+                            {pin.value}
+                          </span>
+                        </div>
+                      ))}
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: "clamp(20px, 2.6vw, 34px)",
+                          bottom: "clamp(20px, 2.6vw, 30px)",
+                          width: "clamp(185px, 24vw, 220px)",
+                          background: "#ffffff",
+                          borderRadius: "16px",
+                          boxShadow: "0 12px 26px rgba(17, 33, 50, 0.12)",
+                          padding: "18px 16px 14px",
+                          textAlign: "left",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "7px",
+                            color: "#10243e",
+                            fontWeight: 700,
+                            fontSize: "clamp(14px, 1vw, 16px)",
+                          }}
+                        >
+                          <i className="bi bi-geo-alt-fill" style={{ color: "#189b96", fontSize: "14px" }} aria-hidden="true" />
+                          Dấu ấn toàn quốc
+                        </div>
+
+                        <div style={{ marginTop: "14px", display: "grid", gap: "10px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            <span
+                              style={{
+                                width: "34px",
+                                height: "34px",
+                                borderRadius: "999px",
+                                background: "#0f9b95",
+                                color: "#fff",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontWeight: 700,
+                              }}
+                            >
+                              15
+                            </span>
+                            <div>
+                              <div style={{ fontWeight: 700, color: "#1a2f48", lineHeight: 1.05 }}>Tỉnh thành</div>
+                              <div style={{ fontSize: "12px", color: "#77859a" }}>Đã triển khai</div>
+                            </div>
+                          </div>
+
+                          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            <span
+                              style={{
+                                width: "34px",
+                                height: "34px",
+                                borderRadius: "999px",
+                                background: "#ff7a18",
+                                color: "#fff",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontWeight: 700,
+                              }}
+                            >
+                              307
+                            </span>
+                            <div>
+                              <div style={{ fontWeight: 700, color: "#1a2f48", lineHeight: 1.05 }}>Dự án</div>
+                              <div style={{ fontSize: "12px", color: "#77859a" }}>Hoàn thành</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          style={{
+                            marginTop: "10px",
+                            borderTop: "1px solid #e8edf2",
+                            paddingTop: "10px",
+                            fontSize: "11px",
+                            color: "#6f7f94",
+                          }}
+                        >
+                          <div style={{ marginBottom: "7px" }}>Quy mô dự án:</div>
+                          <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                              <span style={{ width: "10px", height: "10px", borderRadius: "999px", background: "#19a09a" }} />
+                              {'<'}20
+                            </span>
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                              <span style={{ width: "14px", height: "14px", borderRadius: "999px", background: "#14958f" }} />
+                              20-40
+                            </span>
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                              <span style={{ width: "18px", height: "18px", borderRadius: "999px", background: "#0d8f89" }} />
+                              {'>'}40
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </section>
+
+
+                
 
                 <section
                   style={{
                     width: "100%",
-                    padding: "clamp(30px, 5vw, 40px) clamp(15px, 3vw, 20px)",
-                    backgroundColor: "#f5f5f5",
+                    backgroundColor: "#0f1f45",
+                    backgroundImage:
+                      "radial-gradient(circle at 20% 18%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 32%), radial-gradient(circle at 82% 70%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 36%), repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 24px), radial-gradient(circle, rgba(255,255,255,0.14) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.14) 1px, transparent 1px), linear-gradient(180deg, #1b2f5d 0%, #0e1f45 100%)",
+                    backgroundSize: "100% 100%, 100% 100%, 24px 24px, 24px 24px, 24px 24px, 24px 24px, 100% 100%",
+                    backgroundPosition: "center, center, 0 0, 0 0, 0 0, 12px 12px, center",
+                    minHeight: "clamp(250px, 30vw, 340px)",
+                    padding: "clamp(42px, 7vw, 68px) clamp(14px, 3vw, 28px)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -18px 30px rgba(0,0,0,0.16)",
                   }}
                 >
                   <div
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                      gap: "clamp(15px, 3vw, 40px)",
                       width: "100%",
-                      maxWidth: "1200px",
+                      maxWidth: "1220px",
                       margin: "0 auto",
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+                      gap: "clamp(16px, 2.6vw, 34px)",
+                      alignItems: "center",
                     }}
                   >
                     {[
-                      "QUY HOẠCH",
-                      "THIẾT KẾ",
-                      "HẠ TẦNG KỸ THUẬT",
-                    ].map((text, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          flex: "1 1 250px",
-                          minWidth: "200px",
-                          height: "clamp(120px, 20vw, 160px)",
-                          backgroundColor: "#fff",
-                          border: "1px solid #e5e5e5",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          fontFamily: "'Times New Roman', Times, serif",
-                          fontSize: "clamp(16px, 2.5vw, 20px)",
-                          letterSpacing: "clamp(0.5px, 0.1vw, 1px)",
-                          color: "#2c2c2c",
-                          padding: "15px",
-                          textAlign: "center",
-                        }}
-                      >
-                        {text}
+                      { icon: "bi-clock", value: "15+", label: "Năm kinh nghiệm" },
+                      { icon: "bi-building", value: "200+", label: "Dự án hoàn thành" },
+                      { icon: "bi-geo-alt", value: "50+", label: "Tỉnh thành" },
+                      { icon: "bi-people", value: "100+", label: "Chuyên gia" },
+                    ].map((item) => (
+                      <div key={item.label} style={{ textAlign: "center", color: "#fff" }}>
+                        <i
+                          className={`bi ${item.icon}`}
+                          aria-hidden="true"
+                          style={{
+                            color: "#f2b321",
+                            fontSize: "clamp(24px, 2.2vw, 30px)",
+                            lineHeight: 1,
+                            display: "inline-block",
+                            marginBottom: "clamp(10px, 1.4vw, 14px)",
+                          }}
+                        />
+                        <div
+                          style={{
+                            fontSize: "clamp(48px, 5.4vw, 64px)",
+                            fontWeight: 700,
+                            lineHeight: 1,
+                            letterSpacing: "0.4px",
+                            textShadow: "0 4px 10px rgba(0,0,0,0.22)",
+                          }}
+                        >
+                          {item.value}
+                        </div>
+                        <div
+                          style={{
+                            marginTop: "8px",
+                            fontSize: "clamp(14px, 1.2vw, 22px)",
+                            color: "rgba(255,255,255,0.9)",
+                          }}
+                        >
+                          {item.label}
+                        </div>
                       </div>
                     ))}
-                  </div>
-                </section>
-
-                {/* ===== STATS ===== */}
-                <section
-                  id="stats"
-                  className="stats"
-                  style={{
-                    backgroundImage: `url(${sxdbg3})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    minHeight: "clamp(400px, 50vh, 70vh)",
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "#fff",
-                    textAlign: "center",
-                    padding: "clamp(40px, 8vw, 80px) 20px",
-                  }}
-                >
-                  {/* TIÊU ĐỀ LỚN */}
-                  <h2
-                    style={{
-                      fontFamily: "'Times New Roman', serif",
-                      fontSize: "clamp(28px, 6vw, 60px)",
-                      fontWeight: "600",
-                      marginBottom: "clamp(10px, 2vw, 15px)",
-                      borderBottom: "clamp(2px, 0.3vw, 3px) solid #fff",
-                      paddingBottom: "clamp(3px, 0.5vw, 5px)",
-                      display: "inline-block",
-                      wordBreak: "break-word",
-                      maxWidth: "90%",
-                    }}
-                  >
-                    ACHIEVEMENT AWARDS!
-                  </h2>
-
-                  {/* TIÊU ĐỀ NHỎ */}
-                  <p
-                    style={{
-                      fontFamily: "'Times New Roman', serif",
-                      fontSize: "clamp(14px, 2.5vw, 18px)",
-                      marginTop: "clamp(8px, 1.5vw, 10px)",
-                      letterSpacing: "clamp(1px, 0.2vw, 2px)",
-                    }}
-                  >
-                    THE VIEWS
-                  </p>
-                </section>
-
-                <section
-                  id="stats"
-                  style={{
-                    background: "#f7f7f7",
-                    padding: "clamp(40px, 6vw, 60px) clamp(15px, 3vw, 20px)",
-                    width: "100%",
-                  }}
-                >
-                  <div className="container">
-                    <div className="row" style={{ margin: 0, padding: 0, gap: "20px", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-
-                      {/* CARD 1 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
-                        <div
-                          style={{
-                            background: "#fff",
-                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "clamp(280px, 35vw, 320px)",
-                            height: "100%",
-                          }}
-                        >
-                          <h3
-                            style={{
-                              fontFamily: "'Times New Roman', serif",
-                              fontSize: "clamp(16px, 2.5vw, 20px)",
-                              lineHeight: "1.5",
-                              fontWeight: "bold",
-                              textTransform: "uppercase",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "3px",
-                            }}
-                          >
-                            Các giải thưởng của hội quy hoạch và phát triển đô thị Việt Nam
-                          </h3>
-                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                            luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* CARD 2 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
-                        <div
-                          style={{
-                            background: "#fff",
-                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "clamp(280px, 35vw, 320px)",
-                            height: "100%",
-                          }}
-                        >
-                          <h3
-                            style={{
-                              fontFamily: "'Times New Roman', serif",
-                              fontSize: "clamp(16px, 2.5vw, 20px)",
-                              lineHeight: "1.5",
-                              fontWeight: "bold",
-                              textTransform: "uppercase",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "3px",
-                            }}
-                          >
-                            Các giải thưởng của hội kiến trúc sư Việt Nam
-                          </h3>
-                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                            luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* CARD 3 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
-                        <div
-                          style={{
-                            background: "#fff",
-                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "clamp(280px, 35vw, 320px)",
-                            height: "100%",
-                          }}
-                        >
-                          <h3
-                            style={{
-                              fontFamily: "'Times New Roman', serif",
-                              fontSize: "clamp(16px, 2.5vw, 20px)",
-                              lineHeight: "1.5",
-                              fontWeight: "bold",
-                              textTransform: "uppercase",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "3px",
-                            }}
-                          >
-                            Các giải thưởng trong các cuộc thi quốc tế về thiết kế ý tưởng
-                          </h3>
-                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                            luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* CARD 4 */}
-                      <div className="col-lg-3 col-md-6 col-sm-12" style={{ marginBottom: "20px" }}>
-                        <div
-                          style={{
-                            background: "#fff",
-                            padding: "clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px)",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                            minHeight: "clamp(280px, 35vw, 320px)",
-                            height: "100%",
-                          }}
-                        >
-                          <h3
-                            style={{
-                              fontFamily: "'Times New Roman', serif",
-                              fontSize: "clamp(16px, 2.5vw, 20px)",
-                              lineHeight: "1.5",
-                              fontWeight: "bold",
-                              textTransform: "uppercase",
-                              textDecoration: "underline",
-                              textUnderlineOffset: "3px",
-                            }}
-                          >
-                            Các ấn phẩm đã được xuất bản của viện thiết kế (Publications)
-                          </h3>
-                          <p style={{ marginTop: "clamp(15px, 2.5vw, 20px)", color: "#555", lineHeight: "1.7", fontSize: "clamp(14px, 2vw, 15px)" }}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                            luctus nec ullamcorper mattis, pulvinar dapibus leo.
-                          </p>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </section>
-
-
-                {/* SƠ ĐỒ CẤU TỔ CHỨC */}
-                <section
-                  id="organization-chart"
-                  className="organization-chart section"
-                  style={{
-                    background: "#fff",
-                    padding: "60px 0",
-                  }}
-                >
-                  <div className="container">
-                    <h2
-                      style={{
-                        fontFamily: "'Times New Roman', serif",
-                        fontSize: "34px",
-                        fontWeight: "bold",
-                        marginBottom: "10px",
-                        textAlign: "center",
-                      }}
-                    >
-                      SƠ ĐỒ CẤU TỔ CHỨC VIỆN
-                    </h2>
-
-                    <h4
-                      style={{
-                        fontFamily: "'Times New Roman', serif",
-                        fontSize: "16px",
-                        marginBottom: "40px",
-                        textAlign: "center",
-                        color: "#666",
-                      }}
-                    >
-                      COMPANY'S ORGANIZATION STRUCTURE CHART
-                    </h4>
-
-                    {/* Sơ đồ tổ chức */}
-                    <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "50px 20px" }}>
-                      {/* BỘ XÂY DỰNG */}
-                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                        <div style={{
-                          display: "inline-block",
-                          padding: "12px 30px",
-                          border: "1px solid #333",
-                          background: "#fff",
-                        }}>
-                          <div style={{ fontSize: "13px", fontWeight: "600", letterSpacing: "0.5px" }}>BỘ XÂY DỰNG</div>
-                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>MINISTRY OF CONSTRUCTION</div>
-                        </div>
-                        {/* Đường thẳng xuống */}
-                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
-                      </div>
-
-                      {/* VIUP */}
-                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                        <div style={{
-                          display: "inline-block",
-                          padding: "20px 40px",
-                          border: "2px solid #333",
-                          background: "#fff",
-                        }}>
-                          <div style={{ fontSize: "38px", fontWeight: "700", letterSpacing: "2px", marginBottom: "8px" }}>VIUP</div>
-                          <div style={{ fontSize: "12px", fontWeight: "600", lineHeight: "1.4" }}>VIỆN QUY HOẠCH ĐÔ THỊ VÀ NÔNG THÔN QUỐC GIA</div>
-                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>VIETNAM INSTITUTE FOR URBAN AND RURAL PLANNING</div>
-                        </div>
-                        {/* Đường thẳng xuống */}
-                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
-                      </div>
-
-                      {/* UDI */}
-                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                        <div style={{
-                          display: "inline-block",
-                          padding: "25px 50px",
-                          border: "2px solid #333",
-                          background: "#333",
-                          color: "#fff",
-                        }}>
-                          <div style={{ fontSize: "42px", fontWeight: "700", letterSpacing: "3px", marginBottom: "8px" }}>UDI</div>
-                          <div style={{ fontSize: "12px", fontWeight: "600", lineHeight: "1.4" }}>VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ</div>
-                          <div style={{ fontSize: "10px", color: "#ddd", marginTop: "3px" }}>URBAN DESIGN INSTITUTE</div>
-                        </div>
-                        {/* Đường thẳng xuống */}
-                        <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
-                      </div>
-
-                      {/* GIÁM ĐỐC VIỆN và HỘI ĐỒNG TƯ VẤN */}
-                      <div style={{ position: "relative", marginBottom: "40px", minHeight: "110px", maxWidth: "900px", margin: "0 auto 40px auto" }}>
-                        {/* Hội đồng tư vấn - bên trái */}
-                        <div style={{ position: "absolute", left: "80px", top: "0" }}>
-                          <div style={{
-                            padding: "14px 20px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            width: "220px",
-                          }}>
-                            <div style={{ fontSize: "12px", fontWeight: "600" }}>HỘI ĐỒNG TƯ VẤN</div>
-                            <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>ADVISORY COUNCIL</div>
-                          </div>
-                        </div>
-
-                        {/* Đường kẻ ngang từ Hội đồng tư vấn đến Giám đốc */}
-                        <div style={{
-                          position: "absolute",
-                          left: "300px",
-                          top: "27px",
-                          width: "calc(50% - 425px)",
-                          height: "1px",
-                          background: "#333",
-                        }}></div>
-
-                        {/* Giám đốc - ở giữa */}
-                        <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", top: "0" }}>
-                          <div style={{
-                            padding: "16px 25px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            width: "250px",
-                          }}>
-                            <div style={{ fontSize: "13px", fontWeight: "600" }}>GIÁM ĐỐC VIỆN</div>
-                            <div style={{ fontSize: "11px", color: "#666", marginTop: "3px" }}>DIRECTOR</div>
-                          </div>
-                          {/* Đường thẳng xuống */}
-                          <div style={{ width: "1px", height: "40px", background: "#333", margin: "0 auto" }}></div>
-                        </div>
-                      </div>
-
-                      {/* CÁC PHÓ GIÁM ĐỐC */}
-                      <div style={{ textAlign: "center", marginBottom: "40px" }}>
-                        <div style={{
-                          display: "inline-block",
-                          padding: "14px 25px",
-                          border: "1px solid #333",
-                          background: "#fff",
-                        }}>
-                          <div style={{ fontSize: "12px", fontWeight: "600" }}>CÁC PHÓ GIÁM ĐỐC VIỆN</div>
-                          <div style={{ fontSize: "10px", color: "#666", marginTop: "3px" }}>VICE DIRECTORS</div>
-                        </div>
-                        {/* Đường thẳng xuống */}
-                        <div style={{ width: "1px", height: "25px", background: "#333", margin: "0 auto" }}></div>
-                        {/* Đường ngang */}
-                        <div style={{ width: "100%", height: "1px", background: "#333", margin: "0 auto", maxWidth: "900px" }}></div>
-                        {/* 4 đường thẳng xuống */}
-                        <div style={{ display: "flex", justifyContent: "space-between", padding: "0 50px", maxWidth: "900px", margin: "0 auto" }}>
-                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
-                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
-                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
-                          <div style={{ width: "1px", height: "25px", background: "#333" }}></div>
-                        </div>
-                      </div>
-
-                      {/* CÁC TRUNG TÂM - HÀNG ĐẦU */}
-                      <div style={{ display: "flex", justifyContent: "space-between", gap: "20px", marginBottom: "35px", position: "relative" }}>
-                        {/* Phòng tổng hợp */}
-                        <div style={{ flex: 1 }}>
-                          <div style={{
-                            padding: "16px 12px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            minHeight: "90px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>PHÒNG TỔNG HỢP</div>
-                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>GENERAL OFFICE</div>
-                          </div>
-                        </div>
-
-                        {/* Trung tâm quy hoạch */}
-                        <div style={{ flex: 1 }}>
-                          <div style={{
-                            padding: "16px 12px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            minHeight: "90px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM QUY HOẠCH XÂY DỰNG</div>
-                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>CONSTRUCTION PLANNING CENTER</div>
-                          </div>
-                          {/* Đường thẳng xuống từ box này */}
-                          <div style={{ width: "1px", height: "35px", background: "#333", margin: "0 auto" }}></div>
-                        </div>
-
-                        {/* Trung tâm thiết kế */}
-                        <div style={{ flex: 1 }}>
-                          <div style={{
-                            padding: "16px 12px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            minHeight: "90px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM THIẾT KẾ ĐÔ THỊ</div>
-                            <div style={{ fontSize: "9px", color: "#666", marginTop: "4px" }}>URBAN DESIGN CENTER</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* CÁC TRUNG TÂM - HÀNG DƯỚI */}
-                      <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-                        {/* Trung tâm kiến trúc cảnh quan */}
-                        <div style={{ width: "31%" }}>
-                          <div style={{
-                            padding: "16px 12px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            minHeight: "90px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM KIẾN TRÚC CẢNH</div>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>QUAN VÀ MÔI TRƯỜNG ĐÔ THỊ</div>
-                            <div style={{ fontSize: "9px", color: "#666", marginTop: "3px" }}>ARCHITECTURE DESIGN AND</div>
-                            <div style={{ fontSize: "9px", color: "#666" }}>URBAN ENVIRONMENT CENTER</div>
-                          </div>
-                        </div>
-
-                        {/* Trung tâm kỹ thuật hạ tầng */}
-                        <div style={{ width: "31%" }}>
-                          <div style={{
-                            padding: "16px 12px",
-                            border: "1px solid #333",
-                            background: "#fff",
-                            textAlign: "center",
-                            minHeight: "90px",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>TRUNG TÂM KỸ THUẬT HẠ TẦNG</div>
-                            <div style={{ fontSize: "11px", fontWeight: "600", lineHeight: "1.4" }}>VÀ THUỶ LỢI ĐÔ THỊ</div>
-                            <div style={{ fontSize: "9px", color: "#666", marginTop: "3px" }}>URBAN INFRASTRUCTURE AND</div>
-                            <div style={{ fontSize: "9px", color: "#666" }}>ENGINEERING CENTER</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section style={{ width: "100%", textAlign: "center", padding: "60px 0 80px" }}>
-                  {/* ======= 4 BLOCK STATS ======= */}
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(4, 1fr)",
-                      maxWidth: "1200px",
-                      margin: "0 auto",
-                      gap: "40px",
-                      padding: "0 20px",
-                    }}
-                  >
-                    {/* BLOCK 1 */}
-                    <div>
-                      <h2
-                        style={{
-                          fontSize: "32px",
-                          fontWeight: 600,
-                          marginBottom: "8px",
-                          color: "#1b1b1b",
-                          fontFamily: "serif",
-                        }}
-                      >
-                        12+ years
-                      </h2>
-                      <p style={{ fontSize: "12px", letterSpacing: "2px", marginBottom: "12px", color: "#444" }}>
-                        EXPERIENCE OF WORK
-                      </p>
-                      <div style={{ width: "80px", height: "2px", backgroundColor: "#C9B97E", margin: "0 auto" }} />
-                    </div>
-
-                    {/* BLOCK 2 */}
-                    <div>
-                      <h2
-                        style={{
-                          fontSize: "32px",
-                          fontWeight: 600,
-                          marginBottom: "8px",
-                          color: "#1b1b1b",
-                          fontFamily: "serif",
-                        }}
-                      >
-                        50+
-                      </h2>
-                      <p style={{ fontSize: "12px", letterSpacing: "2px", marginBottom: "12px", color: "#444" }}>
-                        EMPLOYEES
-                      </p>
-                      <div style={{ width: "80px", height: "2px", backgroundColor: "#C9B97E", margin: "0 auto" }} />
-                    </div>
-
-                    {/* BLOCK 3 */}
-                    <div>
-                      <h2
-                        style={{
-                          fontSize: "32px",
-                          fontWeight: 600,
-                          marginBottom: "8px",
-                          color: "#1b1b1b",
-                          fontFamily: "serif",
-                        }}
-                      >
-                        20+
-                      </h2>
-                      <p style={{ fontSize: "12px", letterSpacing: "1px", marginBottom: "4px", color: "#444" }}>
-                        Key Partners & Clients
-                      </p>
-                      <p style={{ fontSize: "12px", letterSpacing: "1px", marginBottom: "12px", color: "#444" }}>
-                        UDI Partners & Friends
-                      </p>
-                      <div style={{ width: "80px", height: "2px", backgroundColor: "#C9B97E", margin: "0 auto" }} />
-                    </div>
-
-                    {/* BLOCK 4 */}
-                    <div>
-                      <h2
-                        style={{
-                          fontSize: "32px",
-                          fontWeight: 600,
-                          marginBottom: "8px",
-                          color: "#1b1b1b",
-                          fontFamily: "serif",
-                        }}
-                      >
-                        1000+
-                      </h2>
-                      <p style={{ fontSize: "12px", letterSpacing: "2px", marginBottom: "12px", color: "#444" }}>
-                        PROJECTS AND IDEAS AWARDS
-                      </p>
-                      <div style={{ width: "80px", height: "2px", backgroundColor: "#C9B97E", margin: "0 auto" }} />
-                    </div>
-                  </div>
-
-                  {/* ======= LIGHT GREY DIVIDER (mũi đỏ trên cùng) ======= */}
-                  <div
-                    style={{
-                      height: 18,
-                      width: "100%",
-                      background: "#f3f3f3",
-                      marginTop: 34,
-                      boxSizing: "border-box",
-                    }}
-                  />
-
-                  {/* ======= BIG IMAGE BELOW ======= */}
-                  <div style={{ width: "100%", marginTop: 40 }}>
-                    <img
-                      src={sxdbg4}
-                      alt="udi sketch"
-                      style={{
-                        width: "100%",
-                        maxWidth: "1200px",
-                        display: "block",
-                        margin: "0 auto",
-                      }}
-                    />
-                  </div>
-
-                  {/* ======= LARGE GOLD HEADING (mũi đỏ thứ 2) ======= */}
-                  <h2
-                    style={{
-                      marginTop: 30,
-                      fontFamily: "serif",
-                      fontSize: 40,
-                      color: "#C9B97E",
-                      letterSpacing: 2,
-                      lineHeight: 1.1,
-                      maxWidth: "1100px",
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                    }}
-                  >
-                    UDI MONG RẰNG ĐƯỢC ĐỒNG HÀNH CÙNG BẠN
-                  </h2>
-
-                  {/* ======= CTA BUTTON (mũi đỏ thứ 3) ======= */}
-                  <div style={{ marginTop: 22 }}>
-                    <a
-                      href="#contact"
-                      style={{
-                        display: "inline-block",
-                        padding: "10px 26px",
-                        borderRadius: 24,
-                        background: "linear-gradient(180deg,#4da6ff,#2188ff)",
-                        color: "#fff",
-                        textDecoration: "none",
-                        fontWeight: 600,
-                        boxShadow: "0 6px 18px rgba(33,136,255,0.18)",
-                        transition: "transform .18s ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
-                    >
-                      LIÊN HỆ TRỰC TIẾP
-                    </a>
                   </div>
                 </section>
 

@@ -1,55 +1,165 @@
-/* Project Navigation Container - Responsive */
+/* Project listing layout responsive rules */
 
-/* Desktop (1200px+) - No changes needed, keep default inline styles */
+.project-grid-shell {
+  align-items: flex-start;
+}
 
-/* Tablet (768px - 1199px) */
-@media (max-width: 1200px) {
+.project-filter-title {
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.project-filter-group-title {
+  letter-spacing: 0.01em;
+}
+
+.project-filter-button {
+  width: 100%;
+  box-shadow: none;
+}
+
+.project-filter-button.is-active {
+  box-shadow: 0 14px 28px rgba(20, 155, 144, 0.2) !important;
+}
+
+.project-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 0;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 55px rgba(15, 23, 42, 0.1) !important;
+}
+
+.project-card-media {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.08), rgba(20, 155, 144, 0.12));
+  aspect-ratio: 16 / 9;
+}
+
+.project-card-image {
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.04);
+}
+
+.project-card-title {
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  min-height: 2.7em;
+}
+
+.project-card-description {
+  min-height: 2.9em;
+}
+
+.project-card-meta {
+  padding-top: 2px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
   .project-section > div:first-of-type {
-    gap: 60px !important;
-    padding: 0 30px !important;
+    flex-direction: column !important;
   }
-  
-  .project-section > div:first-of-type > a > div {
-    font-size: 1.5rem !important;
-    letter-spacing: 1.5px !important;
+
+  .project-filter-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    position: static !important;
+  }
+
+  .project-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .project-card-media {
+    height: 180px !important;
+  }
+
+  .project-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
-/* Mobile (600px - 767px) */
 @media (max-width: 768px) {
+  .project-section {
+    padding: 40px 0 56px !important;
+  }
+
   .project-section > div:first-of-type {
-    gap: 32px !important;
-    padding: 0 20px !important;
-    min-height: auto !important;
-    flex-wrap: wrap !important;
+    padding: 0 12px !important;
+    gap: 20px !important;
   }
-  
-  .project-section > div:first-of-type > a {
-    flex: 0 1 calc(50% - 16px) !important;
+
+  .project-filter-title {
+    font-size: 2rem !important;
   }
-  
-  .project-section > div:first-of-type > a > div {
-    font-size: 1.1rem !important;
-    letter-spacing: 1px !important;
-    white-space: normal !important;
+
+  .project-filter-sidebar {
+    border-radius: 18px !important;
+    padding: 16px !important;
+  }
+
+  .project-grid-count {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .project-card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .project-card {
+    border-radius: 18px !important;
+  }
+
+  .project-card-media {
+    height: 170px !important;
+  }
+
+  .project-card-title {
+    font-size: 1rem !important;
+    min-height: auto;
+  }
+
+  .project-card-description {
+    min-height: auto;
+  }
+
+  .project-map-wrapper,
+  .project-team-section {
+    overflow: hidden !important;
+  }
+
+  .project-team-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 }
 
-/* Mobile Small (< 480px) */
 @media (max-width: 480px) {
   .project-section > div:first-of-type {
-    gap: 16px !important;
-    padding: 0 12px !important;
-    min-height: auto !important;
+    padding: 0 10px !important;
   }
-  
-  .project-section > div:first-of-type > a {
-    flex: 0 1 calc(50% - 8px) !important;
+
+  .project-filter-sidebar {
+    padding: 14px !important;
   }
-  
-  .project-section > div:first-of-type > a > div {
-    font-size: 0.95rem !important;
-    letter-spacing: 0.5px !important;
-    white-space: normal !important;
+
+  .project-card-media {
+    height: 160px !important;
+  }
+
+  .project-card-title {
+    font-size: 0.96rem !important;
+  }
+
+  .project-card-meta {
+    font-size: 13px !important;
+    gap: 10px !important;
   }
 }

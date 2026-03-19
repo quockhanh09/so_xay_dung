@@ -1,20 +1,34 @@
-import { useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
-import bgImage from "../assets/img/sxd-ab6.png";
 function Contact() {
+  const heroBgImage =
+    "https://readdy.ai/api/search-image?query=modern%20office%20building%20exterior%20with%20glass%20facade%20professional%20business%20architecture%20contact%20us%20concept&width=1920&height=800&seq=contacthero&orientation=landscape";
+  const [message, setMessage] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 991px)");
+    const updateLayout = (event) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", updateLayout);
+
+    return () => mediaQuery.removeEventListener("change", updateLayout);
+  }, []);
   
   return (
-    <><section
+    <>
+    <section
             id="portfolio-details"
             className="portfolio-details section"
             style={{
-              backgroundImage: `url(${bgImage})`,
+              backgroundImage: `url(${heroBgImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               padding: 0,
               textAlign: "center",
               position: "relative",
-              minHeight: "60vh",
+              minHeight: "62vh",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -28,7 +42,7 @@ function Contact() {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(0,0,0,0.5)",
+                backgroundColor: "rgba(8, 24, 56, 0.58)",
                 zIndex: 1,
               }}
             ></div>
@@ -42,135 +56,324 @@ function Contact() {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                maxWidth: "1200px",
+                margin: "0 auto",
+                padding: "90px 24px 70px",
               }}
             >
+              <div
+                style={{
+                  color: "rgba(255,255,255,0.88)",
+                  fontSize: "1.1rem",
+                  fontWeight: 500,
+                  marginBottom: "20px",
+                  letterSpacing: "0.3px",
+                }}
+              >
+                Trang chủ&nbsp;&nbsp;/&nbsp;&nbsp;Liên hệ
+              </div>
               <h1
                 style={{
                   color: "#fff",
-                  fontSize: "3.5rem",
-                  fontWeight: 500,
-                  letterSpacing: "2px",
-                  marginBottom: "20px",
-                  fontFamily: "serif",
-                  textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                  fontSize: "clamp(2.4rem, 5vw, 4.7rem)",
+                  fontWeight: 700,
+                  lineHeight: 1.05,
+                  letterSpacing: "0.3px",
+                  margin: 0,
+                  fontFamily: "Montserrat, sans-serif",
+                  textShadow: "0 3px 14px rgba(0,0,0,0.35)",
                 }}
               >
-                CONTACT US
+                Liên hệ
+                <br />
+                &amp; Hợp tác
               </h1>
+            </div>
+          </section>
+
+          
+          <section style={{ background: "#f5f6f8", padding: "0", width: "100%" }}>
+            <div
+              style={{
+                maxWidth: "1180px",
+                margin: "0 auto",
+                display: "grid",
+                gridTemplateColumns: isMobile
+                  ? "minmax(0, 1fr)"
+                  : "minmax(320px, 44%) minmax(320px, 56%)",
+                gap: "0",
+                minHeight: isMobile ? "auto" : "720px",
+                alignItems: "stretch",
+              }}
+            >
               <div
                 style={{
-                  width: "80px",
-                  height: "3px",
-                  background: "#fff",
-                  margin: "0 auto 0",
-                  marginBottom: "10px",
-                  opacity: 0.7,
+                  background: "#f3f4f6",
+                  padding: isMobile ? "42px 20px 36px" : "56px 46px 44px",
                 }}
-              ></div>
+              >
+                <h2
+                  style={{
+                    margin: "0 0 14px",
+                    color: "#0f2543",
+                    fontSize: "2.05rem",
+                    lineHeight: 1.1,
+                    fontWeight: 700,
+                  }}
+                >
+                  Gửi yêu cầu tư vấn
+                </h2>
+                <p
+                  style={{
+                    margin: "0 0 28px",
+                    color: "#5f6d80",
+                    fontSize: "0.96rem",
+                    lineHeight: 1.65,
+                  }}
+                >
+                  Vui lòng điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời
+                  gian sớm nhất.
+                </p>
+
+                <form style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  <label style={{ color: "#32465f", fontWeight: 600, fontSize: "0.9rem" }}>
+                    Họ và tên <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Nguyễn Văn A"
+                    style={{
+                      height: "50px",
+                      border: "1px solid #d6dce4",
+                      borderRadius: "10px",
+                      padding: "0 12px",
+                      fontSize: "0.92rem",
+                      outline: "none",
+                    }}
+                  />
+
+                  <label style={{ color: "#32465f", fontWeight: 600, fontSize: "0.9rem" }}>
+                    Email <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="email@example.com"
+                    style={{
+                      height: "50px",
+                      border: "1px solid #d6dce4",
+                      borderRadius: "10px",
+                      padding: "0 12px",
+                      fontSize: "0.92rem",
+                      outline: "none",
+                    }}
+                  />
+
+                  <label style={{ color: "#32465f", fontWeight: 600, fontSize: "0.9rem" }}>
+                    Số điện thoại <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="0123 456 789"
+                    style={{
+                      height: "50px",
+                      border: "1px solid #d6dce4",
+                      borderRadius: "10px",
+                      padding: "0 12px",
+                      fontSize: "0.92rem",
+                      outline: "none",
+                    }}
+                  />
+
+                  <label style={{ color: "#32465f", fontWeight: 600, fontSize: "0.9rem" }}>
+                    Loại dự án <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <select
+                    defaultValue=""
+                    style={{
+                      height: "50px",
+                      border: "1px solid #d6dce4",
+                      borderRadius: "10px",
+                      padding: "0 12px",
+                      fontSize: "0.92rem",
+                      color: "#18263a",
+                      outline: "none",
+                      background: "#fff",
+                    }}
+                  >
+                    <option value="" disabled>
+                      Chọn loại dự án
+                    </option>
+                    <option value="quy-hoach">Quy hoạch đô thị</option>
+                    <option value="kien-truc">Thiết kế kiến trúc</option>
+                    <option value="ha-tang">Thiết kế hạ tầng</option>
+                  </select>
+
+                  <label style={{ color: "#32465f", fontWeight: 600, fontSize: "0.9rem" }}>
+                    Nội dung <span style={{ color: "#ef4444" }}>*</span>
+                  </label>
+                  <div>
+                    <textarea
+                      maxLength={500}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Mô tả chi tiết về dự án và yêu cầu tư vấn của bạn..."
+                      style={{
+                        width: "100%",
+                        minHeight: "122px",
+                        resize: "none",
+                        border: "1px solid #d6dce4",
+                        borderRadius: "10px",
+                        padding: "10px 12px",
+                        fontSize: "0.92rem",
+                        outline: "none",
+                        fontFamily: "inherit",
+                      }}
+                    ></textarea>
+                    <div
+                      style={{
+                        textAlign: "right",
+                        marginTop: "8px",
+                        color: "#7b8aa0",
+                        fontSize: "0.86rem",
+                      }}
+                    >
+                      {message.length}/500 ky tu
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    style={{
+                      height: "48px",
+                      marginTop: "8px",
+                      border: "none",
+                      borderRadius: "999px",
+                      background: "#0f9f98",
+                      color: "#fff",
+                      fontSize: "1.12rem",
+                      fontWeight: 700,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Gửi yêu cầu
+                  </button>
+                </form>
+              </div>
+
+              <div
+                style={{
+                  height: isMobile ? "440px" : "100%",
+                  background: "#dfe5ed",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                }}
+              >
+                <iframe
+                  title="Google Map"
+                  src="https://www.google.com/maps?q=%C4%90%C6%B0%E1%BB%9Dng+L%C3%A1ng,+%C4%90%E1%BB%91ng+%C4%90a,+H%C3%A0+N%E1%BB%99i&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, display: "block" }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>
           </section>
 
-          
-          <section style={{ background: '#fff', padding: '56px 0 0 0', width: '100%' }}>
-            {/* 3 columns: phone, address, mail */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              gap: '120px',
-              maxWidth: 1200,
-              margin: '0 auto',
-              padding: '0 24px',
-              flexWrap: 'wrap',
-            }}>
-              {/* Phone */}
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 220 }}>
-                <div style={{ fontSize: 54, color: '#c3b393', marginBottom: 8 }}>
-                  <svg width="48" height="48" fill="none" stroke="#c3b393" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3.08 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg>
+          <section style={{ background: "#f3f4f6", padding: "78px 0 92px", width: "100%" }}>
+            <div
+              style={{
+                maxWidth: "1180px",
+                margin: "0 auto",
+                padding: "0 24px",
+                display: "grid",
+                gridTemplateColumns: isMobile
+                  ? "minmax(0, 1fr)"
+                  : "repeat(3, minmax(220px, 1fr))",
+                columnGap: "46px",
+                rowGap: "34px",
+              }}
+            >
+              <div style={{ textAlign: "center" }}>
+                <div
+                  style={{
+                    width: "66px",
+                    height: "66px",
+                    margin: "0 auto 24px",
+                    borderRadius: "16px",
+                    background: "#d8f2eb",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg width="30" height="30" fill="none" stroke="#0f8f90" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
                 </div>
-                <div style={{ color: '#888', fontWeight: 500, letterSpacing: 1, fontSize: 16, marginBottom: 2 }}>PHONE:</div>
-                <div style={{ fontWeight: 700, fontSize: 18, color: '#222', letterSpacing: 1 }}>012.3344.566</div>
+                <h3 style={{ margin: "0 0 12px", fontSize: "2rem", color: "#0e1f3b", fontWeight: 700 }}>
+                  Địa chỉ
+                </h3>
+                <p style={{ margin: 0, color: "#33475f", fontSize: "1.05rem", lineHeight: 1.45 }}>
+                  Tầng 5, Tòa nhà ABC, Số 123 Đường Láng, Đống Đa, Hà Nội
+                </p>
               </div>
-              {/* Address */}
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 220 }}>
-                <div style={{ fontSize: 54, color: '#c3b393', marginBottom: 8 }}>
-                  <svg width="48" height="48" fill="none" stroke="#c3b393" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+
+              <div style={{ textAlign: "center" }}>
+                <div
+                  style={{
+                    width: "66px",
+                    height: "66px",
+                    margin: "0 auto 24px",
+                    borderRadius: "16px",
+                    background: "#d8f2eb",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg width="30" height="30" fill="none" stroke="#0f8f90" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <path d="M22 16.92v2a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3.08 5.18 2 2 0 0 1 5 3h2a2 2 0 0 1 2 1.72c.12.73.32 1.45.6 2.12a2 2 0 0 1-.45 2.18l-.9.9a16 16 0 0 0 6.8 6.8l.9-.9a2 2 0 0 1 2.18-.45c.67.28 1.39.48 2.12.6A2 2 0 0 1 22 16.92z" />
+                  </svg>
                 </div>
-                <div style={{ color: '#888', fontWeight: 500, letterSpacing: 1, fontSize: 16, marginBottom: 2 }}>ADDRESS:</div>
-                <div style={{ fontWeight: 700, fontSize: 18, color: '#222', letterSpacing: 1 }}>36 Hoang Cau, Dong Da, Hanoi</div>
+                <h3 style={{ margin: "0 0 12px", fontSize: "2rem", color: "#0e1f3b", fontWeight: 700 }}>
+                  Điện thoại
+                </h3>
+                <p style={{ margin: 0, color: "#33475f", fontSize: "1.05rem", lineHeight: 1.45 }}>
+                  +84 24 1234 5678
+                </p>
               </div>
-              {/* Mail */}
-              <div style={{ textAlign: 'center', flex: 1, minWidth: 220 }}>
-                <div style={{ fontSize: 54, color: '#c3b393', marginBottom: 8 }}>
-                  <svg width="48" height="48" fill="none" stroke="#c3b393" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+
+              <div style={{ textAlign: "center" }}>
+                <div
+                  style={{
+                    width: "66px",
+                    height: "66px",
+                    margin: "0 auto 24px",
+                    borderRadius: "16px",
+                    background: "#d8f2eb",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg width="30" height="30" fill="none" stroke="#0f8f90" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m4 7 8 6 8-6" />
+                  </svg>
                 </div>
-                <div style={{ color: '#888', fontWeight: 500, letterSpacing: 1, fontSize: 16, marginBottom: 2 }}>MAIL:</div>
-                <div style={{ fontWeight: 700, fontSize: 18, color: '#222', letterSpacing: 1 }}>support@tempi.vn</div>
+                <h3 style={{ margin: "0 0 12px", fontSize: "2rem", color: "#0e1f3b", fontWeight: 700 }}>
+                  Email
+                </h3>
+                <p style={{ margin: 0, color: "#33475f", fontSize: "1.05rem", lineHeight: 1.45 }}>
+                  info@architecture-planning.vn
+                </p>
               </div>
-            </div>
-            {/* Google Map */}
-            <div style={{ width: '100%', margin: '100px 0 0 0', minHeight: 420, height: 480, background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <iframe
-                title="Google Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.427006876153!2d105.8194543154026!3d21.01430739355545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab6b2b2b2b2b%3A0x2b2b2b2b2b2b2b2b!2zMzYgSG_DoG5nIENhbywgxJDhu5FuZyBZw6AsIEjDoG5vaQ!5e0!3m2!1svi!2s!4v1700480000000!5m2!1svi!2s"
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: 8 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
             </div>
           </section>
-
-           <section style={{ background: '#fff', padding: '60px 0 80px 0', width: '100%' }}>
-       
-      
-          
-        {/* Title & Button */}
-        <div style={{ textAlign: 'center', marginTop: 60 }}>
-          <div style={{
-            fontFamily: 'serif',
-            fontSize: '3.2rem',
-            color: '#c3b393',
-            fontWeight: 400,
-            marginBottom: 18,
-            letterSpacing: 1,
-          }}>
-            HOME IS WAITING FOR YOU HERE
-          </div>
-          <div style={{
-            fontFamily: 'serif',
-            fontSize: '2.7rem',
-            color: '#333',
-            fontWeight: 400,
-            marginBottom: 32,
-            letterSpacing: 1,
-          }}>
-            SCHEDULE A TOUR
-          </div>
-          <button
-            style={{
-              background: '#b6a484',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 2,
-              padding: '12px 36px',
-              fontSize: '1rem',
-              fontWeight: 500,
-              letterSpacing: '1px',
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-              transition: 'background 0.2s',
-            }}
-            onMouseOver={e => (e.currentTarget.style.background = '#a08c6a')}
-            onMouseOut={e => (e.currentTarget.style.background = '#b6a484')}
-          >
-            BOOK A VISIT
-          </button>
-        </div>
-      </section>
         </>
      
   );

@@ -1,734 +1,480 @@
 
-import React, { useState, useEffect, useRef } from "react";
-import logo from "../assets/img/logo-sxd.png";
-import iconGlobal from "../assets/img/Icon.svg";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/img/logo-sxd.png";
 import "../style/App.css";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
-  const aboutCloseTimer = useRef(null);
-  const projectsCloseTimer = useRef(null);
   const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
     setMenuOpen(false);
-    setAboutOpen(false);
-    setProjectsOpen(false);
   }, [location.pathname]);
-
-  const handleAboutEnter = () => {
-    if (aboutCloseTimer.current) {
-      clearTimeout(aboutCloseTimer.current);
-      aboutCloseTimer.current = null;
-    }
-    setAboutOpen(true);
-  };
-
-  const handleAboutLeave = () => {
-    if (aboutCloseTimer.current) clearTimeout(aboutCloseTimer.current);
-    aboutCloseTimer.current = setTimeout(() => setAboutOpen(false), 200);
-  };
-
-  const handleProjectsEnter = () => {
-    if (projectsCloseTimer.current) {
-      clearTimeout(projectsCloseTimer.current);
-      projectsCloseTimer.current = null;
-    }
-    setProjectsOpen(true);
-  };
-
-  const handleProjectsLeave = () => {
-    if (projectsCloseTimer.current) clearTimeout(projectsCloseTimer.current);
-    projectsCloseTimer.current = setTimeout(() => setProjectsOpen(false), 200);
-  };
 
   return (
     <>
       <style>{`
-        .logo-intro-overlay {
-          position: fixed;
+        .udi-header {
+          position: absolute;
           top: 0;
           left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: #ffffff;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-          animation: fadeOut 0.5s ease-in-out 2.5s forwards;
-        }
-        
-        .udi-letters-container {
-          position: relative;
-          width: 700px;
-          height: 320px;
-        }
-        
-        .piece {
-          position: absolute;
-          border-radius: 4px;
-          opacity: 0;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        }
-        
-        /* Chữ U - kiểu ảnh 2: hai thanh dọc + thanh ngang ngắn */
-        .u1 { 
-          width: 40px; 
-          height: 180px; 
-          background: #ff002bff;
-          left: -150px; 
-          top: -100px; 
-          border-radius: 12px;
-          animation: moveU1 0.9s ease-out 0.1s forwards;
-        }
-        .u2 { 
-          width: 40px; 
-          height: 180px; 
-          background: #ff002bff;
-          left: 900px; 
-          top: -80px; 
-          border-radius: 12px;
-          animation: moveU2 0.9s ease-out 0.15s forwards;
-        }
-        .u3 { 
-          width: 110px; 
-          height: 40px; 
-          background: #ff002bff;
-          left: -120px; 
-          top: 450px; 
-          border-radius: 12px;
-          animation: moveU3 0.9s ease-out 0.2s forwards;
-        }
-        
-        /* Chữ D - kiểu ảnh 2: giống chữ C + hai khối nhỏ bên phải */
-        .d1 { 
-          width: 40px; 
-          height: 180px; 
-          background: #ff002bff;
-          left: -200px; 
-          top: 100px; 
-          border-radius: 12px;
-          animation: moveD1 0.9s ease-out 0.3s forwards;
-        }
-        .d2 { 
-          width: 110px; 
-          height: 40px; 
-          background: #ff002bff;
-          left: 950px; 
-          top: -120px; 
-          border-radius: 12px;
-          animation: moveD2 0.9s ease-out 0.35s forwards;
-        }
-        .d3 { 
-          width: 110px; 
-          height: 40px; 
-          background: #ff002bff;
-          left: -150px; 
-          top: 480px; 
-          border-radius: 12px;
-          animation: moveD3 0.9s ease-out 0.4s forwards;
-        }
-        .d4 { 
-          width: 40px; 
-          height: 50px; 
-          background: #ff002bff;
-          left: 980px; 
-          top: 180px; 
-          border-radius: 12px;
-          animation: moveD4 0.9s ease-out 0.45s forwards;
-        }
-        .d5 { 
-          width: 40px; 
-          height: 50px; 
-          background: #ff002bff;
-          left: -220px; 
-          top: -150px; 
-          border-radius: 12px;
-          animation: moveD5 0.9s ease-out 0.32s forwards;
-        }
-        
-        /* Chữ I - 3 mảnh tạo hình I đơn giản */
-        .i1 { 
-          width: 100px; 
-          height: 35px; 
-          background: linear-gradient(135deg, #2F2F2F, #1A1A1A);
-          left: 1000px; 
-          top: -100px; 
-          border-radius: 12px 12px 12px 12px;
-          animation: moveI1 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-        }
-        .i2 { 
-          width: 35px; 
-          height: 160px; 
-          background: linear-gradient(135deg, #1A1A1A, #000000);
-          left: -250px; 
-          top: -130px; 
-          border-radius: 12px;
-          animation: moveI2 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
-        }
-        .i3 { 
-          width: 100px; 
-          height: 35px; 
-          background: linear-gradient(135deg, #2F2F2F, #1A1A1A);
-          left: 1020px; 
-          top: 500px; 
-          border-radius: 12px 12px 12px 12px;
-          animation: moveI3 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
-        }
-        
-        /* Animations cho chữ U (single-phase theo bố cục ảnh 2) */
-        @keyframes moveU1 { 
-          to { 
-            left: 80px; 
-            top: 60px; 
-            opacity: 1; 
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveU2 { 
-          to { 
-            left: 235px; 
-            top: 60px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveU3 { 
-          to { 
-            left: 120px; 
-            top: 200px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        
-        /* Animations cho chữ D (single-phase theo bố cục ảnh 2) */
-        @keyframes moveD1 { 
-          to { 
-            left: 330px; 
-            top: 60px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveD2 { 
-          to { 
-            left: 370px; /* sát mép phải của d1 */
-            top: 60px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveD3 { 
-          to { 
-            left: 370px; /* thẳng hàng với d2 */
-            top: 200px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveD4 { 
-          to { 
-            left: 475px; 
-            top: 90px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        @keyframes moveD5 { 
-          to { 
-            left: 475px; 
-            top: 150px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-        
-        /* Animations cho chữ I */
-        @keyframes moveI1 { 
-          to { 
-            left: 565px; 
-            top: 60px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-          from {
-            transform: scale(0.5) rotate(180deg);
-          }
-        }
-        @keyframes moveI2 { 
-          to { 
-            left: 600px; 
-            top: 60px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-          from {
-            transform: scale(0.5) rotate(-180deg);
-          }
-        }
-        @keyframes moveI3 { 
-          to { 
-            left: 565px; 
-            top: 185px; 
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-          from {
-            transform: scale(0.5) rotate(90deg);
-          }
-        }
-        
-        @keyframes fadeOut {
-          to {
-            opacity: 0;
-            visibility: hidden;
-          }
-        }
-        .udi-header {
           width: 100%;
-          background: #f5f5f5;
+          z-index: 1100;
+          padding: 12px 24px;
+          box-sizing: border-box;
+          color: #f4f7fa;
+          background: linear-gradient(180deg, rgba(12, 30, 49, 0.88), rgba(12, 30, 49, 0.46));
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(5px);
+        }
+
+        .udi-header-inner {
+          max-width: 1320px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+        }
+
+        .udi-logo-wrap {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          flex-shrink: 0;
+          text-decoration: none;
+        }
+
+        .udi-header-logo {
+          height: 42px;
+          width: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+        }
+
+        .udi-brand {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          padding-top: 20px;
-          padding-bottom: 10px;
-          border-bottom: 1px solid #eee;
-          position: relative;
-          box-sizing: border-box;
-          padding-left: 24px;
-          padding-right: 24px;
+          color: #ffffff;
+          line-height: 1.1;
         }
-        .udi-header-logo {
-          height: 150px;
-          object-fit: contain;
+
+        .udi-brand-main {
+          font-size: 19px;
+          font-weight: 700;
+          white-space: nowrap;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
         }
+
+        .udi-brand-sub {
+          font-size: 12px;
+          font-weight: 500;
+          opacity: 0.9;
+          letter-spacing: 0.7px;
+          text-transform: uppercase;
+        }
+
         .mobile-menu-btn {
           display: none;
-          background: none;
-          border: none;
-          font-size: 28px;
+          background: transparent;
+          border: 0;
+          color: #f4f7fa;
+          font-size: 30px;
+          line-height: 1;
+          cursor: pointer;
+          padding: 0;
+          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .udi-nav {
+          margin-left: auto;
+        }
+
+        .udi-nav-list {
+          display: flex;
+          align-items: center;
+          gap: 34px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .udi-nav-item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+        }
+
+        .udi-nav-link {
+          color: #f4f7fa;
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1;
+          text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+          transition: opacity 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .udi-nav-link:hover {
+          color: #ffffff;
+          opacity: 0.85;
+        }
+
+        .udi-nav-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 0;
+          background: transparent;
+          color: #f4f7fa;
+          font-size: 20px;
+          padding: 0;
+          cursor: pointer;
+          text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+          opacity: 0.92;
+        }
+
+        .udi-nav-icon:hover {
+          opacity: 1;
+        }
+
+        .drop-toggle {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: #f4f7fa;
+          cursor: pointer;
+          font-size: 16px;
+          line-height: 1;
+          text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .udi-dropdown {
           position: absolute;
-          top: 18px;
-          right: 18px;
+          top: calc(100% + 16px);
+          left: 0;
+          min-width: 290px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.98);
+          box-shadow: 0 14px 28px rgba(8, 24, 36, 0.2);
+          display: none;
+          flex-direction: column;
+          padding: 14px;
           z-index: 1200;
         }
-        @media (max-width: 900px) {
-          .mobile-menu-btn {
-            display: block;
+
+        .udi-dropdown.show {
+          display: flex;
+        }
+
+        .udi-dropdown-link {
+          color: #203243;
+          text-decoration: none;
+          font-size: 14px;
+          line-height: 1.45;
+          padding: 8px 10px;
+          border-radius: 8px;
+        }
+
+        .udi-dropdown-link:hover {
+          background: #eef4f8;
+          color: #0d2232;
+        }
+
+        .udi-mobile-search,
+        .udi-mobile-cta {
+          display: none;
+        }
+
+        @media (max-width: 1200px) {
+          .udi-brand-main {
+            font-size: 15px;
+          }
+
+          .udi-brand-sub {
+            font-size: 11px;
+          }
+
+          .udi-nav-list {
+            gap: 18px;
+          }
+
+          .udi-nav-link {
+            font-size: 14px;
+          }
+
+          .udi-nav-icon {
+            font-size: 18px;
           }
         }
-        @media (max-width: 768px) {
+
+        @media (max-width: 992px) {
           .udi-header {
-            padding-top: 8px !important;
-            padding-bottom: 4px !important;
+            position: fixed;
+            padding: 12px 14px;
+            background: #ffffff;
+            border-bottom: 1px solid #d7dde3;
+            color: #1f2734;
+            backdrop-filter: none;
           }
+
           .udi-header-logo {
-            height: 60px !important;
+            height: 38px;
+            filter: none;
           }
+
+          .udi-brand {
+            display: flex;
+            color: #222b38;
+          }
+
+          .udi-brand-main {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+            white-space: normal;
+          }
+
+          .udi-brand-sub {
+            font-size: 11px;
+            color: #616c7a;
+            opacity: 1;
+          }
+
+          .mobile-menu-btn {
+            display: inline-flex;
+            margin-left: auto;
+            color: #1f2734;
+            text-shadow: none;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+          }
+
           .udi-nav {
-            position: fixed !important;
-            top: 0;
+            position: fixed;
+            top: 81px;
             left: 0;
-            width: 100vw !important;
-            height: 70vh !important;
-            max-height: 420px !important;
-            background: rgba(255,255,255,0.98) !important;
-            z-index: 1100;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: flex-start !important;
-            align-items: flex-start !important;
-            padding-top: 80px !important;
-            transition: all 0.2s;
-            margin: 0 auto;
-           
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            padding: 16px 22px 24px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            pointer-events: none;
+            overflow-y: auto;
           }
-          .udi-nav.closed {
-            display: none !important;
+
+          .udi-nav.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
           }
-          .udi-nav ul {
-            flex-direction: column !important;
-            gap: 8px !important;
-            align-items: flex-start !important;
-            width: 100% !important;
+
+          .udi-mobile-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #d8dde4;
+            border-radius: 8px;
+            padding: 0 10px;
+            height: 44px;
+            margin-bottom: 18px;
           }
-          .udi-nav ul li {
-            width: 100% !important;
-            margin-left: 0 !important;
+
+          .udi-mobile-search i {
+            color: #9aa4b2;
+            font-size: 15px;
           }
-          .udi-nav ul li a {
-            font-size: 18px !important;
-            padding: 12px 0 !important;
-            display: block !important;
+
+          .udi-mobile-search input {
+            width: 100%;
+            border: 0;
+            outline: none;
+            font-size: 16px;
+            color: #344050;
+            background: transparent;
           }
-          .udi-nav ul li > div[style*='position: absolute'] {
-            position: static !important;
-            min-width: 100% !important;
-            box-shadow: none !important;
-            border-radius: 0 !important;
-            padding: 8px 0 !important;
-            margin-top: 2px !important;
+
+          .udi-mobile-search input::placeholder {
+            color: #9aa4b2;
           }
-          .udi-nav ul li > div[style*='position: absolute'] a {
-            font-size: 16px !important;
-            padding: 10px 16px !important;
+
+          .udi-nav-list {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
           }
-          .udi-nav ul li i {
-            margin-left: 8px !important;
+
+          .udi-nav-item {
+            width: 100%;
+            flex-wrap: wrap;
+          }
+
+          .udi-nav-link {
+            display: block;
+            width: 100%;
+            color: #2b3644;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: none;
+            padding: 8px 0;
+          }
+
+          .udi-nav-icon {
+            font-size: 20px;
+            color: #445062;
+            text-shadow: none;
+            margin-top: 12px;
+          }
+
+          .udi-nav-link.active {
+            color: #0f988c;
+          }
+
+          .udi-mobile-cta {
+            display: inline-flex;
+            margin-top: 18px;
+            height: 50px;
+            border-radius: 999px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-decoration: none;
+            background: #0f988c;
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 700;
+            box-shadow: 0 12px 20px rgba(15, 152, 140, 0.24);
+          }
+
+          .search-nav-item {
+            display: none;
+          }
+
+          .udi-mobile-cta:hover {
+            color: #ffffff;
+            background: #10877d;
+          }
+
+          .drop-toggle {
+            display: inline-flex;
+            font-size: 18px;
+            margin-top: 4px;
+          }
+
+          .udi-dropdown {
+            position: static;
+            margin-top: 6px;
+            width: 100%;
+            min-width: 100%;
           }
         }
-        @media (max-width: 400px) {
-          .udi-header-logo {
-            height: 36px !important;
-            margin-left: 8px;
-            margin-right: 8px;
+
+        @media (max-width: 768px) {
+          .udi-brand-main {
+            font-size: 14px;
           }
-          .udi-nav ul {
-            gap: 4px !important;
-            padding-left: 8px;
-            padding-right: 8px;
+
+          .udi-brand-sub {
+            font-size: 10px;
           }
-          .udi-nav ul li a {
-            font-size: 14px !important;
-            padding: 7px 0 !important;
+
+          .udi-nav {
+            top: 77px;
+            padding: 16px 16px 24px;
           }
-          .udi-nav ul li > div[style*='position: absolute'] a {
-            font-size: 12px !important;
-            padding: 6px 10px !important;
+
+          .udi-nav-link {
+            font-size: 16px;
           }
-          .mobile-menu-btn {
-            font-size: 22px;
-            top: 8px;
-            right: 8px;
+
+          .udi-mobile-cta {
+            font-size: 16px;
           }
         }
       `}</style>
-      {/* Đã loại bỏ animation chữ UDI, chỉ còn logo tĩnh */}
+
       <header className="udi-header">
-        {/* Hamburger button for mobile */}
-        <button
-          className="mobile-menu-btn"
-          aria-label="Open menu"
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          {menuOpen ? (
-            <span>&#10005;</span>
-          ) : (
-            <span>&#9776;</span>
-          )}
-        </button>
-      {/* LOGO TRÁI */}
-      <div style={{ marginBottom: "20px",marginRight:"800px" }}>
-        <a href="/">
-          <img
-            src={logo}
-            alt="UDI Logo"
-            className="udi-header-logo"
-          />
-        </a>
-      </div>
+        <div className="udi-header-inner">
+          <Link to="/" className="udi-logo-wrap">
+            <img src={logo} alt="Logo" className="udi-header-logo" />
+            <span className="udi-brand">
+              <span className="udi-brand-main">VIỆN NGHIÊN CỨU THIẾT KẾ ĐÔ THỊ</span>
+              <span className="udi-brand-sub">URBAN DESIGN INSTITUTE</span>
+            </span>
+          </Link>
 
-      {/* MENU DƯỚI */}
-      <nav className={`udi-nav${menuOpen ? '' : ' closed'}`}>
-        <ul
-          style={{
-            display: "flex",
-            alignItems: "center",
-            listStyle: "none",
-            gap: "40px",
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          <li>
-            <a
-              href="/"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              HOME
-            </a>
-          </li>
-
-          <li
-            style={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              position: "relative",
-            }}
-            onMouseEnter={handleAboutEnter}
-            onMouseLeave={handleAboutLeave}
+          <button
+            className="mobile-menu-btn"
+            aria-label="Mo menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((value) => !value)}
+            type="button"
           >
-            <Link
-              to="/About"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              ABOUT US
-            </Link>
+            {menuOpen ? "\u00D7" : "\u2630"}
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setAboutOpen((prev) => !prev)}
-              style={{
-                marginLeft: 5,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                padding: 0,
-              }}
-            >
-              <i className="bi bi-chevron-down"></i>
-            </button>
+          <nav className={`udi-nav ${menuOpen ? "open" : ""}`}>
+            <label className="udi-mobile-search" htmlFor="udi-mobile-search-input">
+              <i className="bi bi-search"></i>
+              <input id="udi-mobile-search-input" type="text" placeholder="Tìm kiếm bài viết..." />
+            </label>
 
-            <div
-              style={{
-                position: "absolute",
-                top: "32px",
-                left: 0,
-                background: "#fff",
-                borderRadius: "6px",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.12)",
-                padding: "18px 22px",
-                display: aboutOpen ? "flex" : "none",
-                flexDirection: "column",
-                minWidth: "280px",
-                zIndex: 1200,
-              }}
-              onMouseEnter={() => setAboutOpen(true)}
-              onMouseLeave={handleAboutLeave}
-            >
-              {[
-                { label: "BAN LÃNH ĐẠO", to: "/ban-lanh-dao" },
-                { label: "PHÒNG TỔNG HỢP", to: "/phong-tong-hop" },
-                { label: "TRUNG TÂM THIẾT KẾ ĐÔ THỊ", to: "/trung-tam-thiet-ke-do-thi" },
-                { label: "TRUNG TÂM QUY HOẠCH ĐÔ THỊ", to: "/trung-tam-quy-hoach-do-thi" },
-                { label: "TRUNG TÂM THIẾT KẾ CÔNG TRÌNH", to: "/trung-tam-thiet-ke-cong-trinh" },
-                { label: "TRUNG TÂM HẠ TẦNG KỸ THUẬT", to: "/trung-tam-ha-tang-ky-thuat" },
-              ].map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  style={{
-                    padding: "10px 0",
-                    fontSize: "14px",
-                    textDecoration: "none",
-                    color: "#333",
-                    letterSpacing: "0.3px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.label}
+            <ul className="udi-nav-list">
+              <li className="udi-nav-item">
+                <Link to="/" className={`udi-nav-link ${isActive("/") ? "active" : ""}`}>
+                  Trang chủ
                 </Link>
-              ))}
-            </div>
-          </li>
+              </li>
 
-
-          <li
-            style={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              position: "relative",
-            }}
-            onMouseEnter={handleProjectsEnter}
-            onMouseLeave={handleProjectsLeave}
-          >
-            <Link
-              to="/Project"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              PROJECTS
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setProjectsOpen((prev) => !prev)}
-              style={{
-                marginLeft: 5,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                padding: 0,
-              }}
-            >
-              <i className="bi bi-chevron-down"></i>
-            </button>
-
-            <div
-              style={{
-                position: "absolute",
-                top: "32px",
-                left: 0,
-                background: "#fff",
-                borderRadius: "6px",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.12)",
-                padding: "18px 22px",
-                display: projectsOpen ? "flex" : "none",
-                flexDirection: "column",
-                minWidth: "280px",
-                zIndex: 1200,
-              }}
-              onMouseEnter={() => setProjectsOpen(true)}
-              onMouseLeave={handleProjectsLeave}
-            >
-              {[
-                { label: "QUY HOẠCH ĐÔ THỊ", to: "/quy-hoach-do-thi" },
-                { label: "THIẾT KẾ CÔNG TRÌNH", to: "/thiet-ke-cong-trinh" },
-                { label: "HẠ TẦNG KỸ THUẬT", to: "/ha-tang-ky-thuat" },
-                { label: "THIẾT KẾ CẢNH QUAN", to: "/thiet-ke-canh-quan" },
-              ].map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  style={{
-                    padding: "10px 0",
-                    fontSize: "14px",
-                    textDecoration: "none",
-                    color: "#333",
-                    letterSpacing: "0.3px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.label}
+              <li className="udi-nav-item">
+                <Link to="/Project" className={`udi-nav-link ${isActive("/Project") ? "active" : ""}`}>
+                  Dự án
                 </Link>
-              ))}
-            </div>
-          </li>
+              </li>
 
+              <li className="udi-nav-item">
+                <Link to="/Achievement" className={`udi-nav-link ${isActive("/Achievement") ? "active" : ""}`}>
+                  Nghiên cứu
+                </Link>
+              </li>
 
-          <li>
-            <a
-              href="/Contact"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              CONTACT US
-            </a>
-          </li>
+              <li className="udi-nav-item">
+                <Link to="/About" className={`udi-nav-link ${isActive("/About") ? "active" : ""}`}>
+                  Giới thiệu
+                </Link>
+              </li>
 
-          <li
-            style={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              position: "relative",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.children[2].style.display = "flex")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.children[2].style.display = "none")
-            }
-          >
-            <a
-              href="/Achievement"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              ACHIEVEMENT AWARDS
-            </a>
+              <li className="udi-nav-item">
+                <Link to="/Contact" className={`udi-nav-link ${isActive("/Contact") ? "active" : ""}`}>
+                  Liên hệ
+                </Link>
+              </li>
 
-            <i className="bi bi-chevron-down" style={{ marginLeft: 5 }}></i>
+              <li className="udi-nav-item search-nav-item">
+                <button type="button" className="udi-nav-icon" aria-label="Tìm kiếm">
+                  <i className="bi bi-search"></i>
+                </button>
+              </li>
+            </ul>
 
-            <div
-              style={{
-                position: "absolute",
-                top: "32px",
-                left: 0,
-                background: "#fff",
-                borderRadius: "6px",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.12)",
-                padding: "18px 22px",
-                display: "none",
-                flexDirection: "column",
-                minWidth: "500px",
-                zIndex: 999,
-              }}
-            >
-              {[
-                "CÁC GIẢI THƯỞNG CỦA HỘI QUY HOẠCH & PHÁT TRIỂN ĐÔ THỊ VIỆT NAM",
-                "CÁC GIẢI THƯỞNG CỦA HỘI KIẾN TRÚC SƯ VIỆT NAM",
-                "CÁC GIẢI THƯỞNG TRONG CÁC CUỘC THI QUỐC TẾ VỀ THIẾT KẾ Ý TƯỞNG",
-                "CÁC ẤN PHẨM ĐÃ ĐƯỢC XUẤT BẢN",
-              ].map((v) => (
-                <a
-                  key={v}
-                  href="#"
-                  style={{
-                    padding: "10px 0",
-                    fontSize: "14px",
-                    textDecoration: "none",
-                    color: "#333",
-                    letterSpacing: "0.3px",
-                    lineHeight: "20px",
-                  }}
-                >
-                  {v}
-                </a>
-              ))}
-            </div>
-          </li>
-
-
-          <li>
-            <a
-              href=""
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                fontSize: "14px",
-                letterSpacing: "0.5px",
-              }}
-            >
-              UDI NEWS
-            </a>
-          </li>
-
-          <li style={{ marginLeft: "60px" }}>
-            <i
-              className="bi bi-search"
-              style={{
-                fontSize: "18px",
-                cursor: "pointer",
-              }}
-            ></i>
-          </li>
-        </ul>
-      </nav>
+            <Link to="/Contact" className="udi-mobile-cta">
+              Tư vấn ngay
+            </Link>
+          </nav>
+        </div>
       </header>
     </>
   );
