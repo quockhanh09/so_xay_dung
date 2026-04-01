@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../style/App.css";
 
@@ -65,6 +66,21 @@ export const leadership = {
 
 
 function About() {
+  const location = useLocation();
+    // Scroll to section if hash exists in URL (for anchor navigation from Footer)
+    useEffect(() => {
+      if (location.hash) {
+        // Map hash to ref
+        const hash = location.hash.replace('#', '');
+        if (hash === 'chuyen-gia' && expertsSectionRef.current) {
+          expertsSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+          setActiveAboutTab('experts');
+        } else if (hash === 'lich-su' && historySectionRef.current) {
+          historySectionRef.current.scrollIntoView({ behavior: 'smooth' });
+          setActiveAboutTab('history');
+        }
+      }
+    }, [location]);
   const aboutTabsRef = useRef(null);
   const missionSectionRef = useRef(null);
   const activitySectionRef = useRef(null);
