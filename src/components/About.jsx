@@ -938,53 +938,99 @@ function About() {
       </section>
 
       {/* CO CAU TO CHUC */}
-      <section ref={orgSectionRef} className="about-org-structure-section">
-        <div className="about-org-structure-container">
-          <div className="about-org-structure-header">
-            <h2>Cơ cấu tổ chức</h2>
-            <p>Tổ chức hoạt động chuyên nghiệp, hiệu quả</p>
-          </div>
-
-          <div className="about-org-director-card">
-            <h3>Ban Giám đốc</h3>
-            <span>Giám đốc điều hành</span>
-          </div>
-
-          <div className="about-org-main-grid">
-            <div className="about-org-unit-card">
-              <div className="about-org-unit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm8-5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-2.5 5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z" fill="#0f9d96" />
-                </svg>
-              </div>
-              <h4>Phòng Quy hoạch</h4>
-              <p>Quy hoạch vùng, đô thị, nông thôn</p>
+      <section style={{ background: 'transparent', padding: isMobile ? '40px 0' : '64px 0', width: '100%' }}>
+        <div ref={orgSectionRef} className="about-org-structure-section" style={{ maxWidth: 'none', width: '100%', margin: '0 auto', background: 'transparent' }}>
+          <div className="about-org-structure-container">
+            <div className="about-org-structure-header">
+              <h2>Cơ cấu tổ chức</h2>
+              <p>Tổ chức hoạt động chuyên nghiệp, hiệu quả</p>
             </div>
-
-            <div className="about-org-unit-card">
-              <div className="about-org-unit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 17.5 15.5 6l2.5 2.5L6.5 20H4v-2.5Zm13.75-12.25a1.75 1.75 0 1 1 2.47 2.47l-1.14 1.14-2.47-2.47 1.14-1.14ZM9 7h4v2H9V7Zm-3 4h6v2H6v-2Z" fill="#0f9d96" />
-                </svg>
-              </div>
-              <h4>Phòng Thiết kế</h4>
-              <p>Thiết kế kiến trúc, đô thị, cảnh quan</p>
+            <div className="about-org-director-card" style={{
+              background: '#10a39b',
+              borderRadius: 12,
+              boxShadow: '0 4px 16px 0 rgba(16,163,155,0.10)',
+              padding: '18px 28px 12px',
+              minWidth: 180,
+              maxWidth: 260,
+              margin: '0 auto 24px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+              <h3 style={{
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 20,
+                margin: 0,
+                marginBottom: 4,
+                textAlign: 'center',
+              }}>Ban Giám đốc</h3>
+              <span style={{
+                color: '#f3f8f7',
+                fontWeight: 400,
+                fontSize: 15,
+                textAlign: 'center',
+              }}>Giám đốc điều hành</span>
             </div>
-
-            <div className="about-org-unit-card">
-              <div className="about-org-unit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 18h16v2H4v-2Zm2-3V7h2v8H6Zm5 0V4h2v11h-2Zm5 0v-5h2v5h-2Z" fill="#0f9d96" />
-                </svg>
+            <div className="about-org-main-grid">
+              <div className="about-org-unit-card">
+                <div className="about-org-unit-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm8-5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-2.5 5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z" fill="#0f9d96" />
+                  </svg>
+                </div>
+                <h4>Phòng Quy hoạch</h4>
+                <p>Quy hoạch vùng, đô thị, nông thôn</p>
               </div>
-              <h4>Phòng Tư vấn</h4>
-              <p>Nghiên cứu, tư vấn chiến lược</p>
+              <div className="about-org-unit-card">
+                <div className="about-org-unit-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 17.5 15.5 6l2.5 2.5L6.5 20H4v-2.5Zm13.75-12.25a1.75 1.75 0 1 1 2.47 2.47l-1.14 1.14-2.47-2.47 1.14-1.14ZM9 7h4v2H9V7Zm-3 4h6v2H6v-2Z" fill="#0f9d96" />
+                  </svg>
+                </div>
+                <h4>Phòng Thiết kế</h4>
+                <p>Thiết kế kiến trúc, đô thị, cảnh quan</p>
+              </div>
+              <div className="about-org-unit-card">
+                <div className="about-org-unit-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 18h16v2H4v-2Zm2-3V7h2v8H6Zm5 0V4h2v11h-2Zm5 0v-5h2v5h-2Z" fill="#0f9d96" />
+                  </svg>
+                </div>
+                <h4>Phòng Tư vấn</h4>
+                <p>Nghiên cứu, tư vấn chiến lược</p>
+              </div>
+            </div>
+            <div className="about-org-sub-grid">
+              <div className="about-org-sub-card">Phòng Hành chính</div>
+              <div className="about-org-sub-card">Phòng Kỹ thuật</div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="about-org-sub-grid">
-            <div className="about-org-sub-card">Phòng Hành chính</div>
-            <div className="about-org-sub-card">Phòng Kỹ thuật</div>
+      {/* Phần giải thưởng dưới Cơ cấu tổ chức */}
+      <section className="about-award-section" style={{ background: '#f7fcfa', padding: isMobile ? '40px 0' : '64px 0', width: '100%' }}>
+        <div className="container about-award-header" style={{ textAlign: 'center', marginBottom: 24 }}>
+          <h2>Giải thưởng</h2>
+          <p>Thành tựu nổi bật và các giải thưởng đã đạt được</p>
+        </div>
+        <div className="about-award-grid" style={{ width: '100%', maxWidth: 1200, margin: '0 auto' }}>
+          <div className="member-card-grid" style={{ justifyContent: 'center' }}>
+            {[{id:1, name:'Giải thưởng Kiến trúc Quốc gia', title:'2022', subtitle:'Dự án A', image:'https://public.readdy.ai/ai/img_res/3ab41539e100a0479fdf39e30b6d2d67.jpg'},
+              {id:2, name:'Giải thưởng Quy hoạch Đô thị', title:'2021', subtitle:'Dự án B', image:'https://public.readdy.ai/ai/img_res/8f75024fcef8f3bcbe9f0f63ad9c68cc.jpg'},
+              {id:3, name:'Top 10 Công trình Xanh', title:'2023', subtitle:'Dự án C', image:'https://public.readdy.ai/ai/img_res/45d3c62951391d85344e988cfdb50f54.jpg'}].map((award) => (
+                <div key={award.id} className="member-card" style={{ minWidth: 220 }}>
+                  <div className="member-card__photo">
+                    <img src={award.image} alt={award.name} />
+                  </div>
+                  <div className="member-card__body">
+                    <h3 className="member-card__name">{award.name}</h3>
+                    {award.title && <p className="member-card__line">{award.title}</p>}
+                    {award.subtitle && <p className="member-card__line">{award.subtitle}</p>}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </section>

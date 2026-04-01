@@ -191,6 +191,104 @@ function ProjectProfile() {
           ))}
         </div>
       </section>
+
+      {/* Giá trị mang lại */}
+      {(project.valueList || project.valueTitle || project.valueDesc) && (
+        <section style={{ background: '#099', padding: '56px 0 72px', width: '100%' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+            <h2 style={{ textAlign: 'center', fontSize: 36, fontWeight: 800, color: '#fff', marginBottom: 10, letterSpacing: 0.2 }}>
+              {project.valueTitle || 'Giá trị mang lại'}
+            </h2>
+            <p style={{ textAlign: 'center', color: '#e0f7f7', fontSize: 18, marginBottom: 38 }}>
+              {project.valueDesc || 'Dự án tạo ra những giá trị tích cực cho sự phát triển kinh tế, xã hội và môi trường'}
+            </p>
+            {Array.isArray(project.valueList) && project.valueList.length > 0 ? (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center' }}>
+                {project.valueList.map((item, idx) => (
+                  <div key={idx} style={{ background: 'rgba(255,255,255,0.08)', border: '1.5px solid #6fdad1', borderRadius: 18, padding: '32px 28px', minWidth: 280, flex: '1 1 320px', color: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+                    <div style={{ fontWeight: 700, fontSize: 20, marginBottom: 12 }}>{item.title}</div>
+                    <div style={{ fontSize: 16, color: '#e0f7f7' }}>{item.desc}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', color: '#e0f7f7', fontSize: 18, marginTop: 32 }}>
+                Chưa có dữ liệu giá trị cụ thể cho dự án này.
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Dự án liên quan */}
+      <section style={{ background: '#fff', padding: '56px 0 72px', width: '100%' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+            <h2 style={{ fontSize: 32, fontWeight: 800, color: '#181c32', margin: 0 }}>Dự án liên quan</h2>
+            <a href="/Project" style={{ color: '#0ea5a0', fontWeight: 600, fontSize: 17, textDecoration: 'none' }}>Xem tất cả &rarr;</a>
+          </div>
+          <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+            {Object.values(projectsData)
+              .filter(p => String(p.id) !== String(id))
+              .slice(0, 3)
+              .map((p, idx) => (
+                <a
+                  href={`/projects/${p.id}`}
+                  key={p.id}
+                  style={{
+                    flex: '1 1 320px',
+                    maxWidth: 370,
+                    background: '#fff',
+                    borderRadius: 18,
+                    boxShadow: '0 2px 16px rgba(13,28,56,0.08)',
+                    textDecoration: 'none',
+                    color: '#181c32',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minWidth: 280,
+                    overflow: 'hidden',
+                    transition: 'box-shadow 0.2s',
+                  }}
+                >
+                  <div style={{ width: '100%', height: 180, overflow: 'hidden', background: '#f7f8fa' }}>
+                    <img
+                      src={p.avatar || (Array.isArray(p.images) && p.images[0]) || ''}
+                      alt={p.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                  <div style={{ padding: '18px 18px 22px' }}>
+                    <div style={{ marginBottom: 10 }}>
+                      {p.category && (
+                        <span style={{
+                          background: p.category.includes('quy-hoach') ? '#0ea5a0' : p.category.includes('thiet-ke') ? '#3bb0ff' : '#f7b731',
+                          color: '#fff',
+                          borderRadius: 8,
+                          padding: '4px 14px',
+                          fontWeight: 700,
+                          fontSize: 13,
+                          letterSpacing: 0.2,
+                          marginRight: 8,
+                        }}>
+                          {p.category === 'quy-hoach-do-thi' ? 'Quy hoạch đô thị'
+                            : p.category === 'quy-hoach' ? 'Quy hoạch'
+                            : p.category === 'thiet-ke-cong-trinh' ? 'Thiết kế công trình'
+                            : p.category === 'thiet-ke-canh-quan' ? 'Thiết kế cảnh quan'
+                            : 'Khác'}
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 10, minHeight: 48 }}>{p.title}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#6b7280', fontSize: 15 }}>
+                      <span><i className="bi bi-geo-alt" /> {p.location || 'Hà Nội'}</span>
+                      <span>{p.year || '2023'}</span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

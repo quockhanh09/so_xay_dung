@@ -33,6 +33,29 @@ import sxdbg2 from "./assets/img/sxd-ab2.png"
 import sxdbg3 from "./assets/img/sxd-ab3.png"
 import sxdbg4 from "./assets/img/sxd-ab4.png"
 import vietnamOutline from "./data/vietnam_outline.json";
+import projectsData from "./data/projects.json";
+  // Lấy 6 dự án gần nhất từ projects.json
+  const allProjectsArr = Object.values(projectsData)
+    .sort((a, b) => b.id - a.id); // id lớn nhất là mới nhất
+  const featuredProjects = allProjectsArr.slice(0, 6).map((p) => ({
+    id: p.id,
+    title: p.title,
+    location: p.location || "Việt Nam", // fallback nếu không có location
+    year: p.year || "2026", // fallback nếu không có year
+    category:
+      p.category === "quy-hoach-do-thi"
+        ? "Quy hoạch đô thị"
+        : p.category === "thiet-ke-cong-trinh"
+        ? "Thiết kế công trình"
+        : p.category === "thiet-ke-canh-quan"
+        ? "Thiết kế cảnh quan"
+        : p.category === "ha-tang-ky-thuat"
+        ? "Hạ tầng kỹ thuật"
+        : p.category === "quy-hoach-nong-thon"
+        ? "Quy hoạch nông thôn"
+        : "Khác",
+    image: Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : p.avatar,
+  }));
 
 
 
@@ -408,56 +431,28 @@ function App({ characters }) {
     "Quy hoạch nông thôn",
   ];
 
-  const featuredProjects = [
-    {
-      id: 1,
-      title: "Quy hoạch phân khu đô thị Đông Anh",
-      location: "Hà Nội",
-      year: "2023",
-      category: "Quy hoạch",
-      image: sxdbg1,
-    },
-    {
-      id: 2,
-      title: "Thiết kế Trung tâm Hành chính tỉnh Bắc Giang",
-      location: "Bắc Giang",
-      year: "2022",
-      category: "Thiết kế công trình",
-      image: sxdbg2,
-    },
-    {
-      id: 3,
-      title: "Quy hoạch đô thị ven sông Hồng",
-      location: "Hà Nội",
-      year: "2023",
-      category: "Quy hoạch đô thị",
-      image: sxdbg3,
-    },
-    {
-      id: 4,
-      title: "Quy hoạch Khu công nghiệp sinh thái Hải Phòng",
-      location: "Hải Phòng",
-      year: "2022",
-      category: "Quy hoạch",
-      image: sxdbg4,
-    },
-    {
-      id: 5,
-      title: "Thiết kế Khu nhà ở xã hội Thanh Hóa",
-      location: "Thanh Hóa",
-      year: "2023",
-      category: "Thiết kế đô thị",
-      image: sxdbg2,
-    },
-    {
-      id: 6,
-      title: "Quy hoạch Nông thôn mới xã Đại Đồng",
-      location: "Bắc Ninh",
-      year: "2022",
-      category: "Quy hoạch nông thôn",
-      image: sxdbg1,
-    },
-  ];
+  // Lấy 6 dự án gần nhất từ projects.json
+  const allProjectsArr = Object.values(projectsData)
+    .sort((a, b) => b.id - a.id); // id lớn nhất là mới nhất
+  const featuredProjects = allProjectsArr.slice(0, 6).map((p) => ({
+    id: p.id,
+    title: p.title,
+    location: p.location || "Việt Nam", // fallback nếu không có location
+    year: p.year || "2026", // fallback nếu không có year
+    category:
+      p.category === "quy-hoach-do-thi"
+        ? "Quy hoạch đô thị"
+        : p.category === "thiet-ke-cong-trinh"
+        ? "Thiết kế công trình"
+        : p.category === "thiet-ke-canh-quan"
+        ? "Thiết kế cảnh quan"
+        : p.category === "ha-tang-ky-thuat"
+        ? "Hạ tầng kỹ thuật"
+        : p.category === "quy-hoach-nong-thon"
+        ? "Quy hoạch nông thôn"
+        : "Khác",
+    image: Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : p.avatar,
+  }));
 
   const visibleFeaturedProjects =
     featuredFilter === "Tất cả"

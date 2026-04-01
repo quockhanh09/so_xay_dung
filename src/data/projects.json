@@ -14,6 +14,7 @@
       "Thông tin bổ sung về dự án Dublin.",
       "Ghi chú: Dự án trọng điểm năm 2025."
     ]
+
   },
   "2": {
     "id": 2,
@@ -155,11 +156,20 @@
     "avatar": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503389152951-9c3d0c6b7a2a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1503389152951-9c3d0c6b7a2a?auto=format&fit=crop&w=1200&q=80"
     ],
     "popupText": [
       "Tái phát triển khu trung tâm thương mại, xây dựng các tòa nhà xanh và thông minh.",
       "Dự án hợp tác quốc tế năm 2026."
-    ]
+    ],
+        "valueTitle": "Giá trị mang lại",
+"valueDesc": "Dự án tạo ra những giá trị tích cực cho sự phát triển kinh tế, xã hội và môi trường",
+"valueList": [
+  { "title": "Tác động kinh tế", "desc": "Thúc đẩy phát triển kinh tế địa phương, tạo việc làm và thu hút đầu tư" },
+  { "title": "Tác động xã hội", "desc": "Cải thiện chất lượng sống, nâng cao tiện ích cộng đồng và không gian công cộng" },
+  { "title": "Tác động môi trường", "desc": "Bảo vệ môi trường, phát triển bền vững và giảm thiểu tác động tiêu cực" }
+]
   }
 }

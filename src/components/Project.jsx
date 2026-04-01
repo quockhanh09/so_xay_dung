@@ -41,58 +41,36 @@ function Project() {
     event.currentTarget.src = fallbackSrc || bgImage;
   };
 
-  // Tự động tạo danh sách project từ projects.json
-  const projectCards = Object.keys(projectsData).map((id) => {
-    const project = projectsData[id];
-    const numericId = parseInt(id, 10);
-    // Lấy images đúng chuẩn (chỉ link hoặc file, ưu tiên link)
-    let images = [];
-    if (Array.isArray(project.images) && project.images.length > 0) {
-      images = project.images
-        .map((img) => resolveProjectAsset(img))
-        .filter(Boolean);
-    }
-
-    const avatar = resolveProjectAsset(project.avatar) || images[0] || bgImage;
-    const typeKey = (() => {
-      if (project.category === 'quy-hoach-do-thi') {
-        return numericId % 4 === 0 ? 'quy-hoach-nong-thon' : 'quy-hoach-do-thi';
+  // Lấy toàn bộ dự án từ projects.json, sắp xếp mới nhất lên đầu
+  const projectCards = Object.values(projectsData)
+    .sort((a, b) => b.id - a.id)
+    .map((project) => {
+      // Xử lý ảnh đại diện
+      let images = [];
+      if (Array.isArray(project.images) && project.images.length > 0) {
+        images = project.images.map((img) => resolveProjectAsset(img)).filter(Boolean);
       }
-      if (project.category === 'thiet-ke-cong-trinh') {
-        return 'thiet-ke-cong-trinh';
-      }
-      if (project.category === 'thiet-ke-canh-quan' || project.category === 'ha-tang-ky-thuat') {
-        return 'thiet-ke-do-thi';
-      }
-      return 'quy-hoach';
-    })();
-
-    const scaleKey = (() => {
-      if (typeKey === 'quy-hoach-do-thi' || typeKey === 'quy-hoach-nong-thon' || typeKey === 'quy-hoach') {
-        const planningScales = ['quy-hoach-tong-the', 'quy-hoach-phan-khu', 'quy-hoach-chi-tiet'];
-        return planningScales[numericId % planningScales.length];
-      }
-      return numericId % 2 === 0 ? 'thiet-ke-kien-truc' : 'thiet-ke-do-thi';
-    })();
-
-    const locations = ['Ha Noi', 'Bac Giang', 'Da Nang', 'Hai Phong', 'Ninh Binh', 'Quang Ninh'];
-    const years = [2023, 2022, 2024, 2025, 2021, 2026];
-    const excerpt = project.description || (Array.isArray(project.popupText) ? project.popupText[0] : project.popupText) || '';
-
-    return {
-      id: numericId,
-      title: project.title,
-      category: project.category,
-      avatar,
-      description: excerpt,
-      images,
-      popupText: project.popupText,
-      typeKey,
-      scaleKey,
-      location: locations[numericId % locations.length],
-      year: years[numericId % years.length],
-    };
-  });
+      const avatar = resolveProjectAsset(project.avatar) || images[0] || bgImage;
+      // Loại dự án
+      const typeKey = project.category;
+      // Năm và địa điểm (ưu tiên lấy từ project, fallback nếu thiếu)
+      const location = project.location || "Việt Nam";
+      const year = project.year || "2026";
+      // Mô tả
+      const excerpt = project.description || (Array.isArray(project.popupText) ? project.popupText[0] : project.popupText) || '';
+      return {
+        id: project.id,
+        title: project.title,
+        category: project.category,
+        avatar,
+        description: excerpt,
+        images,
+        popupText: project.popupText,
+        typeKey,
+        location,
+        year,
+      };
+    });
 
   const typeOptions = [
     { key: 'all', label: 'Tất cả' },
@@ -374,103 +352,107 @@ function Project() {
               }}
             >
               {paginatedCards.map((item) => (
-                <article
-                  className="project-card"
+                <Link
+                  to={`/projects/${item.id}`}
                   key={item.id}
-                  style={{
-                    background: '#fff',
-                    borderRadius: 24,
-                    overflow: 'hidden',
-                    border: '1px solid rgba(15, 23, 42, 0.06)',
-                    boxShadow: '0 22px 50px rgba(15, 23, 42, 0.07)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <div
-                    className="project-card-media"
+                  <article
+                    className="project-card"
                     style={{
-                      position: 'relative',
-                      height: 190,
+                      background: '#fff',
+                      borderRadius: 24,
                       overflow: 'hidden',
-                      cursor: 'pointer',
+                      border: '1px solid rgba(15, 23, 42, 0.06)',
+                      boxShadow: '0 22px 50px rgba(15, 23, 42, 0.07)',
+                      display: 'flex',
+                      flexDirection: 'column',
                     }}
-                    onClick={() => openModal(item.images, 0)}
-                    title="Xem ảnh lớn"
                   >
-                    <img
-                      className="project-card-image"
-                      src={item.avatar}
-                      alt={item.title}
-                      onError={(event) => handleCardImageError(event, item.images[0])}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    />
                     <div
+                      className="project-card-media"
                       style={{
-                        position: 'absolute',
-                        top: 14,
-                        left: 14,
-                        background: '#149b90',
-                        color: '#fff',
-                        padding: '8px 14px',
-                        borderRadius: 999,
-                        fontSize: 13,
-                        fontWeight: 700,
-                        lineHeight: 1,
-                        boxShadow: '0 10px 24px rgba(20, 155, 144, 0.28)',
-                      }}
-                    >
-                      {badgeLabels[item.typeKey] || 'Dự án'}
-                    </div>
-                  </div>
-
-                  <div className="project-card-body" style={{ padding: '16px 18px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div
-                      className="project-card-title"
-                      style={{
-                        color: '#1f2937',
-                        fontSize: '1.06rem',
-                        fontWeight: 700,
-                        lineHeight: 1.32,
-                        marginBottom: 10,
-                        fontFamily: 'serif',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
+                        position: 'relative',
+                        height: 190,
                         overflow: 'hidden',
+                        cursor: 'pointer',
                       }}
+                      title="Xem chi tiết dự án"
                     >
-                      {item.title}
+                      <img
+                        className="project-card-image"
+                        src={item.avatar}
+                        alt={item.title}
+                        onError={(event) => handleCardImageError(event, item.images[0])}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 14,
+                          left: 14,
+                          background: '#149b90',
+                          color: '#fff',
+                          padding: '8px 14px',
+                          borderRadius: 999,
+                          fontSize: 13,
+                          fontWeight: 700,
+                          lineHeight: 1,
+                          boxShadow: '0 10px 24px rgba(20, 155, 144, 0.28)',
+                        }}
+                      >
+                        {badgeLabels[item.typeKey] || 'Dự án'}
+                      </div>
                     </div>
 
-                    <div
-                      className="project-card-description"
-                      style={{
-                        color: '#6b7280',
-                        fontSize: 14,
-                        lineHeight: 1.55,
-                        marginBottom: 12,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {item.description}
-                    </div>
+                    <div className="project-card-body" style={{ padding: '16px 18px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                      <div
+                        className="project-card-title"
+                        style={{
+                          color: '#1f2937',
+                          fontSize: '1.06rem',
+                          fontWeight: 700,
+                          lineHeight: 1.32,
+                          marginBottom: 10,
+                          fontFamily: 'serif',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {item.title}
+                      </div>
 
-                    <div className="project-card-meta" style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#6b7280', fontSize: 14, marginTop: 'auto' }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M12 21C15 17.4 18 14.7 18 10.5C18 6.91 15.31 4 12 4C8.69 4 6 6.91 6 10.5C6 14.7 9 17.4 12 21Z" stroke="#9ca3af" strokeWidth="1.8" />
-                          <circle cx="12" cy="10" r="2.3" stroke="#9ca3af" strokeWidth="1.8" />
-                        </svg>
-                        {item.location}
-                      </span>
-                      <span>{item.year}</span>
+                      <div
+                        className="project-card-description"
+                        style={{
+                          color: '#6b7280',
+                          fontSize: 14,
+                          lineHeight: 1.55,
+                          marginBottom: 12,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {item.description}
+                      </div>
+
+                      <div className="project-card-meta" style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#6b7280', fontSize: 14, marginTop: 'auto' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 21C15 17.4 18 14.7 18 10.5C18 6.91 15.31 4 12 4C8.69 4 6 6.91 6 10.5C6 14.7 9 17.4 12 21Z" stroke="#9ca3af" strokeWidth="1.8" />
+                            <circle cx="12" cy="10" r="2.3" stroke="#9ca3af" strokeWidth="1.8" />
+                          </svg>
+                          {item.location}
+                        </span>
+                        <span>{item.year}</span>
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </Link>
               ))}
             </div>
 
