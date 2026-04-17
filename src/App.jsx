@@ -133,58 +133,58 @@ function App({ characters }) {
   const [showLogo, setShowLogo] = useState(true);
   const charactersList = [
     { 
-      id: 1,
-      name: "Anna Cawrse", 
+      id: 1,"
+      name: "Nguyễn Thị Phương Liên" 
       image: banThan2,
-      title: "Chair of Landscape Architecture, Civil Engineering, & Ecology",
+      title: "Trưởng phòng tài chính - tổng hợp" 
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
     },
     { 
       id: 2,
-      name: "Zachary Chrisco", 
+      name: "Phạm Thị Lan Anh"
       image: banThan3,
-      title: "Chair At-Large",
+      title: "Văn Thư"
       subtitle: "Board of Directors, Principal",
       role: "Civil Engineer"
     },
     { 
       id: 3,
-      name: "Caitlyn Clauson", 
+      name: "Nguyễn Thị Huyền"
       image: banThan4,
-      title: "President",
+      title:"Phụ Trách Kế Toán "
       subtitle: "Board of Directors, Principal",
       role: "Planner"
     },
     { 
       id: 4,
-      name: "Meredith McCarthy", 
+      name: "Vũ Bá Minh"
       image: banThan5,
-      title: "Chair At-Large",
+      title: "Chuyên viên - Truyền thông"
       subtitle: "Associate Principal, Board of Directors",
       role: "Architect"
     },
     { 
       id: 5,
-      name: "Tyler Patrick", 
+      name: "Phạm Minh Phương"
       image: banThan6,
-      title: "Chair of Planning & Urban Design",
+      title: "Giám đốc trung tâm thiết kế đô thị"
       subtitle: "Board of Directors, Principal",
       role: "Planner"
     },
     { 
       id: 6,
-      name: "Pablo Savid-Buteler", 
+      name: "Lê Huy Phong"
       image: banThan7,
-      title: "Chair of Design Integration",
+      title: "Phó Giám đốc trung tâm thiết kế đô thị",
       subtitle: "Board of Directors, Principal",
       role: "Designer"
     },
     { 
       id: 7,
-      name: "Victor Vizgaitis", 
+      name: "Vũ Thị Minh Nguyệt"
       image: banThan8,
-      title: "Managing Principal",
+      title: "KTS- Chuyên viên trung tâm thiết kế đô thị",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
     },
@@ -198,143 +198,143 @@ function App({ characters }) {
     },
     { 
       id: 9,
-      name: "Carla Ceruzzi", 
+      name: "Nguyễn Đại Thắng"
       image: banThan10,
-      title: "Associate Principal",
+      title: "Giám đốc trung tâm quy hoạch đô thị",
       subtitle: "Landscape Architect",
       role: ""
     },
     { 
       id: 10,
-      name: "Fiske Crowell", 
+      name: "Trần Hoàng Giang"
       image: banThan11,
-      title: "Principal",
+      title: "Phó Giám đốc trung tâm quy hoạch đô thị",
       subtitle: "Landscape Architect",
       role: ""
     },
     { 
       id: 11,
-      name: "Ian Dickenson", 
+      name: "Đặng Thị Nguyễn Huyền"
       image: banThan12,
-      title: "Associate Principal",
+      title: "KTS- Chuyên viên trung tâm quy hoạch đô thị",
       subtitle: "Architect",
       role: ""
     },
     { 
       id: 12,
-      name: "Philip Dugdale", 
+      name: "Phan Đình Ấn"
       image: banThan13,
-      title: "New York Office Director",
+      title: "Chuyên viên trung tâm quy hoạch đô thị",
       subtitle: "Principal",
       role: "Architect"
     },
     { 
       id: 13,
-      name: "Anna Cawrse", 
+      name: "Nguyễn Hùng Sơn "
       image: banThan14,
-      title: "Chair of Landscape Architecture",
+      title: "Giám đốc trung tâm hạ tầng kỹ thuật",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
     },
     { 
       id: 14,
-      name: "Zachary Chrisco", 
+      name: "Nguyễn Thùy Dung", 
       image: banThan15,
-      title: "Chair At-Large",
+      title: "Phó giám đốc trung tâm hạ tầng kỹ thuật",
       subtitle: "Board of Directors, Principal",
       role: "Civil Engineer"
     },
     { 
       id: 15,
-      name: "Caitlyn Clauson", 
+      name: "Nguyễn Anh Tuấn", 
       image: banThan16,
-      title: "President",
+      title: "KTS- Trung tâm hạ tầng kỹ thuật",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
     },
     { 
       id: 16,
-      name: "Meredith McCarthy", 
+      name: "Tô Duy Long", 
       image: banThan17,
-      title: "Chair At-Large",
+      title: "KTS- Trung tâm hạ tầng kỹ thuật",
       subtitle: "Associate Principal",
       role: "Architect"
     },
     { 
       id: 17,
-      name: "Tyler Patrick", 
+      name: "Hoàng Trung Dũng", 
       image: banThan18,
-      title: "Chair of Planning & Urban Design",
+      title: "KTS - Trung tâm hạ tầng kỹ thuật",
       subtitle: "Board of Directors, Principal",
       role: "Planner"
     },
     { 
       id: 18,
-      name: "Pablo Savid-Buteler", 
+      name: "Lê Thị Ngọc Lan", 
       image: banThan19,
-      title: "Chair of Design Integration",
+      title: "KTS - Trung tâm hạ tầng kỹ thuật",
       subtitle: "Board of Directors, Principal",
       role: "Designer"
     },
     { 
       id: 19,
-      name: "Victor Vizgaitis", 
+      name: "Phạm Quỳnh Anh", 
       image: banThan20,
-      title: "Managing Principal",
+      title: "KTS- Trung tâm quy hoạch đô thị",
       subtitle: "Board of Directors",
       role: "Landscape Architect"
     },
     { 
       id: 20,
-      name: "Joshua Brooks", 
+      name: "Đinh Nguyệt Ánh", 
       image: banThan21,
-      title: "Denver Office Director",
+      title: "Giám đốc trung tâm kiến trúc công trình",
       subtitle: "Principal",
       role: "Landscape Architect"
     },
     { 
       id: 21,
-      name: "Carla Ceruzzi", 
+      name: "Nguyễn Xuân Khánh", 
       image: banThan22,
-      title: "Associate Principal",
+      title: "Phó giám đốc trung tâm kiến trúc công trình",
       subtitle: "Landscape Architect",
       role: ""
     },
     { 
       id: 22,
-      name: "Fiske Crowell", 
+      name: "Nguyễn Ngọc Kiên", 
       image: banThan23,
-      title: "Principal",
+      title: "KTS -  Chuyên viên trung tâm kiến trúc công trình",
       subtitle: "Landscape Architect",
       role: ""
     },
     { 
       id: 23,
-      name: "Ian Dickenson", 
+      name: "Nguyễn Hồng Dương", 
       image: banThan24,
-      title: "Associate Principal",
+      title: "KTS -  Chuyên viên trung tâm kiến trúc công trình",
       subtitle: "Architect",
       role: ""
     },
     { 
       id: 24,
-      name: "Philip Dugdale", 
+      name: "Trần Nhật Linh", 
       image: banThan25,
-      title: "New York Office Director",
+      title: "KTS - Chuyên viên Trung tâm kiến trúc công trình",
       subtitle: "Principal",
       role: "Architect"
     },
     { 
       id: 25,
-      name: "Anna Cawrse", 
+      name: "Nguyễn Thị Thanh Hương", 
       image: banThan26,
-      title: "Chair of Landscape Architecture",
+      title: "KTS - chuyên viên trung tâm thiết kế đô thị",
       subtitle: "Board of Directors, Principal",
       role: "Landscape Architect"
     },
     { 
       id: 26,
-      name: "Zachary Chrisco", 
+      name: "Lê Tiến Đồng", 
       image: banThan27,
       title: "Chair At-Large",
       subtitle: "Board of Directors, Principal",
@@ -342,7 +342,7 @@ function App({ characters }) {
     },
     { 
       id: 27,
-      name: "Caitlyn Clauson", 
+      name: "Cao Kỳ Sơn", 
       image: banThan28,
       title: "President",
       subtitle: "Board of Directors, Principal",
@@ -350,7 +350,7 @@ function App({ characters }) {
     },
     { 
       id: 28,
-      name: "Meredith McCarthy", 
+      name: "Từ Quang Huy", 
       image: banThan29,
       title: "Chair At-Large",
       subtitle: "Associate Principal",
@@ -358,7 +358,7 @@ function App({ characters }) {
     },
     { 
       id: 29,
-      name: "Tyler Patrick", 
+      name: "Diệp Sơn Tùng", 
       image: banThan30,
       title: "Chair of Planning & Urban Design",
       subtitle: "Board of Directors, Principal",
@@ -366,7 +366,7 @@ function App({ characters }) {
     },
     { 
       id: 30,
-      name: "Pablo Savid-Buteler", 
+      name: "Vũ Mạnh Huy Tuấn", 
       image: banThan31,
       title: "Chair of Design Integration",
       subtitle: "Board of Directors, Principal",
